@@ -84,8 +84,12 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     master = LpProblem("CSAM_Master", LpMinimize)
     y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
     theta = LpVariable("theta", lowBound=0)
-    master += lpSum(F[m] * y[(m, 'l1')] for m in M) + theta
-    master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES
+    master += lpSum(F[m] * y[(m, 'l1')] for m in M) + theta, "objective"
+    
+    # Cardinality constraint - gave it a clear name
+    master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
+    
+    print(f"Master constraint 'max_csam_limit' added with RHS = {MAX_CSAM_FACILITIES}")
 
     # ====================== Benders Decomposition ======================
     lb, ub = -np.inf, np.inf
@@ -98,6 +102,8 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
         iter_count += 1
         print(f"\nIteration {iter_count}: Solving Master...")
         master.solve(PULP_CBC_CMD(msg=0))
+        current_deployed = sum(value(y[(m, 'l1')]) for m in M)
+        print(f"Master proposed {int(current_deployed)} facilities (should be <= {MAX_CSAM_FACILITIES})")
         lb = value(master.objective)
         print(f"Master LB: {lb:.2f}")
 
@@ -205,7 +211,7 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
                 print(f"✅ New best solution found! Deployed: {int(num_deployed)} CSAM | Total Cost: {total_cost:.2f}")
             else:
                 if num_deployed > MAX_CSAM_FACILITIES:
-                    print(f"   Warning: Master proposed {int(num_deployed)} facilities → ignored for incumbent")
+                    print(f"   Warning: Master proposed {int(num_deployed)} facilities - ignored for incumbent")
                     
                     
             ##### Optimality cut #####

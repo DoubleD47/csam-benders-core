@@ -1,0 +1,1608 @@
+Experiment: 2026-05-27_170811_default_run_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy = 5000.0
+Random seed: 456
+Master constraint 'max_csam_limit' added with RHS = 3
+
+Iteration 1: Solving Master...
+Master proposed 0 facilities (should be <= 3)
+Master LB: 0.00
+Fixed y: {}
+Master proposed 0 facilities
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 2: Solving Master...
+Master proposed 1 facilities (should be <= 3)
+Master LB: 1000.00
+Fixed y: {'m9': 1}
+Master proposed 1 facilities
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 3: Solving Master...
+Master proposed 2 facilities (should be <= 3)
+Master LB: 2000.00
+Fixed y: {'m1': 1, 'm10': 1}
+Master proposed 2 facilities
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 4: Solving Master...
+Master proposed 3 facilities (should be <= 3)
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Master proposed 3 facilities
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 5: Solving Master...
+Master proposed 4 facilities (should be <= 3)
+Master LB: 4000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm10': 1}
+Master proposed 4 facilities
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 6: Solving Master...
+Master proposed 5 facilities (should be <= 3)
+Master LB: 5000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm10': 1}
+Master proposed 5 facilities
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 7: Solving Master...
+Master proposed 6 facilities (should be <= 3)
+Master LB: 6000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm10': 1}
+Master proposed 6 facilities
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 8: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 9: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 10: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 11: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 12: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 13: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 14: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 15: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 16: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 17: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 18: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 19: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 20: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 21: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 22: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 23: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 24: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 25: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 26: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 27: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 28: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 29: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 30: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 31: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 32: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 33: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 34: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 35: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 36: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 37: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 38: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 39: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 40: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 41: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 42: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 43: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 44: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 45: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 46: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 47: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 48: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 49: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 50: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 51: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 52: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 53: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 54: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 55: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 56: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 57: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 58: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 59: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 60: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 61: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 62: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 63: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 64: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 65: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 66: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 67: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 68: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 69: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 70: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 71: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 72: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 73: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 74: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 75: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 76: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 77: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 78: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 79: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 80: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 81: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 82: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 83: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 84: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 85: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 86: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 87: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 88: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 89: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 90: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 91: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 92: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 93: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 94: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 95: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 96: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 97: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 98: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 99: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 100: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 101: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 102: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 103: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 104: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 105: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 106: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 107: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 108: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 109: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 110: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 111: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 112: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 113: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 114: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 115: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 116: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 117: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 118: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 119: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 120: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 121: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 122: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 123: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 124: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 125: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 126: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 127: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 128: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 129: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 130: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 131: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 132: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 133: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 134: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 135: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 136: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 137: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 138: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 139: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 140: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 141: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 142: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 143: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 144: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 145: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 146: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 147: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 148: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 149: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 150: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 151: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 152: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 153: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 154: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 155: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 156: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 157: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 158: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 159: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 160: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 161: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 162: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 163: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 164: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 165: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 166: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 167: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 168: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 169: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 170: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 171: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 172: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 173: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 174: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 175: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 176: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 177: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 178: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 179: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 180: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 181: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 182: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 183: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 184: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 185: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 186: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 187: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 188: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 189: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 190: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 191: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 192: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 193: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 194: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 195: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 196: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 197: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 198: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 199: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+Iteration 200: Solving Master...
+Master proposed 7 facilities (should be <= 3)
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Master proposed 7 facilities
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+=== Benders converged ===
+Final Objective (UB): 73383.11
+Runtime: 407.26 seconds
