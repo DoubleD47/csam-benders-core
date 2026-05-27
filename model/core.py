@@ -18,7 +18,12 @@ class Tee:
 
     def write(self, obj):
         for f in self.files:
-            f.write(obj)
+            try:
+                f.write(obj)
+            except UnicodeEncodeError:
+                # Replace problematic characters for Windows log file
+                clean_obj = obj.encode('ascii', 'replace').decode('ascii')
+                f.write(clean_obj)
             f.flush()
 
     def flush(self):
@@ -84,13 +89,14 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     master = LpProblem("CSAM_Master", LpMinimize)
     y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
     theta = LpVariable("theta", lowBound=0)
-    master += lpSum(F[m] * y[(m, 'l1')] for m in M) + theta, "objective"
-    
-    # Cardinality constraint - gave it a clear name
-    master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
-    
-    print(f"Master constraint 'max_csam_limit' added with RHS = {MAX_CSAM_FACILITIES}")
 
+    master += lpSum(F[m] * y[(m, 'l1')] for m in M) + theta, "objective"
+
+    # === NAMED Cardinality Constraint ===
+    master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
+
+    print(f"Master created with max_csam_limit = {MAX_CSAM_FACILITIES}")
+    
     # ====================== Benders Decomposition ======================
     lb, ub = -np.inf, np.inf
     iter_count = 0
@@ -106,6 +112,10 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
         print(f"Master proposed {int(current_deployed)} facilities (should be <= {MAX_CSAM_FACILITIES})")
         lb = value(master.objective)
         print(f"Master LB: {lb:.2f}")
+        
+        # === DEBUG: Check if constraint is respected ===
+        current_deployed = sum(value(y[(m, 'l1')]) for m in M)
+        print(f"Master proposed {int(current_deployed)} facilities (max allowed = {MAX_CSAM_FACILITIES})")
 
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
         print("Fixed y:", {m: int(fixed_y[m]) for m in M if fixed_y[m] > 0.5})
