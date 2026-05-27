@@ -103,6 +103,8 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
 
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
         print("Fixed y:", {m: int(fixed_y[m]) for m in M if fixed_y[m] > 0.5})
+
+        # Diagnostic: Check what the Master actually proposed
         current_deployed = sum(value(y[(m, 'l1')]) for m in M)
         print(f"Master proposed {int(current_deployed)} facilities")
 
