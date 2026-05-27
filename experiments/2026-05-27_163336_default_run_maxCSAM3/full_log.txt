@@ -1,0 +1,634 @@
+Experiment: 2026-05-27_163336_default_run_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy = 5000.0
+Random seed: 456
+
+Iteration 1: Solving Master...
+Master LB: 0.00
+Fixed y: {}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 2: Solving Master...
+Master LB: 1000.00
+Fixed y: {'m9': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 3: Solving Master...
+Master LB: 2000.00
+Fixed y: {'m1': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 4: Solving Master...
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 5: Solving Master...
+Master LB: 4000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 6: Solving Master...
+Master LB: 5000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 7: Solving Master...
+Master LB: 6000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 8: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm10': 1}
+Sub Status: Optimal
+New best solution found! Deployed: 7 CSAM facilities | Total Cost: 73383.11
+
+Iteration 9: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+New best solution found! Deployed: 7 CSAM facilities | Total Cost: 73383.11
+
+Iteration 10: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 11: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 12: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Sub Status: Optimal
+
+Iteration 13: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 14: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 15: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Sub Status: Optimal
+
+Iteration 16: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 17: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 18: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 19: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 20: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 21: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 22: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 23: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 24: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 25: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 26: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 27: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 28: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 29: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 30: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 31: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 32: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 33: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 34: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 35: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 36: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 37: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 38: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 39: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 40: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 41: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 42: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Sub Status: Optimal
+New best solution found! Deployed: 7 CSAM facilities | Total Cost: 73383.11
+
+Iteration 43: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Sub Status: Optimal
+
+Iteration 44: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 45: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 46: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 47: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Sub Status: Optimal
+
+Iteration 48: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 49: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 50: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 51: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 52: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 53: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 54: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 55: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 56: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 57: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 58: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 59: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Sub Status: Optimal
+
+Iteration 60: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 61: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 62: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 63: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Sub Status: Optimal
+
+Iteration 64: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 65: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 66: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 67: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 68: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 69: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 70: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 71: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 72: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 73: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 74: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 75: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Sub Status: Optimal
+
+Iteration 76: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 77: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 78: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 79: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Sub Status: Optimal
+
+Iteration 80: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 81: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 82: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 83: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 84: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 85: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 86: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 87: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 88: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 89: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 90: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 91: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm7': 1, 'm9': 1}
+Sub Status: Optimal
+
+Iteration 92: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm5': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 93: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm3': 1, 'm4': 1, 'm6': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 94: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+Iteration 95: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm7': 1}
+Sub Status: Optimal
+
+Iteration 96: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 97: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm3': 1, 'm5': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 98: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 99: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m2': 1, 'm4': 1, 'm6': 1, 'm7': 1, 'm8': 1, 'm9': 1, 'm10': 1}
+Sub Status: Optimal
+
+Iteration 100: Solving Master...
+Master LB: 7000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm8': 1}
+Sub Status: Optimal
+
+=== Benders converged ===
+Final Objective (UB): 73383.11
+Runtime: 198.05 seconds
+Objective Value: 73383.10705912401
+
+CSAM Deployments:
+y[m2, 'l1'] = 1
+y[m3, 'l1'] = 1
+y[m4, 'l1'] = 1
+y[m5, 'l1'] = 1
+y[m6, 'l1'] = 1
+y[m8, 'l1'] = 1
+y[m10, 'l1'] = 1
+
+Positive CSAM l1 flows (q_l1 to r_l1):
+Arc (m2_q_l1 -> m2_r_l1), t=1, commodity=('l1', 'k1'): flow=6.8
+Arc (m2_q_l1 -> m2_r_l1), t=1, commodity=('l1', 'k3'): flow=7.4
+Arc (m2_q_l1 -> m2_r_l1), t=1, commodity=('l1', 'k4'): flow=5.1
+Arc (m2_q_l1 -> m2_r_l1), t=1, commodity=('l1', 'k5'): flow=8.6
+Arc (m2_q_l1 -> m2_r_l1), t=1, commodity=('l2', 'k1'): flow=6.5
+Arc (m2_q_l1 -> m2_r_l1), t=1, commodity=('l2', 'k3'): flow=13.6
+Arc (m2_q_l1 -> m2_r_l1), t=1, commodity=('l2', 'k4'): flow=7.0
+Arc (m2_q_l1 -> m2_r_l1), t=1, commodity=('l2', 'k5'): flow=6.3
+Arc (m2_q_l1 -> m2_r_l1), t=2, commodity=('l1', 'k1'): flow=7.1
+Arc (m2_q_l1 -> m2_r_l1), t=2, commodity=('l1', 'k3'): flow=13.6
+Arc (m2_q_l1 -> m2_r_l1), t=2, commodity=('l1', 'k4'): flow=10.3
+Arc (m2_q_l1 -> m2_r_l1), t=2, commodity=('l2', 'k1'): flow=6.9
+Arc (m2_q_l1 -> m2_r_l1), t=2, commodity=('l2', 'k3'): flow=11.3
+Arc (m2_q_l1 -> m2_r_l1), t=2, commodity=('l2', 'k4'): flow=8.6
+Arc (m2_q_l1 -> m2_r_l1), t=2, commodity=('l2', 'k5'): flow=12.3
+Arc (m3_q_l1 -> m3_r_l1), t=1, commodity=('l1', 'k1'): flow=10.6
+Arc (m3_q_l1 -> m3_r_l1), t=1, commodity=('l1', 'k2'): flow=14.4
+Arc (m3_q_l1 -> m3_r_l1), t=1, commodity=('l1', 'k4'): flow=14.0
+Arc (m3_q_l1 -> m3_r_l1), t=1, commodity=('l1', 'k5'): flow=6.8
+Arc (m3_q_l1 -> m3_r_l1), t=1, commodity=('l2', 'k1'): flow=10.9
+Arc (m3_q_l1 -> m3_r_l1), t=1, commodity=('l2', 'k2'): flow=1.7
+Arc (m3_q_l1 -> m3_r_l1), t=1, commodity=('l2', 'k4'): flow=8.7
+Arc (m3_q_l1 -> m3_r_l1), t=1, commodity=('l2', 'k5'): flow=13.0
+Arc (m3_q_l1 -> m3_r_l1), t=2, commodity=('l1', 'k1'): flow=5.1
+Arc (m3_q_l1 -> m3_r_l1), t=2, commodity=('l1', 'k2'): flow=9.8
+Arc (m3_q_l1 -> m3_r_l1), t=2, commodity=('l1', 'k4'): flow=6.3
+Arc (m3_q_l1 -> m3_r_l1), t=2, commodity=('l1', 'k5'): flow=4.2
+Arc (m3_q_l1 -> m3_r_l1), t=2, commodity=('l2', 'k1'): flow=11.0
+Arc (m3_q_l1 -> m3_r_l1), t=2, commodity=('l2', 'k2'): flow=14.7
+Arc (m3_q_l1 -> m3_r_l1), t=2, commodity=('l2', 'k5'): flow=10.2
+Arc (m4_q_l1 -> m4_r_l1), t=1, commodity=('l1', 'k1'): flow=10.2
+Arc (m4_q_l1 -> m4_r_l1), t=1, commodity=('l1', 'k2'): flow=6.2
+Arc (m4_q_l1 -> m4_r_l1), t=1, commodity=('l1', 'k3'): flow=8.3
+Arc (m4_q_l1 -> m4_r_l1), t=1, commodity=('l2', 'k1'): flow=1.4
+Arc (m4_q_l1 -> m4_r_l1), t=1, commodity=('l2', 'k2'): flow=9.8
+Arc (m4_q_l1 -> m4_r_l1), t=1, commodity=('l2', 'k3'): flow=13.4
+Arc (m4_q_l1 -> m4_r_l1), t=1, commodity=('l2', 'k5'): flow=5.5
+Arc (m4_q_l1 -> m4_r_l1), t=2, commodity=('l1', 'k2'): flow=9.1
+Arc (m4_q_l1 -> m4_r_l1), t=2, commodity=('l1', 'k3'): flow=12.1
+Arc (m4_q_l1 -> m4_r_l1), t=2, commodity=('l1', 'k5'): flow=8.8
+Arc (m4_q_l1 -> m4_r_l1), t=2, commodity=('l2', 'k1'): flow=5.2
+Arc (m4_q_l1 -> m4_r_l1), t=2, commodity=('l2', 'k2'): flow=8.9
+Arc (m4_q_l1 -> m4_r_l1), t=2, commodity=('l2', 'k3'): flow=6.4
+Arc (m4_q_l1 -> m4_r_l1), t=2, commodity=('l2', 'k5'): flow=12.9
+Arc (m5_q_l1 -> m5_r_l1), t=1, commodity=('l1', 'k2'): flow=9.8
+Arc (m5_q_l1 -> m5_r_l1), t=1, commodity=('l1', 'k3'): flow=14.8
+Arc (m5_q_l1 -> m5_r_l1), t=1, commodity=('l1', 'k4'): flow=9.5
+Arc (m5_q_l1 -> m5_r_l1), t=1, commodity=('l2', 'k1'): flow=10.4
+Arc (m5_q_l1 -> m5_r_l1), t=1, commodity=('l2', 'k2'): flow=11.8
+Arc (m5_q_l1 -> m5_r_l1), t=1, commodity=('l2', 'k3'): flow=12.4
+Arc (m5_q_l1 -> m5_r_l1), t=1, commodity=('l2', 'k4'): flow=11.3
+Arc (m5_q_l1 -> m5_r_l1), t=2, commodity=('l1', 'k1'): flow=13.0
+Arc (m5_q_l1 -> m5_r_l1), t=2, commodity=('l1', 'k3'): flow=13.7
+Arc (m5_q_l1 -> m5_r_l1), t=2, commodity=('l1', 'k4'): flow=9.1
+Arc (m5_q_l1 -> m5_r_l1), t=2, commodity=('l2', 'k1'): flow=6.4
+Arc (m5_q_l1 -> m5_r_l1), t=2, commodity=('l2', 'k2'): flow=4.9
+Arc (m5_q_l1 -> m5_r_l1), t=2, commodity=('l2', 'k3'): flow=0.3
+Arc (m5_q_l1 -> m5_r_l1), t=2, commodity=('l2', 'k4'): flow=13.9
+Arc (m6_q_l1 -> m6_r_l1), t=1, commodity=('l1', 'k2'): flow=11.4
+Arc (m6_q_l1 -> m6_r_l1), t=1, commodity=('l1', 'k4'): flow=6.7
+Arc (m6_q_l1 -> m6_r_l1), t=1, commodity=('l1', 'k5'): flow=7.3
+Arc (m6_q_l1 -> m6_r_l1), t=1, commodity=('l2', 'k1'): flow=7.6
+Arc (m6_q_l1 -> m6_r_l1), t=1, commodity=('l2', 'k2'): flow=4.3
+Arc (m6_q_l1 -> m6_r_l1), t=1, commodity=('l2', 'k3'): flow=9.1
+Arc (m6_q_l1 -> m6_r_l1), t=1, commodity=('l2', 'k5'): flow=14.9
+Arc (m6_q_l1 -> m6_r_l1), t=2, commodity=('l1', 'k2'): flow=13.8
+Arc (m6_q_l1 -> m6_r_l1), t=2, commodity=('l1', 'k3'): flow=5.0
+Arc (m6_q_l1 -> m6_r_l1), t=2, commodity=('l1', 'k4'): flow=6.1
+Arc (m6_q_l1 -> m6_r_l1), t=2, commodity=('l1', 'k5'): flow=7.9
+Arc (m6_q_l1 -> m6_r_l1), t=2, commodity=('l2', 'k1'): flow=14.0
+Arc (m6_q_l1 -> m6_r_l1), t=2, commodity=('l2', 'k2'): flow=14.2
+Arc (m6_q_l1 -> m6_r_l1), t=2, commodity=('l2', 'k4'): flow=10.9
+Arc (m6_q_l1 -> m6_r_l1), t=2, commodity=('l2', 'k5'): flow=8.2
+Arc (m8_q_l1 -> m8_r_l1), t=1, commodity=('l1', 'k2'): flow=7.1
+Arc (m8_q_l1 -> m8_r_l1), t=1, commodity=('l1', 'k3'): flow=7.9
+Arc (m8_q_l1 -> m8_r_l1), t=1, commodity=('l1', 'k4'): flow=4.4
+Arc (m8_q_l1 -> m8_r_l1), t=1, commodity=('l1', 'k5'): flow=9.6
+Arc (m8_q_l1 -> m8_r_l1), t=1, commodity=('l2', 'k1'): flow=5.7
+Arc (m8_q_l1 -> m8_r_l1), t=1, commodity=('l2', 'k2'): flow=13.6
+Arc (m8_q_l1 -> m8_r_l1), t=1, commodity=('l2', 'k3'): flow=9.2
+Arc (m8_q_l1 -> m8_r_l1), t=1, commodity=('l2', 'k5'): flow=4.2
+Arc (m8_q_l1 -> m8_r_l1), t=2, commodity=('l1', 'k1'): flow=2.4
+Arc (m8_q_l1 -> m8_r_l1), t=2, commodity=('l1', 'k2'): flow=14.9
+Arc (m8_q_l1 -> m8_r_l1), t=2, commodity=('l1', 'k3'): flow=7.8
+Arc (m8_q_l1 -> m8_r_l1), t=2, commodity=('l1', 'k5'): flow=10.5
+Arc (m8_q_l1 -> m8_r_l1), t=2, commodity=('l2', 'k1'): flow=10.3
+Arc (m8_q_l1 -> m8_r_l1), t=2, commodity=('l2', 'k3'): flow=12.6
+Arc (m8_q_l1 -> m8_r_l1), t=2, commodity=('l2', 'k4'): flow=7.0
+Arc (m8_q_l1 -> m8_r_l1), t=2, commodity=('l2', 'k5'): flow=12.4
+Arc (m10_q_l1 -> m10_r_l1), t=1, commodity=('l1', 'k2'): flow=9.9
+Arc (m10_q_l1 -> m10_r_l1), t=1, commodity=('l1', 'k3'): flow=12.1
+Arc (m10_q_l1 -> m10_r_l1), t=1, commodity=('l1', 'k4'): flow=10.2
+Arc (m10_q_l1 -> m10_r_l1), t=1, commodity=('l2', 'k1'): flow=7.3
+Arc (m10_q_l1 -> m10_r_l1), t=1, commodity=('l2', 'k3'): flow=8.4
+Arc (m10_q_l1 -> m10_r_l1), t=1, commodity=('l2', 'k4'): flow=11.8
+Arc (m10_q_l1 -> m10_r_l1), t=1, commodity=('l2', 'k5'): flow=12.3
+Arc (m10_q_l1 -> m10_r_l1), t=2, commodity=('l1', 'k2'): flow=10.3
+Arc (m10_q_l1 -> m10_r_l1), t=2, commodity=('l1', 'k3'): flow=6.1
+Arc (m10_q_l1 -> m10_r_l1), t=2, commodity=('l1', 'k4'): flow=9.5
+Arc (m10_q_l1 -> m10_r_l1), t=2, commodity=('l2', 'k2'): flow=14.1
+Arc (m10_q_l1 -> m10_r_l1), t=2, commodity=('l2', 'k3'): flow=9.5
+Arc (m10_q_l1 -> m10_r_l1), t=2, commodity=('l2', 'k4'): flow=5.7
+Arc (m10_q_l1 -> m10_r_l1), t=2, commodity=('l2', 'k5'): flow=15.0
+
+=== Generating visualizations ===

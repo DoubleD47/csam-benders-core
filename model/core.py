@@ -103,6 +103,8 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
 
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
         print("Fixed y:", {m: int(fixed_y[m]) for m in M if fixed_y[m] > 0.5})
+        current_deployed = sum(value(y[(m, 'l1')]) for m in M)
+        print(f"Master proposed {int(current_deployed)} facilities")
 
         # Subproblem
         sub = LpProblem("Subproblem_Flow", LpMinimize)
@@ -189,13 +191,19 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
             total_cost = deployment_cost + sub_cost
             ub = min(ub, total_cost)
 
-            if total_cost < deployment_cost + best_sub_cost:
+                # === CRITICAL FIX: Only accept if it respects max facilities ===
+            num_deployed = sum(fixed_y.values())
+            if num_deployed <= MAX_CSAM_FACILITIES and total_cost < deployment_cost + best_sub_cost:
                 best_y = fixed_y.copy()
                 best_sub_cost = sub_cost
                 best_sub_vars = {
-                    'x_regular': {a: value(x_regular[a]) for a in regular_arcs},
-                    'x_qq': {a: value(x_qq[a]) for a in qq_arcs}
+                    'x_regular': {a: value(x_regular[a]) for a in regular_arcs if value(x_regular[a]) is not None},
+                    'x_qq': {a: value(x_qq[a]) for a in qq_arcs if value(x_qq[a]) is not None}
                 }
+                print(f"✅ New best solution found! Deployed: {int(num_deployed)} CSAM | Total Cost: {total_cost:.2f}")
+            else:
+                if num_deployed > MAX_CSAM_FACILITIES:
+                    print(f"Warning: Master proposed {int(num_deployed)} facilities (ignored for incumbent)")
 
             # Optimality cut
             pi = {(m, t): sub.constraints[l1_capacity_cons[(m, t)]].pi for m in M for t in T}
