@@ -204,34 +204,9 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
 
         else:
             print("Subproblem infeasible! Adding feasibility cut.")
-            master += lpSum(y[(m, 'l1')] for m in M) >= sum(fixed_y.values()) + 1, f"feas_cut_{iter_count}"
-
-        status = sub.solve(PULP_CBC_CMD(msg=0))
-        print("Sub Status:", LpStatus[status])
-
-        if LpStatus[status] == 'Optimal':
-            sub_cost = value(sub.objective)
-            deployment_cost = sum(F[m] * fixed_y[m] for m in M)
-            total_cost = deployment_cost + sub_cost
-            ub = min(ub, total_cost)
-
-            if total_cost < deployment_cost + best_sub_cost:
-                best_y = fixed_y.copy()
-                best_sub_cost = sub_cost
-                best_sub_vars = {
-                    'x_regular': {a: value(x_regular[a]) for a in regular_arcs},
-                    'x_qq': {a: value(x_qq[a]) for a in qq_arcs}
-                }
-
-            # Optimality cut
-            l1_capacity_cons = { ... }  # define as in original
-            pi = {(m, t): sub.constraints[f"capacity_l1_{m}_{t}"].pi for m in M for t in T}
-            cut = theta >= sub_cost + lpSum(pi[(m, t)] * U_l1 * (y[(m, 'l1')] - fixed_y[m]) for m in M for t in T)
-            master += cut, f"opt_cut_{iter_count}"
-
-        else:
-            print("Subproblem infeasible!")
-            master += lpSum(y[(m, 'l1')] for m in M) >= sum(fixed_y.values()) + 1, f"feas_cut_{iter_count}"
+            # Use unique name to prevent collision
+            cut_name = f"feas_cut_{iter_count}"
+            master += lpSum(y[(m, 'l1')] for m in M) >= sum(fixed_y.values()) + 1, cut_name
 
 # ====================== Output & Save ======================
     print("\n=== Benders converged ===")

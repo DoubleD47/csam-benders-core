@@ -1,0 +1,28 @@
+{
+  "run_id": "2026-05-27_161138_default_run_maxCSAM3",
+  "timestamp": "2026-05-27_161138",
+  "experiment": "default_run",
+  "max_csam_facilities": 3,
+  "seed": 456,
+  "objective": 73383.10703859998,
+  "deployed_count": 7,
+  "deployed_facilities": [
+    "m1",
+    "m2",
+    "m3",
+    "m4",
+    "m5",
+    "m6",
+    "m10"
+  ],
+  "unmet_demand": 0.0,
+  "iterations": 100,
+  "runtime_seconds": 211.22444105148315,
+  "deployment_cost": 7000.0,
+  "travel_cost": 2458.2260517,
+  "queue_entry_cost": 19553.340565,
+  "repair_l1_cost": 23883.3514125,
+  "repair_l2_cost": 20000.0,
+  "carryover_cost": 0.0,
+  "dummy_cost": 0.0
+}
