@@ -193,9 +193,9 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
             total_cost = deployment_cost + sub_cost
             ub = min(ub, total_cost)
 
-                # === CRITICAL FIX: Only accept if it respects max facilities ===
+            # === FIXED INCUMBENT TRACKING ===
             num_deployed = sum(fixed_y.values())
-            if num_deployed <= MAX_CSAM_FACILITIES and total_cost < deployment_cost + best_sub_cost:
+            if num_deployed <= MAX_CSAM_FACILITIES and total_cost < best_sub_cost + deployment_cost:
                 best_y = fixed_y.copy()
                 best_sub_cost = sub_cost
                 best_sub_vars = {
@@ -205,9 +205,10 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
                 print(f"✅ New best solution found! Deployed: {int(num_deployed)} CSAM | Total Cost: {total_cost:.2f}")
             else:
                 if num_deployed > MAX_CSAM_FACILITIES:
-                    print(f"Warning: Master proposed {int(num_deployed)} facilities (ignored for incumbent)")
-
-            # Optimality cut
+                    print(f"   Warning: Master proposed {int(num_deployed)} facilities → ignored for incumbent")
+                    
+                    
+            ##### Optimality cut #####
             pi = {(m, t): sub.constraints[l1_capacity_cons[(m, t)]].pi for m in M for t in T}
             cut = theta >= sub_cost + lpSum(pi[(m, t)] * U_l1 * (y[(m, 'l1')] - fixed_y[m]) for m in M for t in T)
             master += cut, f"opt_cut_{iter_count}"
