@@ -90,12 +90,14 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
     theta = LpVariable("theta", lowBound=0)
 
+    # Objective
     master += lpSum(F[m] * y[(m, 'l1')] for m in M) + theta, "objective"
 
-    # === NAMED Cardinality Constraint ===
+    # === STRONGER Cardinality Constraint ===
     master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
 
     print(f"Master created with max_csam_limit = {MAX_CSAM_FACILITIES}")
+    print(f"Number of binary variables: {len(y)}")
     
     # ====================== Benders Decomposition ======================
     lb, ub = -np.inf, np.inf
@@ -108,14 +110,20 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
         iter_count += 1
         print(f"\nIteration {iter_count}: Solving Master...")
         master.solve(PULP_CBC_CMD(msg=0))
-        current_deployed = sum(value(y[(m, 'l1')]) for m in M)
-        print(f"Master proposed {int(current_deployed)} facilities (should be <= {MAX_CSAM_FACILITIES})")
         lb = value(master.objective)
         print(f"Master LB: {lb:.2f}")
-        
-        # === DEBUG: Check if constraint is respected ===
-        current_deployed = sum(value(y[(m, 'l1')]) for m in M)
-        print(f"Master proposed {int(current_deployed)} facilities (max allowed = {MAX_CSAM_FACILITIES})")
+
+        # Strong debug
+        deployed = sum(value(y[(m, 'l1')]) for m in M)
+        print(f"Master proposed {int(deployed)} facilities (max allowed = {MAX_CSAM_FACILITIES})")
+
+        # Check if constraint is violated
+        if deployed > MAX_CSAM_FACILITIES + 0.1:
+            print("ERROR: Cardinality constraint is being violated!")
+            print("Current y values:")
+            for m in M:
+                val = value(y[(m, 'l1')])
+                print(f"  y[{m}] = {val}")
 
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
         print("Fixed y:", {m: int(fixed_y[m]) for m in M if fixed_y[m] > 0.5})
