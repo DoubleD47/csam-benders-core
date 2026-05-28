@@ -71,10 +71,10 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     output_dir = repo_root / output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Logging
-    log_file = open(exp_dir / "full_log.txt", 'w') if create_exp_dir else open(os.devnull, 'w')
-    original_stdout = sys.stdout
-    sys.stdout = Tee(sys.stdout, log_file)
+    # # Logging
+    # log_file = open(exp_dir / "full_log.txt", 'w') if create_exp_dir else open(os.devnull, 'w')
+    # original_stdout = sys.stdout
+    # sys.stdout = Tee(sys.stdout, log_file)
 
     print(f"Experiment: {run_id}")
     print(f"MAX_CSAM_FACILITIES = {MAX_CSAM_FACILITIES} | U_l1 = {U_l1} | C_dummy = {C_dummy}")
@@ -120,8 +120,8 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     while ub - lb > EPS and iter_count < MAX_ITER:
         iter_count += 1
         print(f"\nIteration {iter_count}: Solving Master...")
-        # master.solve(PULP_CBC_CMD(msg=0))
-        master.solve(HiGHS_CMD(msg=0))     # ← Uncomment this after installing highspy
+        solver = HiGHS_CMD(msg=0, options=['--log_file=""', '--mip_rel_gap=0.0001'])
+        master.solve(solver)
 
         lb = value(master.objective)
         print(f"Master LB: {lb:.2f}")
@@ -334,8 +334,8 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
             print("Visualization script failed or not found.")
 
     # Restore stdout
-    sys.stdout = original_stdout
-    log_file.close()
+    # sys.stdout = original_stdout
+    # log_file.close()
 
     print(f"\nExperiment completed → {exp_dir}")
 
