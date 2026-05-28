@@ -1,0 +1,11 @@
+Experiment: 2026-05-28_153706_default_run_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy = 5000.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+Fixed y: {}
+  → Using relaxed capacity for diagnosis...
+Sub Status: Optimal
+New best UB: 64472.44 with 0 CSAM facilities
