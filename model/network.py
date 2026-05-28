@@ -21,31 +21,43 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
 
             for m in M:
                 nodes.append((f'{m}_in', t, c))
+                # l1 queue and repair
                 nodes.extend([(f'{m}_q_l1', t, c), (f'{m}_r_l1', t, c), (f'{m}_out_l1', t, c)])
+                # l2 queue and repair (if this m is traditional for this k)
                 if m == traditional_m_dict.get(c[1]):
                     nodes.extend([(f'{m}_q_l2', t, c), (f'{m}_r_l2', t, c), (f'{m}_out_l2', t, c)])
 
-    # Regular arcs + Dummy arcs only in last period
+    # === Regular Arcs + Crossover + Dummy ===
     for t in T:
         for c in C:
             for m in M:
                 regular_arcs.append(('source', f'{m}_in', t, c))
-                # ... (keep your existing movement between ins)
 
+                # Movement between major nodes
+                for m2 in M:
+                    if m != m2:
+                        regular_arcs.append((f'{m}_in', f'{m2}_in', t, c))
+
+                # Enter l1 queue
                 regular_arcs.append((f'{m}_in', f'{m}_q_l1', t, c))
-                if m == traditional_m_dict.get(c[1]):
-                    regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
 
+                # l1 processing
                 regular_arcs.append((f'{m}_q_l1', f'{m}_r_l1', t, c))
                 regular_arcs.append((f'{m}_r_l1', f'{m}_out_l1', t, c))
                 regular_arcs.append((f'{m}_out_l1', 'sink', t, c))
 
+                # === l1 to l2 crossover (important!) ===
+                if m in traditional_m_dict.values():  # if this is an l2 capable node
+                    regular_arcs.append((f'{m}_q_l1', f'{m}_q_l2', t, c))   # l1 queue to l2 queue
+
+                # l2 processing (if applicable)
                 if m == traditional_m_dict.get(c[1]):
+                    regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
                     regular_arcs.append((f'{m}_q_l2', f'{m}_r_l2', t, c))
                     regular_arcs.append((f'{m}_r_l2', f'{m}_out_l2', t, c))
                     regular_arcs.append((f'{m}_out_l2', 'sink', t, c))
 
-                # Dummy arcs ONLY in last time period from queues
+                # Dummy arcs ONLY in last period from queues
                 if t == max_t:
                     regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
                     if m == traditional_m_dict.get(c[1]):
@@ -56,7 +68,7 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
                 if t == max_t:
                     regular_arcs.append(('dummy', 'ss', t, c))
 
-    # Queue carry-over arcs
+    # Queue carry-over
     for t in range(min(T), max(T)):
         for c in C:
             for m in M:
