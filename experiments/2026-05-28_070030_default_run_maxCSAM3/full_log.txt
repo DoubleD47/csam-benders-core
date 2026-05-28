@@ -1,0 +1,6 @@
+Experiment: 2026-05-28_070030_default_run_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy = 5000.0
+Random seed: 456
+Master created with max_csam_limit = 3 + penalty 1000000.0
+
+Iteration 1: Solving Master...

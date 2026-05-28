@@ -10,8 +10,6 @@ import numpy as np
 import subprocess
 
 from .network import build_network
-
-
 class Tee:
     def __init__(self, *files):
         self.files = files
@@ -20,15 +18,23 @@ class Tee:
         for f in self.files:
             try:
                 f.write(obj)
-            except UnicodeEncodeError:
-                # Replace problematic characters for Windows log file
-                clean_obj = obj.encode('ascii', 'replace').decode('ascii')
+            except (UnicodeEncodeError, AttributeError):
+                # Fallback for solvers that need real file handles
+                clean_obj = str(obj).encode('ascii', 'replace').decode('ascii')
                 f.write(clean_obj)
             f.flush()
 
     def flush(self):
         for f in self.files:
-            f.flush()
+            if hasattr(f, 'flush'):
+                f.flush()
+
+    def fileno(self):
+        # This is the critical addition for HiGHS / subprocess compatibility
+        for f in self.files:
+            if hasattr(f, 'fileno'):
+                return f.fileno()
+        raise AttributeError("No fileno available")
 
 
 def solve_benders(params, output_dir="output", create_exp_dir=True):
