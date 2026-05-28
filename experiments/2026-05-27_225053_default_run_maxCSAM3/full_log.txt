@@ -1,0 +1,68 @@
+Experiment: 2026-05-27_225053_default_run_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy = 5000.0
+Random seed: 456
+Master created with max_csam_limit = 3 (with penalty = 1000000.0)
+
+Iteration 1: Solving Master...
+Master LB: 0.00
+Master proposed 0 facilities (max allowed = 3)
+Fixed y: {}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 2: Solving Master...
+Master LB: 1001000.00
+Master proposed 1 facilities (max allowed = 3)
+Fixed y: {'m9': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 3: Solving Master...
+Master LB: 2002000.00
+Master proposed 2 facilities (max allowed = 3)
+Fixed y: {'m1': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 4: Solving Master...
+Master LB: 3003000.00
+Master proposed 3 facilities (max allowed = 3)
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 5: Solving Master...
+Master LB: 4004000.00
+Master proposed 4 facilities (max allowed = 3)
+*** CRITICAL ERROR: Cardinality constraint is being IGNORED! ***
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 6: Solving Master...
+Master LB: 5005000.00
+Master proposed 5 facilities (max allowed = 3)
+*** CRITICAL ERROR: Cardinality constraint is being IGNORED! ***
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 7: Solving Master...
+Master LB: 6006000.00
+Master proposed 6 facilities (max allowed = 3)
+*** CRITICAL ERROR: Cardinality constraint is being IGNORED! ***
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding feasibility cut.
+
+Iteration 8: Solving Master...
+Master LB: 7007000.00
+Master proposed 7 facilities (max allowed = 3)
+*** CRITICAL ERROR: Cardinality constraint is being IGNORED! ***
+Fixed y: {'m1': 1, 'm2': 1, 'm3': 1, 'm4': 1, 'm5': 1, 'm6': 1, 'm10': 1}
+Sub Status: Optimal
+   Warning: Master proposed 7 facilities - ignored for incumbent
+
+=== Benders converged ===
+Final Objective (UB): 73383.11
+Runtime: 16.56 seconds

@@ -90,14 +90,16 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
     theta = LpVariable("theta", lowBound=0)
 
-    # Objective
-    master += lpSum(F[m] * y[(m, 'l1')] for m in M) + theta, "objective"
+    # Big-M penalty to discourage too many facilities
+    PENALTY = 1000000.0
 
-    # === STRONGER Cardinality Constraint ===
+    # Objective with penalty
+    master += lpSum(F[m] * y[(m, 'l1')] for m in M) + theta + PENALTY * lpSum(y[(m, 'l1')] for m in M), "objective"
+
+    # Hard constraint (still keep it as backup)
     master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
 
-    print(f"Master created with max_csam_limit = {MAX_CSAM_FACILITIES}")
-    print(f"Number of binary variables: {len(y)}")
+    print(f"Master created with max_csam_limit = {MAX_CSAM_FACILITIES} (with penalty = {PENALTY})")
     
     # ====================== Benders Decomposition ======================
     lb, ub = -np.inf, np.inf
@@ -113,25 +115,16 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
         lb = value(master.objective)
         print(f"Master LB: {lb:.2f}")
 
-        # Strong debug
+        # === STRONG DEBUG ===
         deployed = sum(value(y[(m, 'l1')]) for m in M)
         print(f"Master proposed {int(deployed)} facilities (max allowed = {MAX_CSAM_FACILITIES})")
 
-        # Check if constraint is violated
-        if deployed > MAX_CSAM_FACILITIES + 0.1:
-            print("ERROR: Cardinality constraint is being violated!")
-            print("Current y values:")
-            for m in M:
-                val = value(y[(m, 'l1')])
-                print(f"  y[{m}] = {val}")
+        if deployed > MAX_CSAM_FACILITIES + 0.01:
+            print("*** CRITICAL ERROR: Cardinality constraint is being IGNORED! ***")
 
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
         print("Fixed y:", {m: int(fixed_y[m]) for m in M if fixed_y[m] > 0.5})
-
-        # Diagnostic: Check what the Master actually proposed
-        current_deployed = sum(value(y[(m, 'l1')]) for m in M)
-        print(f"Master proposed {int(current_deployed)} facilities")
-
+        
         # Subproblem
         sub = LpProblem("Subproblem_Flow", LpMinimize)
         x_regular = LpVariable.dicts("flow_regular", regular_arcs, lowBound=0, cat='Continuous')
@@ -250,6 +243,8 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     print(f"Runtime: {runtime:.2f} seconds")
 
     # Calculate cost breakdown (needed for summary)
+    if best_y is None:
+        best_y = {m: 0 for m in M}   # fallback
     deployment_cost = sum(F[m] * best_y.get(m, 0) for m in M)
     travel_cost = sum(C_in_in * best_sub_vars['x_regular'].get(a, 0) for a in regular_arcs if '_in' in str(a[0]) and '_in' in str(a[1]))
     queue_entry_cost = sum(C_in_q * best_sub_vars['x_regular'].get(a, 0) for a in regular_arcs if '_in' in str(a[0]) and '_q_' in str(a[1]))
