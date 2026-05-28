@@ -1,0 +1,20 @@
+{
+  "run_id": "2026-05-28_130125_default_run_maxCSAM3",
+  "timestamp": "2026-05-28_130125",
+  "experiment": "default_run",
+  "max_csam_facilities": 3,
+  "seed": 456,
+  "objective": Infinity,
+  "deployed_count": 0,
+  "deployed_facilities": [],
+  "unmet_demand": 0.0,
+  "iterations": 15,
+  "runtime_seconds": 30.543313026428223,
+  "deployment_cost": 0.0,
+  "travel_cost": 0.0,
+  "queue_entry_cost": 0.0,
+  "repair_l1_cost": 0.0,
+  "repair_l2_cost": 0.0,
+  "carryover_cost": 0.0,
+  "dummy_cost": 0.0
+}
