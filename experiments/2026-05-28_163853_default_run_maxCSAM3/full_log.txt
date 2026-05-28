@@ -1,0 +1,88 @@
+Experiment: 2026-05-28_163853_default_run_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy = 5000.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+--- Iteration 2 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+--- Iteration 3 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+--- Iteration 4 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+--- Iteration 5 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+--- Iteration 6 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+--- Iteration 7 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+--- Iteration 8 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+--- Iteration 9 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+--- Iteration 10 ---
+Master LB: 0.00
+Fixed y: {}
+  → Building subproblem for 10 fixed facilities
+  → Total demand injected: 1955.3
+  → Using relaxed capacity for diagnosis
+Sub Status: Optimal
+
+=== Benders converged ===
+Final Objective (UB): inf
+Runtime: 1.74 seconds

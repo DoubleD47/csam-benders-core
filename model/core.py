@@ -106,6 +106,32 @@ def solve_benders(params, output_dir="output"):
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
         print("Fixed y:", {m: int(fixed_y[m]) for m in M if fixed_y[m] > 0.5})
 
+    # ====================== Benders Decomposition ======================
+    lb, ub = -np.inf, np.inf
+    iter_count = 0
+    best_y = None
+    best_sub_cost = np.inf
+    best_sub_vars = None
+
+    # Master created once
+    master = LpProblem("CSAM_Master", LpMinimize)
+    y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
+    theta = LpVariable("theta", lowBound=0)
+
+    master += lpSum(F[m] * y[(m, 'l1')] for m in M) + theta, "objective"
+    master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
+
+    while ub - lb > EPS and iter_count < MAX_ITER:
+        iter_count += 1
+        print(f"\n--- Iteration {iter_count} ---")
+        master.solve(PULP_CBC_CMD(msg=0))
+        lb = value(master.objective)
+        print(f"Master LB: {lb:.2f}")
+
+        fixed_y = {m: value(y[(m, 'l1')]) for m in M}
+        num_deployed = sum(fixed_y.values())
+        print(f"Fixed y: { {m: int(v) for m, v in fixed_y.items() if v > 0.5} } ({int(num_deployed)} facilities)")
+
         # ====================== Subproblem ======================
         sub = LpProblem("Subproblem_Flow", LpMinimize)
         x_regular = LpVariable.dicts("flow_regular", regular_arcs, lowBound=0, cat='Continuous')
@@ -125,10 +151,6 @@ def solve_benders(params, output_dir="output"):
             lpSum(0.1 * x_regular[a] for a in regular_arcs if 'dummy' in str(a[0]) and 'ss' in str(a[1]))
         )
 
-        # Debug: How many dummy arcs exist in last period?
-        dummy_arcs = [a for a in regular_arcs if 'dummy' in str(a[1])]
-        print(f"  → Number of dummy arcs in model: {len(dummy_arcs)}")
-
         # Demand injection
         for m in M:
             for t in T:
@@ -137,7 +159,7 @@ def solve_benders(params, output_dir="output"):
                     if a in x_regular:
                         sub += x_regular[a] == D.get((m, t, c), 0)
 
-        # Flow conservation
+        # Flow conservation (exact from original)
         constraint_counter = 0
         unique_nodes = set(nodes)
         for n, t_node, comm in unique_nodes:
@@ -186,14 +208,31 @@ def solve_benders(params, output_dir="output"):
         print("Sub Status:", LpStatus[status])
 
         if LpStatus[status] == 'Optimal':
-            # ... (keep your existing optimal block)
-            print(f"New best UB: {ub:.2f} with {sum(best_y.values()):.0f} CSAM facilities")
+            sub_cost = value(sub.objective)
+            deployment_cost = sum(F[m] * fixed_y.get(m, 0) for m in M)
+            total_cost = deployment_cost + sub_cost
+            ub = min(ub, total_cost)
+
+            if total_cost < best_sub_cost:
+                best_y = fixed_y.copy()
+                best_sub_cost = sub_cost
+                best_sub_vars = {
+                    'x_regular': {a: value(x_regular[a]) for a in regular_arcs},
+                    'x_qq': {a: value(x_qq[a]) for a in qq_arcs}
+                }
+                print(f"New best UB: {ub:.2f} with {sum(best_y.values()):.0f} CSAM facilities")
+
+            # Optimality cut
+            pi = {(m, t): sub.constraints[l1_capacity_cons[(m, t)]].pi for m in M for t in T if (m, t) in l1_capacity_cons}
+            cut = theta >= sub_cost + lpSum(pi.get((m, t), 0) * U_l1 * (y[(m, 'l1')] - fixed_y.get(m, 0)) for m in M for t in T)
+            master += cut, f"opt_cut_{iter_count}"
+
         else:
             print("Subproblem infeasible! Adding strong feasibility cut.")
             min_facilities = min(iter_count, MAX_CSAM_FACILITIES)
             master += lpSum(y[(m, 'l1')] for m in M) >= min_facilities, f"feas_cut_{iter_count}"
             print(f"Added feasibility cut: at least {min_facilities} facilities")
-            
+
     # ====================== Output & Save ======================
     print("\n=== Benders converged ===")
     print(f"Final Objective (UB): {ub:.2f}")
@@ -203,7 +242,7 @@ def solve_benders(params, output_dir="output"):
     if best_y is None:
         best_y = {m: 0 for m in M}
 
-    # TODO: Add your CSV writing and summary.json code here later
+    # TODO: Add CSV and summary output here later
 
     sys.stdout = original_stdout
     log_file.close()
