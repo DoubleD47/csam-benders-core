@@ -96,8 +96,9 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
     theta = LpVariable("theta", lowBound=0)
 
-    PENALTY = 1_000_000.0
+    PENALTY = 10_000_000.0   # Even stronger
 
+    # Objective: deployment + theta + very heavy penalty on extra facilities
     master += (
         lpSum(F[m] * y[(m, 'l1')] for m in M) + 
         theta + 
@@ -107,7 +108,7 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
 
     print(f"Master created with max_csam_limit = {MAX_CSAM_FACILITIES} + penalty {PENALTY}")
-            
+                
     # ====================== Benders Decomposition ======================
     lb, ub = -np.inf, np.inf
     iter_count = 0
@@ -117,7 +118,23 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
 
     while ub - lb > EPS and iter_count < MAX_ITER:
         iter_count += 1
-        print(f"\nIteration {iter_count}: Solving Master...")
+
+        # === RE-CREATE MASTER EVERY ITERATION (forces CBC to respect constraint) ===
+        master = LpProblem("CSAM_Master", LpMinimize)
+        y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
+        theta = LpVariable("theta", lowBound=0)
+
+        PENALTY = 10_000_000.0
+
+        master += (
+            lpSum(F[m] * y[(m, 'l1')] for m in M) + 
+            theta + 
+            PENALTY * lpSum(y[(m, 'l1')] for m in M)
+        ), "objective"
+
+        master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
+
+        print(f"\nIteration {iter_count}: Solving Master (re-created)...")
         master.solve(PULP_CBC_CMD(msg=0))
 
         lb = value(master.objective)
@@ -127,11 +144,11 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
         print(f"Master proposed {int(deployed)} facilities (max allowed = {MAX_CSAM_FACILITIES})")
 
         if deployed > MAX_CSAM_FACILITIES + 0.01:
-            print("*** CRITICAL: Cardinality constraint violated! ***")
+            print("*** CRITICAL: Cardinality constraint still violated! ***")
 
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
         print("Fixed y:", {m: int(fixed_y[m]) for m in M if fixed_y[m] > 0.5})
-        
+                
         # Subproblem
         sub = LpProblem("Subproblem_Flow", LpMinimize)
         x_regular = LpVariable.dicts("flow_regular", regular_arcs, lowBound=0, cat='Continuous')
@@ -243,24 +260,55 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
             cut_name = f"feas_cut_{iter_count}"
             master += lpSum(y[(m, 'l1')] for m in M) >= sum(fixed_y.values()) + 1, cut_name
 
-    # ====================== Output & Save ======================
+# ====================== Output & Save ======================
     print("\n=== Benders converged ===")
     print(f"Final Objective (UB): {ub:.2f}")
     runtime = timer.time() - start_time
     print(f"Runtime: {runtime:.2f} seconds")
 
-    # Safe best_y handling
+    # Safe fallback if no incumbent was found
     if best_y is None or len(best_y) == 0:
         print("Warning: No incumbent found - using final master solution")
         best_y = {m: value(y[(m, 'l1')]) for m in M}
+        best_sub_vars = {'x_regular': {}, 'x_qq': {}}
 
+    # Calculate cost breakdown safely
     deployment_cost = sum(F[m] * best_y.get(m, 0) for m in M)
-    travel_cost = sum(C_in_in * best_sub_vars['x_regular'].get(a, 0) for a in regular_arcs if '_in' in str(a[0]) and '_in' in str(a[1]))
-    queue_entry_cost = sum(C_in_q * best_sub_vars['x_regular'].get(a, 0) for a in regular_arcs if '_in' in str(a[0]) and '_q_' in str(a[1]))
-    repair_l1_cost = sum(C_q_r_l1 * best_sub_vars['x_regular'].get(a, 0) for a in regular_arcs if '_q_l1' in str(a[0]) and '_r_l1' in str(a[1]))
-    repair_l2_cost = sum(C_q_r_l2 * best_sub_vars['x_regular'].get(a, 0) for a in regular_arcs if '_q_l2' in str(a[0]) and '_r_l2' in str(a[1]))
-    carryover_cost = sum(C_q_q * best_sub_vars.get('x_qq', {}).get(a, 0) for a in qq_arcs)
-    dummy_cost = sum(C_dummy * best_sub_vars['x_regular'].get(a, 0) for a in regular_arcs if 'dummy' in str(a[1]))
+    
+    travel_cost = sum(
+        C_in_in * best_sub_vars['x_regular'].get(a, 0) 
+        for a in regular_arcs 
+        if '_in' in str(a[0]) and '_in' in str(a[1])
+    )
+    
+    queue_entry_cost = sum(
+        C_in_q * best_sub_vars['x_regular'].get(a, 0) 
+        for a in regular_arcs 
+        if '_in' in str(a[0]) and '_q_' in str(a[1])
+    )
+    
+    repair_l1_cost = sum(
+        C_q_r_l1 * best_sub_vars['x_regular'].get(a, 0) 
+        for a in regular_arcs 
+        if '_q_l1' in str(a[0]) and '_r_l1' in str(a[1])
+    )
+    
+    repair_l2_cost = sum(
+        C_q_r_l2 * best_sub_vars['x_regular'].get(a, 0) 
+        for a in regular_arcs 
+        if '_q_l2' in str(a[0]) and '_r_l2' in str(a[1])
+    )
+    
+    carryover_cost = sum(
+        C_q_q * best_sub_vars.get('x_qq', {}).get(a, 0) 
+        for a in qq_arcs
+    )
+    
+    dummy_cost = sum(
+        C_dummy * best_sub_vars['x_regular'].get(a, 0) 
+        for a in regular_arcs 
+        if 'dummy' in str(a[1])
+    )
 
     # ====================== DETAILED PRINTING ======================
     print("Objective Value:", ub)
