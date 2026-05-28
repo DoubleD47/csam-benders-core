@@ -9,47 +9,54 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
     regular_arcs = []
     qq_arcs = []
 
+    max_t = max(T)
+
     for t in T:
         for c in C:
             nodes.append(('source', t, c))
             nodes.append(('sink', t, c))
-            if t == max(T):
+            if t == max_t:
                 nodes.append(('dummy', t, c))
             nodes.append(('ss', None, c))
+
             for m in M:
                 nodes.append((f'{m}_in', t, c))
                 nodes.extend([(f'{m}_q_l1', t, c), (f'{m}_r_l1', t, c), (f'{m}_out_l1', t, c)])
                 if m == traditional_m_dict.get(c[1]):
                     nodes.extend([(f'{m}_q_l2', t, c), (f'{m}_r_l2', t, c), (f'{m}_out_l2', t, c)])
 
-    # Regular arcs (same as bd_1.py)
+    # Regular arcs + Dummy arcs only in last period
     for t in T:
         for c in C:
             for m in M:
                 regular_arcs.append(('source', f'{m}_in', t, c))
-                for m1 in M:
-                    for m2 in M:
-                        if m1 != m2:
-                            regular_arcs.append((f'{m1}_in', f'{m2}_in', t, c))
+                # ... (keep your existing movement between ins)
+
                 regular_arcs.append((f'{m}_in', f'{m}_q_l1', t, c))
                 if m == traditional_m_dict.get(c[1]):
                     regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
+
                 regular_arcs.append((f'{m}_q_l1', f'{m}_r_l1', t, c))
                 regular_arcs.append((f'{m}_r_l1', f'{m}_out_l1', t, c))
                 regular_arcs.append((f'{m}_out_l1', 'sink', t, c))
+
                 if m == traditional_m_dict.get(c[1]):
                     regular_arcs.append((f'{m}_q_l2', f'{m}_r_l2', t, c))
                     regular_arcs.append((f'{m}_r_l2', f'{m}_out_l2', t, c))
                     regular_arcs.append((f'{m}_out_l2', 'sink', t, c))
-                regular_arcs.append(('sink', 'ss', t, c))
-                if t == max(T):
+
+                # Dummy arcs ONLY in last time period from queues
+                if t == max_t:
                     regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
                     if m == traditional_m_dict.get(c[1]):
                         regular_arcs.append((f'{m}_q_l2', 'dummy', t, c))
                     regular_arcs.append((f'{m}_in', 'dummy', t, c))
-            regular_arcs.append(('dummy', 'ss', t, c))
 
-    # Queue carry-over
+                regular_arcs.append(('sink', 'ss', t, c))
+                if t == max_t:
+                    regular_arcs.append(('dummy', 'ss', t, c))
+
+    # Queue carry-over arcs
     for t in range(min(T), max(T)):
         for c in C:
             for m in M:

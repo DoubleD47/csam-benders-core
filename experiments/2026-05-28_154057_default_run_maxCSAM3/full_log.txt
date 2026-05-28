@@ -1,0 +1,358 @@
+Experiment: 2026-05-28_154057_default_run_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy = 5000.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+Fixed y: {}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 1 facilities
+
+--- Iteration 2 ---
+Master LB: 1000.00
+Fixed y: {'m9': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 2 facilities
+
+--- Iteration 3 ---
+Master LB: 2000.00
+Fixed y: {'m1': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 4 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 5 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 6 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 7 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 8 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 9 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 10 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 11 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 12 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 13 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 14 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 15 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 16 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 17 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 18 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 19 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 20 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 21 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 22 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 23 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 24 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 25 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 26 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 27 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 28 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 29 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 30 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 31 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 32 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 33 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 34 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 35 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 36 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 37 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 38 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 39 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 40 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 41 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 42 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 43 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 44 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 45 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 46 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 47 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 48 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 49 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 50 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+=== Benders converged ===
+Final Objective (UB): inf
+Runtime: 108.30 seconds
