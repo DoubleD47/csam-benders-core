@@ -1,4 +1,4 @@
-Experiment: 2026-05-28_132702_default_run_maxCSAM3
+Experiment: 2026-05-28_140025_default_run_maxCSAM3
 MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy = 5000.0
 Random seed: 456
 
@@ -62,14 +62,67 @@ Fixed y: {}
 --- Iteration 15 ---
 Master LB: 0.00
 Fixed y: {}
-New best UB: 0.00 with 0 CSAM
-New best UB: 0.00 with 0 CSAM
-New best UB: 0.00 with 0 CSAM
-New best UB: 0.00 with 0 CSAM
-New best UB: 0.00 with 0 CSAM
-New best UB: 0.00 with 0 CSAM
-New best UB: 0.00 with 0 CSAM
+
+--- Iteration 1 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 2 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 3 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 4 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 5 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 6 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 7 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 8 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 9 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 10 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 11 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 12 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 13 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 14 ---
+Master LB: 0.00
+Fixed y: {}
+
+--- Iteration 15 ---
+Master LB: 0.00
+Fixed y: {}
 
 === Benders converged ===
-Final Objective (UB): 0.00
-Runtime: 537.38 seconds
+Final Objective (UB): inf
+Runtime: 11.07 seconds

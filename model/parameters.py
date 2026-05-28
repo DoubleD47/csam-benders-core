@@ -19,6 +19,6 @@ def get_default_params():
         'MAX_CSAM_FACILITIES': 3,
         'SEED': 456,
         'EPS': 1e-4,
-        'MAX_ITER': 15,
+        'MAX_ITER': 50,
         'EXPERIMENT_NAME': "default_run"
     }
