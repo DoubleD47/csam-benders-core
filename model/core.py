@@ -98,18 +98,16 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
 
     PENALTY = 1_000_000.0
 
-    # Strong penalty to force respect of max facilities
     master += (
         lpSum(F[m] * y[(m, 'l1')] for m in M) + 
         theta + 
         PENALTY * lpSum(y[(m, 'l1')] for m in M)
     ), "objective"
 
-    # Hard constraint as backup
     master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
 
     print(f"Master created with max_csam_limit = {MAX_CSAM_FACILITIES} + penalty {PENALTY}")
-        
+            
     # ====================== Benders Decomposition ======================
     lb, ub = -np.inf, np.inf
     iter_count = 0
@@ -120,8 +118,7 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     while ub - lb > EPS and iter_count < MAX_ITER:
         iter_count += 1
         print(f"\nIteration {iter_count}: Solving Master...")
-        solver = HiGHS_CMD(msg=0, options=['--log_file=""', '--mip_rel_gap=0.0001'])
-        master.solve(solver)
+        master.solve(PULP_CBC_CMD(msg=0))
 
         lb = value(master.objective)
         print(f"Master LB: {lb:.2f}")
