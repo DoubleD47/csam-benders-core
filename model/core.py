@@ -90,17 +90,20 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
     theta = LpVariable("theta", lowBound=0)
 
-    # Big-M penalty to discourage too many facilities
-    PENALTY = 1000000.0
+    PENALTY = 1_000_000.0
 
-    # Objective with penalty
-    master += lpSum(F[m] * y[(m, 'l1')] for m in M) + theta + PENALTY * lpSum(y[(m, 'l1')] for m in M), "objective"
+    # Strong penalty to force respect of max facilities
+    master += (
+        lpSum(F[m] * y[(m, 'l1')] for m in M) + 
+        theta + 
+        PENALTY * lpSum(y[(m, 'l1')] for m in M)
+    ), "objective"
 
-    # Hard constraint (still keep it as backup)
+    # Hard constraint as backup
     master += lpSum(y[(m, 'l1')] for m in M) <= MAX_CSAM_FACILITIES, "max_csam_limit"
 
-    print(f"Master created with max_csam_limit = {MAX_CSAM_FACILITIES} (with penalty = {PENALTY})")
-    
+    print(f"Master created with max_csam_limit = {MAX_CSAM_FACILITIES} + penalty {PENALTY}")
+        
     # ====================== Benders Decomposition ======================
     lb, ub = -np.inf, np.inf
     iter_count = 0
@@ -111,16 +114,17 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
     while ub - lb > EPS and iter_count < MAX_ITER:
         iter_count += 1
         print(f"\nIteration {iter_count}: Solving Master...")
-        master.solve(PULP_CBC_CMD(msg=0))
+        # master.solve(PULP_CBC_CMD(msg=0))
+        master.solve(HiGHS_CMD(msg=0))     # ← Uncomment this after installing highspy
+
         lb = value(master.objective)
         print(f"Master LB: {lb:.2f}")
 
-        # === STRONG DEBUG ===
         deployed = sum(value(y[(m, 'l1')]) for m in M)
         print(f"Master proposed {int(deployed)} facilities (max allowed = {MAX_CSAM_FACILITIES})")
 
         if deployed > MAX_CSAM_FACILITIES + 0.01:
-            print("*** CRITICAL ERROR: Cardinality constraint is being IGNORED! ***")
+            print("*** CRITICAL: Cardinality constraint violated! ***")
 
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
         print("Fixed y:", {m: int(fixed_y[m]) for m in M if fixed_y[m] > 0.5})
@@ -236,15 +240,17 @@ def solve_benders(params, output_dir="output", create_exp_dir=True):
             cut_name = f"feas_cut_{iter_count}"
             master += lpSum(y[(m, 'l1')] for m in M) >= sum(fixed_y.values()) + 1, cut_name
 
-# ====================== Output & Save ======================
+    # ====================== Output & Save ======================
     print("\n=== Benders converged ===")
     print(f"Final Objective (UB): {ub:.2f}")
     runtime = timer.time() - start_time
     print(f"Runtime: {runtime:.2f} seconds")
 
-    # Calculate cost breakdown (needed for summary)
-    if best_y is None:
-        best_y = {m: 0 for m in M}   # fallback
+    # Safe best_y handling
+    if best_y is None or len(best_y) == 0:
+        print("Warning: No incumbent found - using final master solution")
+        best_y = {m: value(y[(m, 'l1')]) for m in M}
+
     deployment_cost = sum(F[m] * best_y.get(m, 0) for m in M)
     travel_cost = sum(C_in_in * best_sub_vars['x_regular'].get(a, 0) for a in regular_arcs if '_in' in str(a[0]) and '_in' in str(a[1]))
     queue_entry_cost = sum(C_in_q * best_sub_vars['x_regular'].get(a, 0) for a in regular_arcs if '_in' in str(a[0]) and '_q_' in str(a[1]))
