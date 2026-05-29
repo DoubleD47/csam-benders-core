@@ -29,7 +29,7 @@ class Tee:
 
 
 def solve_benders(params, output_dir="output"):
-    # ====================== Unpack Parameters ======================
+# ====================== Unpack Parameters ======================
     M = params['M']
     traditional_m_dict = params['traditional_m_dict']
     L = params['L']
@@ -48,6 +48,7 @@ def solve_benders(params, output_dir="output"):
     SEED = params.get('SEED', 456)
     EPS = params.get('EPS', 1e-4)
     MAX_ITER = params.get('MAX_ITER', 50)
+    EXPERIMENT_NAME = params.get('EXPERIMENT_NAME', "default_run")
 
     # ====================== Experiment Setup ======================
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H%M%S")
@@ -68,6 +69,9 @@ def solve_benders(params, output_dir="output"):
     print(f"Experiment: {run_id}")
     print(f"MAX_CSAM_FACILITIES = {MAX_CSAM_FACILITIES} | U_l1 = {U_l1} | C_dummy = {C_dummy}")
     print(f"Random seed: {SEED}\n")
+
+    np.random.seed(SEED)
+    start_time = timer.time()   # ← This was missing
     
     # Build network
     net = build_network(M, traditional_m_dict, L, K, T, SEED)
