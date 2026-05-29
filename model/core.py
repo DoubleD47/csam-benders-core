@@ -141,17 +141,23 @@ def solve_benders(params, output_dir="output"):
                         total_demand += demand
         print(f"  [DEBUG] Total demand injected: {total_demand:.1f}")
 
-        # Flow conservation with debug
+        # Flow conservation with detailed debug
         print("  [DEBUG] Starting flow conservation setup...")
         constraint_counter = 0
-        unique_nodes = set(nodes)
-        node_flow_balance = {}
+        unbalanced_nodes = []
 
+        unique_nodes = set(nodes)
         for n, t_node, comm in unique_nodes:
             incoming = [a for a in regular_arcs if a[1] == n and a[2] == t_node and a[3] == comm]
             outgoing = [a for a in regular_arcs if a[0] == n and a[2] == t_node and a[3] == comm]
             incoming_qq = [a for a in qq_arcs if a[1] == n and a[4] == t_node and a[3] == comm]
             outgoing_qq = [a for a in qq_arcs if a[0] == n and a[2] == t_node and a[3] == comm]
+
+            in_count = len(incoming) + len(incoming_qq)
+            out_count = len(outgoing) + len(outgoing_qq)
+
+            if in_count != out_count and not n.startswith('source'):
+                unbalanced_nodes.append((n, t_node, comm, in_count, out_count))
 
             if not (incoming or outgoing or incoming_qq or outgoing_qq):
                 continue
@@ -174,12 +180,10 @@ def solve_benders(params, output_dir="output"):
                 )
             sub += constraint, constraint_name
 
-            # Debug balance
-            if (n, t_node, comm) not in node_flow_balance:
-                node_flow_balance[(n, t_node, comm)] = (len(incoming) + len(incoming_qq), len(outgoing) + len(outgoing_qq))
-
         print(f"  [DEBUG] Flow conservation constraints added: {constraint_counter}")
-        print(f"  [DEBUG] Sample node balance (first 5): {list(node_flow_balance.items())[:5]}")
+        print(f"  [DEBUG] Unbalanced nodes found: {len(unbalanced_nodes)}")
+        if unbalanced_nodes:
+            print(f"  [DEBUG] First 5 unbalanced nodes: {unbalanced_nodes[:5]}")
 
         # Capacity constraints
         l1_capacity_cons = {}
