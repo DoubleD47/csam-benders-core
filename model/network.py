@@ -94,6 +94,9 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
 
     D = {(m, t, c): np.random.uniform(5, 15) for m in M for t in T for c in C}
     
+    print(f"  [DEBUG] Built network with {len(set(nodes))} unique nodes, "
+    f"{len(regular_arcs)} regular arcs, {len(qq_arcs)} qq arcs")
+    
     return {
         'nodes': list(set(nodes)),
         'regular_arcs': regular_arcs,
@@ -101,3 +104,4 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
         'D': D,
         'C': C
     }
+    
