@@ -158,9 +158,8 @@ def solve_benders(params, output_dir="output"):
         l1_capacity_cons = {}
         for m in M:
             for t in T:
-                cons_name = f"capacity_l1_{m}_{t}"
-                cons = lpSum(x_regular[(f'{m}_q_l1', f'{m}_r_l1', t, c)] for c in C 
-                            if (f'{m}_q_l1', f'{m}_r_l1', t, c) in x_regular) <= U_l1 * fixed_y.get(m, 0)
+                cons_name = f"capacity_l1_{m}_{t}_{iter_count}"   # Make unique per iteration
+                cons = lpSum(x_regular.get((f'{m}_q_l1', f'{m}_r_l1', t, c), 0) for c in C) <= U_l1 * fixed_y.get(m, 0)
                 sub += cons, cons_name
                 l1_capacity_cons[(m, t)] = cons_name
 
@@ -168,8 +167,9 @@ def solve_benders(params, output_dir="output"):
             if k in traditional_m_dict:
                 tm = traditional_m_dict[k]
                 for t in T:
-                    sub += lpSum(x_regular[(f'{tm}_q_l2', f'{tm}_r_l2', t, c)] for c in C 
-                                if c[1] == k and (f'{tm}_q_l2', f'{tm}_r_l2', t, c) in x_regular) <= U_l2.get(k, 100)
+                    cons_name = f"capacity_l2_{tm}_{t}_{iter_count}"
+                    cons = lpSum(x_regular.get((f'{tm}_q_l2', f'{tm}_r_l2', t, c), 0) for c in C if c[1] == k) <= U_l2.get(k, 100)
+                    sub += cons, cons_name
 
 
         status = sub.solve(PULP_CBC_CMD(msg=0))
@@ -196,8 +196,10 @@ def solve_benders(params, output_dir="output"):
 
         else:
             print("Subproblem infeasible! Adding strong feasibility cut.")
-            master += lpSum(y[(m, 'l1')] for m in M) >= min(iter_count, MAX_CSAM_FACILITIES), f"feas_cut_{iter_count}"
-
+            min_facilities = min(iter_count, MAX_CSAM_FACILITIES)
+            master += lpSum(y[(m, 'l1')] for m in M) >= min_facilities, f"feas_cut_{iter_count}"
+            print(f"Added feasibility cut: at least {min_facilities} facilities")
+            
     # ====================== Output & Save ======================
     print("\n=== Benders converged ===")
     print(f"Final Objective (UB): {ub:.2f}")
