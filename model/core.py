@@ -110,6 +110,11 @@ def solve_benders(params, output_dir="output"):
         x_regular = LpVariable.dicts("flow_regular", regular_arcs, lowBound=0, cat='Continuous')
         x_qq = LpVariable.dicts("flow_qq", qq_arcs, lowBound=0, cat='Continuous')
 
+        print(f"  [DEBUG] Fixed y: {fixed_y}")
+        print(f"  [DEBUG] Number of regular arcs: {len(regular_arcs)}")
+        print(f"  [DEBUG] Number of qq arcs: {len(qq_arcs)}")
+        print(f"  [DEBUG] Number of dummy arcs: {len([a for a in regular_arcs if 'dummy' in str(a)])}")
+
         # Objective
         sub += (
             lpSum(C_in_in * x_regular[a] for a in regular_arcs if '_in' in str(a[0]) and '_in' in str(a[1])) +
@@ -125,14 +130,18 @@ def solve_benders(params, output_dir="output"):
         )
 
         # Demand injection
+        total_demand = 0
         for m in M:
             for t in T:
                 for c in C:
                     a = ('source', f'{m}_in', t, c)
                     if a in x_regular:
-                        sub += x_regular[a] == D.get((m, t, c), 0)
+                        demand = D.get((m, t, c), 0)
+                        sub += x_regular[a] == demand
+                        total_demand += demand
+        print(f"  [DEBUG] Total demand injected: {total_demand:.1f}")
 
-        # Flow conservation (your original block)
+        # Flow conservation
         constraint_counter = 0
         unique_nodes = set(nodes)
         for n, t_node, comm in unique_nodes:
@@ -162,7 +171,7 @@ def solve_benders(params, output_dir="output"):
                 )
             sub += constraint, constraint_name
 
-        # Capacity constraints - unique names per iteration
+        # Capacity constraints
         l1_capacity_cons = {}
         for m in M:
             for t in T:
@@ -179,6 +188,7 @@ def solve_benders(params, output_dir="output"):
                     cons = lpSum(x_regular.get((f'{tm}_q_l2', f'{tm}_r_l2', t, c), 0) for c in C if c[1] == k) <= U_l2.get(k, 100)
                     sub += cons, cons_name
 
+        print("  [DEBUG] Solving subproblem...")
         status = sub.solve(PULP_CBC_CMD(msg=0))
         print("Sub Status:", LpStatus[status])
 
