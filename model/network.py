@@ -25,14 +25,12 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
                 if m == traditional_m_dict.get(c[1]):
                     nodes.extend([(f'{m}_q_l2', t, c), (f'{m}_r_l2', t, c), (f'{m}_out_l2', t, c)])
 
-    # Regular Arcs + Dummy + Crossover
     for t in T:
         for c in C:
             for m in M:
-                # Source to in
                 regular_arcs.append(('source', f'{m}_in', t, c))
 
-                # Inter-major node movement
+                # Inter-node movement
                 for m2 in M:
                     if m != m2:
                         regular_arcs.append((f'{m}_in', f'{m2}_in', t, c))
@@ -47,7 +45,7 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
                 regular_arcs.append((f'{m}_r_l1', f'{m}_out_l1', t, c))
                 regular_arcs.append((f'{m}_out_l1', 'sink', t, c))
 
-                # l1 to l2 crossover
+                # l1 to l2 crossover (important for l1 demand at l2 facilities)
                 if m in traditional_m_dict.values():
                     regular_arcs.append((f'{m}_q_l1', f'{m}_q_l2', t, c))
 
@@ -57,7 +55,7 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
                     regular_arcs.append((f'{m}_r_l2', f'{m}_out_l2', t, c))
                     regular_arcs.append((f'{m}_out_l2', 'sink', t, c))
 
-                # Dummy arcs ONLY in last period from all queues and in nodes
+                # Dummy arcs ONLY in last period
                 if t == max_t:
                     regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
                     if m == traditional_m_dict.get(c[1]):
