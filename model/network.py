@@ -12,6 +12,7 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
     max_t = max(T)
     l2_locations = set(traditional_m_dict.values())
 
+    # === Node Creation ===
     for t in T:
         for c in C:
             l, k = c
@@ -19,15 +20,15 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
             nodes.append(('sink', t, c))
             if t == max_t:
                 nodes.append(('dummy', t, c))
-            nodes.append(('ss', None, c))  # super sink per c
+            nodes.append(('ss', None, c))  # global super sink per c
 
             for m in M:
                 nodes.append((f'{m}_in', t, c))
                 
-                # l1 queue/repair always available (but capacity controlled by y later)
+                # l1 always available
                 nodes.extend([(f'{m}_q_l1', t, c), (f'{m}_r_l1', t, c), (f'{m}_out_l1', t, c)])
                 
-                # l2 only at traditional locations, and only for matching k or l1 crossover
+                # l2 only at traditional locations + only for allowed c
                 if m in l2_locations:
                     if l == 'l2' or (l == 'l1' and m == traditional_m_dict.get(k)):
                         nodes.extend([(f'{m}_q_l2', t, c), (f'{m}_r_l2', t, c), (f'{m}_out_l2', t, c)])
@@ -36,61 +37,65 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
     for t in T:
         for c in C:
             l, k = c
-            matching_m_for_k = traditional_m_dict.get(k)
+            matching_m = traditional_m_dict.get(k)
             
             for m in M:
-                # Source injection
+                # 1. Source injection to any _in
                 regular_arcs.append(('source', f'{m}_in', t, c))
 
-                # Inter-node movement (only for l1 demands? User said l1 may travel)
-                if l == 'l1':
-                    for m2 in M:
-                        if m != m2:
-                            regular_arcs.append((f'{m}_in', f'{m2}_in', t, c))
+                # 2. Travel between _in nodes (all c allowed)
+                for m2 in M:
+                    if m != m2:
+                        regular_arcs.append((f'{m}_in', f'{m2}_in', t, c))
 
-                # Enter queues
+                # 3. Enter l1 queue (anywhere)
                 regular_arcs.append((f'{m}_in', f'{m}_q_l1', t, c))
-                
-                # l2 queue entry - stricter
-                if m == matching_m_for_k:
-                    if l == 'l2' or (l == 'l1'):  # allow l1 crossover at matching m
-                        regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
 
-                # l1 processing
+                # 4. Enter l2 queue (very restricted)
+                if m == matching_m and f'{m}_q_l2' in {n[0] for n in nodes if n[1] == t and n[2] == c}:
+                    regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
+
+                # 5. l1 processing chain
                 regular_arcs.append((f'{m}_q_l1', f'{m}_r_l1', t, c))
                 regular_arcs.append((f'{m}_r_l1', f'{m}_out_l1', t, c))
                 regular_arcs.append((f'{m}_out_l1', 'sink', t, c))
 
-                # l2 processing (only if node exists for this c)
-                if m == matching_m_for_k and f'{m}_q_l2' in [n[0] for n in nodes if n[1]==t and n[2]==c]:
+                # 6. l2 processing chain
+                if m == matching_m and f'{m}_q_l2' in {n[0] for n in nodes if n[1] == t and n[2] == c}:
                     regular_arcs.append((f'{m}_q_l2', f'{m}_r_l2', t, c))
                     regular_arcs.append((f'{m}_r_l2', f'{m}_out_l2', t, c))
                     regular_arcs.append((f'{m}_out_l2', 'sink', t, c))
 
-                # Dummy exits (last period)
-                if t == max_t:
-                    regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
-                    if m == matching_m_for_k:
-                        regular_arcs.append((f'{m}_q_l2', 'dummy', t, c))
-                    regular_arcs.append((f'{m}_in', 'dummy', t, c))  # stranded at in
+                # 7. l1 → l2 crossover at matching location
+                if l == 'l1' and m == matching_m and f'{m}_q_l2' in {n[0] for n in nodes if n[1] == t and n[2] == c}:
+                    regular_arcs.append((f'{m}_q_l1', f'{m}_q_l2', t, c))
 
-                # Sinks to super-sink
+                # 8. Dummy exits (LAST period ONLY)
+                if t == max_t:
+                    regular_arcs.append((f'{m}_in', 'dummy', t, c))
+                    regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
+                    if m == matching_m and f'{m}_q_l2' in {n[0] for n in nodes if n[1] == t and n[2] == c}:
+                        regular_arcs.append((f'{m}_q_l2', 'dummy', t, c))
+
+                # 9. Sink → super-sink (every period)
                 regular_arcs.append(('sink', 'ss', t, c))
                 if t == max_t:
                     regular_arcs.append(('dummy', 'ss', t, c))
 
-    # Queue carry-over (only same c)
-    for t in range(min(T), max(T)):
+    # === Queue carry-over arcs ===
+    for i in range(len(T)-1):
+        t_curr = T[i]
+        t_next = T[i+1]
         for c in C:
             for m in M:
-                qq_arcs.append((f'{m}_q_l1', f'{m}_q_l1', t, c, t+1))
+                qq_arcs.append((f'{m}_q_l1', f'{m}_q_l1', t_curr, c, t_next))
                 if m == traditional_m_dict.get(c[1]):
-                    qq_arcs.append((f'{m}_q_l2', f'{m}_q_l2', t, c, t+1))
+                    qq_arcs.append((f'{m}_q_l2', f'{m}_q_l2', t_curr, c, t_next))
 
     D = {(m, t, c): np.random.uniform(5, 15) for m in M for t in T for c in C}
     
     return {
-        'nodes': list(set(nodes)),  # dedup
+        'nodes': list(set(nodes)),
         'regular_arcs': regular_arcs,
         'qq_arcs': qq_arcs,
         'D': D,

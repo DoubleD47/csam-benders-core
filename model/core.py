@@ -167,12 +167,18 @@ def solve_benders(params, output_dir="output"):
 
             if n.startswith('source'):
                 continue
-            elif n == 'sink' and t_node == max(T):
-                total_demand = sum(D.get((m, t_node, comm), 0) for m in M)
-                constraint = lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) == total_demand
+            elif n == 'sink' and t_node is not None:
+                # Per-time sink just forwards to ss
+                constraint = (
+                    lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) ==
+                    lpSum(x_regular[a] for a in outgoing)
+                )
             elif n == 'ss' and t_node is None:
-                total_demand = sum(D.get((m, ti, comm), 0) for m in M for ti in T)
-                constraint = lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) == total_demand
+                # Global super-sink collects EVERYTHING
+                total_d = sum(D.get((m, ti, comm), 0) for m in M for ti in T)
+                constraint = (
+                    lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) == total_d
+                )
             else:
                 constraint = (
                     lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) ==
