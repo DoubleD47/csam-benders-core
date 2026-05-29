@@ -141,9 +141,12 @@ def solve_benders(params, output_dir="output"):
                         total_demand += demand
         print(f"  [DEBUG] Total demand injected: {total_demand:.1f}")
 
-        # Flow conservation
+        # Flow conservation with debug
+        print("  [DEBUG] Starting flow conservation setup...")
         constraint_counter = 0
         unique_nodes = set(nodes)
+        node_flow_balance = {}
+
         for n, t_node, comm in unique_nodes:
             incoming = [a for a in regular_arcs if a[1] == n and a[2] == t_node and a[3] == comm]
             outgoing = [a for a in regular_arcs if a[0] == n and a[2] == t_node and a[3] == comm]
@@ -170,6 +173,13 @@ def solve_benders(params, output_dir="output"):
                     lpSum(x_regular[a] for a in outgoing) + lpSum(x_qq[a] for a in outgoing_qq)
                 )
             sub += constraint, constraint_name
+
+            # Debug balance
+            if (n, t_node, comm) not in node_flow_balance:
+                node_flow_balance[(n, t_node, comm)] = (len(incoming) + len(incoming_qq), len(outgoing) + len(outgoing_qq))
+
+        print(f"  [DEBUG] Flow conservation constraints added: {constraint_counter}")
+        print(f"  [DEBUG] Sample node balance (first 5): {list(node_flow_balance.items())[:5]}")
 
         # Capacity constraints
         l1_capacity_cons = {}
