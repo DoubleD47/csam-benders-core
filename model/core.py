@@ -105,7 +105,7 @@ def solve_benders(params, output_dir="output"):
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
         print("Fixed y:", {m: int(v) for m, v in fixed_y.items() if v > 0.5})
 
-        # Subproblem (exact from original)
+        # ====================== Subproblem ======================
         sub = LpProblem("Subproblem_Flow", LpMinimize)
         x_regular = LpVariable.dicts("flow_regular", regular_arcs, lowBound=0, cat='Continuous')
         x_qq = LpVariable.dicts("flow_qq", qq_arcs, lowBound=0, cat='Continuous')
@@ -120,45 +120,53 @@ def solve_benders(params, output_dir="output"):
             lpSum(0.1 * x_regular[a] for a in regular_arcs if '_r_' in str(a[0]) and '_out_' in str(a[1])) +
             lpSum(0.1 * x_regular[a] for a in regular_arcs if '_out_' in str(a[0]) and 'sink' in str(a[1])) +
             lpSum(0.1 * x_regular[a] for a in regular_arcs if 'sink' in str(a[0]) and 'ss' in str(a[1])) +
-            lpSum(C_dummy * x_regular[a] for a in regular_arcs if ('_q_' in str(a[0]) or '_in' in str(a[0])) and 'dummy' in str(a[1])) +
+            lpSum(C_dummy * x_regular[a] for a in regular_arcs if 'dummy' in str(a[1])) +
             lpSum(0.1 * x_regular[a] for a in regular_arcs if 'dummy' in str(a[0]) and 'ss' in str(a[1]))
         )
 
-        # Demand and Flow Conservation (exact from original fleet flow)
-    constraint_names = set()
-    constraint_counter = 0
-    unique_nodes = set(nodes)
-    for n, t_node, comm in unique_nodes:
-        incoming = [a for a in regular_arcs if a[1] == n and a[2] == t_node and a[3] == comm]
-        outgoing = [a for a in regular_arcs if a[0] == n and a[2] == t_node and a[3] == comm]
-        incoming_qq = [a for a in qq_arcs if a[1] == n and a[4] == t_node and a[3] == comm]
-        outgoing_qq = [a for a in qq_arcs if a[0] == n and a[2] == t_node and a[3] == comm]
+        # Demand injection
+        for m in M:
+            for t in T:
+                for c in C:
+                    a = ('source', f'{m}_in', t, c)
+                    if a in x_regular:
+                        sub += x_regular[a] == D.get((m, t, c), 0)
 
-        if not (incoming or outgoing or incoming_qq or outgoing_qq):
-            continue
+        # Flow conservation (your original block)
+        constraint_counter = 0
+        unique_nodes = set(nodes)
+        for n, t_node, comm in unique_nodes:
+            incoming = [a for a in regular_arcs if a[1] == n and a[2] == t_node and a[3] == comm]
+            outgoing = [a for a in regular_arcs if a[0] == n and a[2] == t_node and a[3] == comm]
+            incoming_qq = [a for a in qq_arcs if a[1] == n and a[4] == t_node and a[3] == comm]
+            outgoing_qq = [a for a in qq_arcs if a[0] == n and a[2] == t_node and a[3] == comm]
 
-        constraint_name = f"flow_conservation_{constraint_counter}_{n.replace('_', '-')}_{t_node if t_node else 'None'}_{comm[0]}_{comm[1]}"
-        constraint_names.add(constraint_name)
-        constraint_counter += 1
+            if not (incoming or outgoing or incoming_qq or outgoing_qq):
+                continue
 
-        if n == 'source':
-            total_demand_t_c = sum(D.get((m, t_node, comm), 0) for m in M)
-            constraint = lpSum(x_regular[a] for a in outgoing) + lpSum(x_qq[a] for a in outgoing_qq) == total_demand_t_c
-        elif n == 'ss' and t_node is None:
-            total_demand_c = sum(D.get((m, ti, comm), 0) for m in M for ti in T)
-            constraint = lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) == total_demand_c
-        else:
-            constraint = (
-                lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) ==
-                lpSum(x_regular[a] for a in outgoing) + lpSum(x_qq[a] for a in outgoing_qq)
-            )
-        sub += constraint, constraint_name
+            constraint_counter += 1
+            constraint_name = f"flow_con_{constraint_counter}"
 
-        # Capacity constraints
+            if n.startswith('source'):
+                continue
+            elif n == 'sink' and t_node == max(T):
+                total_demand = sum(D.get((m, t_node, comm), 0) for m in M)
+                constraint = lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) == total_demand
+            elif n == 'ss' and t_node is None:
+                total_demand = sum(D.get((m, ti, comm), 0) for m in M for ti in T)
+                constraint = lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) == total_demand
+            else:
+                constraint = (
+                    lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) ==
+                    lpSum(x_regular[a] for a in outgoing) + lpSum(x_qq[a] for a in outgoing_qq)
+                )
+            sub += constraint, constraint_name
+
+        # Capacity constraints - unique names per iteration
         l1_capacity_cons = {}
         for m in M:
             for t in T:
-                cons_name = f"capacity_l1_{m}_{t}_{iter_count}"   # Make unique per iteration
+                cons_name = f"capacity_l1_{m}_{t}_{iter_count}"
                 cons = lpSum(x_regular.get((f'{m}_q_l1', f'{m}_r_l1', t, c), 0) for c in C) <= U_l1 * fixed_y.get(m, 0)
                 sub += cons, cons_name
                 l1_capacity_cons[(m, t)] = cons_name
@@ -171,13 +179,13 @@ def solve_benders(params, output_dir="output"):
                     cons = lpSum(x_regular.get((f'{tm}_q_l2', f'{tm}_r_l2', t, c), 0) for c in C if c[1] == k) <= U_l2.get(k, 100)
                     sub += cons, cons_name
 
-
         status = sub.solve(PULP_CBC_CMD(msg=0))
         print("Sub Status:", LpStatus[status])
 
         if LpStatus[status] == 'Optimal':
             sub_cost = value(sub.objective)
-            total_cost = sum(F[m] * fixed_y.get(m, 0) for m in M) + sub_cost
+            deployment_cost = sum(F[m] * fixed_y.get(m, 0) for m in M)
+            total_cost = deployment_cost + sub_cost
             ub = min(ub, total_cost)
 
             if total_cost < best_sub_cost:
@@ -187,7 +195,7 @@ def solve_benders(params, output_dir="output"):
                     'x_regular': {a: value(x_regular[a]) for a in regular_arcs},
                     'x_qq': {a: value(x_qq[a]) for a in qq_arcs}
                 }
-                print(f"New best UB: {ub:.2f} with {sum(best_y.values()):.0f} CSAM")
+                print(f"New best UB: {ub:.2f} with {sum(best_y.values()):.0f} CSAM facilities")
 
             # Optimality cut
             pi = {(m, t): sub.constraints[l1_capacity_cons[(m, t)]].pi for m in M for t in T if (m, t) in l1_capacity_cons}

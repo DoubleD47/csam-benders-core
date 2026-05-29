@@ -1,0 +1,82 @@
+Experiment: 2026-05-29_111538_default_run_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy = 5000.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+Fixed y: {}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 1 facilities
+
+--- Iteration 2 ---
+Master LB: 1000.00
+Fixed y: {'m9': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 2 facilities
+
+--- Iteration 3 ---
+Master LB: 2000.00
+Fixed y: {'m1': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 4 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 5 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 6 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 7 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 8 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 9 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+--- Iteration 10 ---
+Master LB: 3000.00
+Fixed y: {'m1': 1, 'm2': 1, 'm10': 1}
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+Added feasibility cut: at least 3 facilities
+
+=== Benders converged ===
+Final Objective (UB): inf
+Runtime: 5.71 seconds
+
+CSAM Deployments:
+
+Experiment completed → C:\Git\csam-benders-core\experiments\2026-05-29_111538_default_run_maxCSAM3
