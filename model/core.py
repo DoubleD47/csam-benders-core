@@ -49,8 +49,26 @@ def solve_benders(params, output_dir="output"):
     EPS = params.get('EPS', 1e-4)
     MAX_ITER = params.get('MAX_ITER', 50)
 
-    # Experiment setup (logging, folders) - keep as is...
+    # ====================== Experiment Setup ======================
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H%M%S")
+    run_id = f"{timestamp}_{EXPERIMENT_NAME}_maxCSAM{MAX_CSAM_FACILITIES}"
+    
+    repo_root = Path(__file__).parent.parent
+    exp_dir = repo_root / "experiments" / run_id
+    exp_dir.mkdir(parents=True, exist_ok=True)
 
+    output_dir = repo_root / output_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Logging
+    log_file = open(exp_dir / "full_log.txt", 'w', encoding='utf-8')
+    original_stdout = sys.stdout
+    sys.stdout = Tee(sys.stdout, log_file)
+
+    print(f"Experiment: {run_id}")
+    print(f"MAX_CSAM_FACILITIES = {MAX_CSAM_FACILITIES} | U_l1 = {U_l1} | C_dummy = {C_dummy}")
+    print(f"Random seed: {SEED}\n")
+    
     # Build network
     net = build_network(M, traditional_m_dict, L, K, T, SEED)
     nodes = net['nodes']
@@ -176,7 +194,40 @@ def solve_benders(params, output_dir="output"):
             print("Subproblem infeasible! Adding strong feasibility cut.")
             master += lpSum(y[(m, 'l1')] for m in M) >= min(iter_count, MAX_CSAM_FACILITIES), f"feas_cut_{iter_count}"
 
-    # Output section...
-    # (keep your existing output code)
+    # ====================== Output & Save ======================
+    print("\n=== Benders converged ===")
+    print(f"Final Objective (UB): {ub:.2f}")
+    runtime = timer.time() - start_time
+    print(f"Runtime: {runtime:.2f} seconds")
+
+    if best_y is None:
+        best_y = {m: 0 for m in M}
+
+    # CSAM Deployments
+    print("\nCSAM Deployments:")
+    for m in M:
+        if best_y.get(m, 0) > 0.5:
+            print(f"y[{m}, 'l1'] = 1")
+
+    # Save summary
+    summary = {
+        "run_id": run_id,
+        "max_csam_facilities": MAX_CSAM_FACILITIES,
+        "seed": SEED,
+        "objective": float(ub),
+        "deployed_count": int(sum(best_y.values())),
+        "deployed_facilities": [m for m in M if best_y.get(m, 0) > 0.5],
+        "iterations": iter_count,
+        "runtime_seconds": float(runtime)
+    }
+
+    with open(exp_dir / "summary.json", "w") as f:
+        json.dump(summary, f, indent=2)
+
+    print(f"\nExperiment completed → {exp_dir}")
+
+    # Restore stdout
+    sys.stdout = original_stdout
+    log_file.close()
 
     return {"objective": ub, "best_y": best_y, "runtime": runtime, "exp_dir": str(exp_dir)}
