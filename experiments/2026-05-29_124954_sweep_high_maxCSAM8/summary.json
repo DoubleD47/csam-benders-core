@@ -1,0 +1,15 @@
+{
+  "run_id": "2026-05-29_124954_sweep_high_maxCSAM8",
+  "max_csam_facilities": 8,
+  "seed": 456,
+  "objective": 71122.89429230995,
+  "deployed_count": 4,
+  "deployed_facilities": [
+    "m1",
+    "m2",
+    "m3",
+    "m10"
+  ],
+  "iterations": 10,
+  "runtime_seconds": 6.474272727966309
+}

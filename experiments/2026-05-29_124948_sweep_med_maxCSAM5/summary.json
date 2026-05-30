@@ -1,0 +1,16 @@
+{
+  "run_id": "2026-05-29_124948_sweep_med_maxCSAM5",
+  "max_csam_facilities": 5,
+  "seed": 456,
+  "objective": 71694.88267385603,
+  "deployed_count": 5,
+  "deployed_facilities": [
+    "m1",
+    "m2",
+    "m3",
+    "m4",
+    "m10"
+  ],
+  "iterations": 10,
+  "runtime_seconds": 6.087961435317993
+}

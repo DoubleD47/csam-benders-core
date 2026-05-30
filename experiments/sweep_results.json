@@ -1,0 +1,29 @@
+[
+  {
+    "scenario": "low",
+    "max_csam": 2,
+    "u_l1": 60,
+    "c_dummy": 3000,
+    "objective": 2206865.035289811,
+    "deployed": null,
+    "deployed_list": null
+  },
+  {
+    "scenario": "med",
+    "max_csam": 5,
+    "u_l1": 100,
+    "c_dummy": 6000,
+    "objective": 71694.88267385603,
+    "deployed": null,
+    "deployed_list": null
+  },
+  {
+    "scenario": "high",
+    "max_csam": 8,
+    "u_l1": 160,
+    "c_dummy": 10000,
+    "objective": 71122.89429230995,
+    "deployed": null,
+    "deployed_list": null
+  }
+]

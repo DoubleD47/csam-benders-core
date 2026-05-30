@@ -156,7 +156,12 @@ def solve_benders(params, output_dir="output"):
             in_count = len(incoming) + len(incoming_qq)
             out_count = len(outgoing) + len(outgoing_qq)
 
-            if in_count != out_count and not n.startswith('source'):
+            # Only flag real conservation violations (ignore sources, sinks, ss, dummy)
+            if in_count != out_count and not (
+                n.startswith('source') or 
+                n in ['sink', 'ss', 'dummy'] or 
+                '_out_' in n
+            ):
                 unbalanced_nodes.append((n, t_node, comm, in_count, out_count))
 
             if not (incoming or outgoing or incoming_qq or outgoing_qq):

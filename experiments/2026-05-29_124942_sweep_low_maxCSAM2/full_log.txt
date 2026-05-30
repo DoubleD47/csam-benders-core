@@ -1,0 +1,167 @@
+Experiment: 2026-05-29_124942_sweep_low_maxCSAM2
+MAX_CSAM_FACILITIES = 2 | U_l1 = 60 | C_dummy = 3000
+Random seed: 456
+
+  [DEBUG] Built network with 1040 unique nodes, 3400 regular arcs, 110 qq arcs
+
+--- Iteration 1 ---
+Master LB: 0.00
+Fixed y: {}
+  [DEBUG] Fixed y: {'m1': 0.0, 'm2': 0.0, 'm3': 0.0, 'm4': 0.0, 'm5': 0.0, 'm6': 0.0, 'm7': 0.0, 'm8': 0.0, 'm9': 0.0, 'm10': 0.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+New best UB: 2922726.65 with 0 CSAM facilities
+
+--- Iteration 2 ---
+Master LB: 2204774.70
+Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Fixed y: {'m1': 1.0, 'm2': 0.0, 'm3': 0.0, 'm4': 0.0, 'm5': 0.0, 'm6': 0.0, 'm7': 0.0, 'm8': 0.0, 'm9': 0.0, 'm10': 1.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+New best UB: 2206865.04 with 2 CSAM facilities
+
+--- Iteration 3 ---
+Master LB: 2205665.00
+Fixed y: {'m2': 1, 'm3': 1}
+  [DEBUG] Fixed y: {'m1': 0.0, 'm2': 1.0, 'm3': 1.0, 'm4': 0.0, 'm5': 0.0, 'm6': 0.0, 'm7': 0.0, 'm8': 0.0, 'm9': 0.0, 'm10': 0.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 4 ---
+Master LB: 2205665.00
+Fixed y: {'m4': 1, 'm5': 1}
+  [DEBUG] Fixed y: {'m1': 0.0, 'm2': 0.0, 'm3': 0.0, 'm4': 1.0, 'm5': 1.0, 'm6': 0.0, 'm7': 0.0, 'm8': 0.0, 'm9': 0.0, 'm10': 0.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 5 ---
+Master LB: 2205665.00
+Fixed y: {'m6': 1, 'm7': 1}
+  [DEBUG] Fixed y: {'m1': 0.0, 'm2': 0.0, 'm3': 0.0, 'm4': 0.0, 'm5': 0.0, 'm6': 1.0, 'm7': 1.0, 'm8': 0.0, 'm9': 0.0, 'm10': 0.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 6 ---
+Master LB: 2205665.00
+Fixed y: {'m8': 1, 'm9': 1}
+  [DEBUG] Fixed y: {'m1': 0.0, 'm2': 0.0, 'm3': 0.0, 'm4': 0.0, 'm5': 0.0, 'm6': 0.0, 'm7': 0.0, 'm8': 1.0, 'm9': 1.0, 'm10': 0.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 7 ---
+Master LB: 2206265.00
+Fixed y: {'m2': 1, 'm6': 1}
+  [DEBUG] Fixed y: {'m1': 0.0, 'm2': 1.0, 'm3': 0.0, 'm4': 0.0, 'm5': 0.0, 'm6': 1.0, 'm7': 0.0, 'm8': 0.0, 'm9': 0.0, 'm10': 0.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 8 ---
+Master LB: 2206265.00
+Fixed y: {'m3': 1, 'm7': 1}
+  [DEBUG] Fixed y: {'m1': 0.0, 'm2': 0.0, 'm3': 1.0, 'm4': 0.0, 'm5': 0.0, 'm6': 0.0, 'm7': 1.0, 'm8': 0.0, 'm9': 0.0, 'm10': 0.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 9 ---
+Master LB: 2206265.00
+Fixed y: {'m2': 1, 'm7': 1}
+  [DEBUG] Fixed y: {'m1': 0.0, 'm2': 1.0, 'm3': 0.0, 'm4': 0.0, 'm5': 0.0, 'm6': 0.0, 'm7': 1.0, 'm8': 0.0, 'm9': 0.0, 'm10': 0.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 10 ---
+Master LB: 2206265.00
+Fixed y: {'m3': 1, 'm6': 1}
+  [DEBUG] Fixed y: {'m1': 0.0, 'm2': 0.0, 'm3': 1.0, 'm4': 0.0, 'm5': 0.0, 'm6': 1.0, 'm7': 0.0, 'm8': 0.0, 'm9': 0.0, 'm10': 0.0}
+  [DEBUG] Number of regular arcs: 3400
+  [DEBUG] Number of qq arcs: 110
+  [DEBUG] Number of dummy arcs: 310
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 910
+  [DEBUG] Unbalanced nodes found: 225
+  [DEBUG] First 5 unbalanced nodes: [('m8_q_l1', 1, ('l2', 'k1'), 1, 2), ('m2_q_l2', 2, ('l1', 'k2'), 3, 2), ('m2_in', 1, ('l1', 'k2'), 10, 11), ('m7_in', 2, ('l2', 'k5'), 10, 11), ('m8_q_l1', 1, ('l2', 'k4'), 1, 2)]
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+=== Benders converged ===
+Final Objective (UB): 2206865.04
+Runtime: 6.00 seconds
+
+CSAM Deployments:
+y[m1, 'l1'] = 1
+y[m10, 'l1'] = 1
+
+Experiment completed → C:\git\csam-benders-core\experiments\2026-05-29_124942_sweep_low_maxCSAM2
