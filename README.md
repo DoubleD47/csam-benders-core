@@ -10,7 +10,8 @@ cd csam-benders-core
 '''
 
 # Create virtual environment (recommended)
-'''bash python -m venv venv
+'''bash 
+python -m venv venv
 venv\Scripts\activate    # Windows
 # source venv/bin/activate  # Linux/Mac
 
