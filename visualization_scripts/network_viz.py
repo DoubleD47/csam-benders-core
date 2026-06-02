@@ -6,7 +6,7 @@ from model.parameters import get_default_params
 def plot_improved_network():
     params = get_default_params()
     net = build_network(params['M'], params['traditional_m_dict'], 
-                       params['L'], params['K'], [1], seed=456)
+                    params['L'], params['K'], [1], seed=456)
     
     G = nx.DiGraph()
     
