@@ -25,9 +25,13 @@ Demand arrives at main nodes, can travel between nodes, enters repair queues, in
 ### Sets
 - $M$: Main nodes (traditional repair sites)
 - $T$: Time periods
-- $C = L \times K$: Commodities (repair types)
-- $A_r$: Regular arcs
-- $A_{qq}$: Queue carry-over arcs
+- $C = l \times k$: Commodities (repair types)
+- $A$: Arcs
+  - $A_r$: Regular arcs, for travel in between main nodes
+  - $A_q$: Queuing arcs, entering the queue at a main node
+  - $A_{qq}$: Queue carry-over arcs between time periods
+  - $A_d$: Dummy arcs, carry unment demand from queue to super sink in the final time period
+  - $A_l1, A_l2$: Repair arcs for cold spray and traditional repair to the super sink, respectively
 
 ### Variables
 - $x_a^{t,c}$: Flow of commodity $c$ on regular arc $a$ in period $t$
