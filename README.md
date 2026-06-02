@@ -97,7 +97,24 @@ venv\Scripts\activate          # Windows
 pip install -r requirements.txt
 '''
 
-Single Run
+## Single Run
+
 '''bash
 python -m experiment_scripts.run_single --max_csam 5 --u_l1 100 --c_dummy 5000 --seed 456
 '''
+
+## Parameter Sweep
+
+'''bash
+python -m experiment_scripts.run_sweep
+python -m experiment_scripts.analyze_sweep
+'''
+
+## Key Features
+
+#Time-expanded multi-commodity network flow
+#Flexible l1 vs restricted l2 repair logic
+#Queue carry-over penalties
+#Dummy arcs for unmet demand in final period
+#Benders decomposition with strong feasibility/optimality cuts
+#Organized experiment tracking
