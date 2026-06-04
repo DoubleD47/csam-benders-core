@@ -1,0 +1,10 @@
+{
+  "run_id": "2026-06-04_101757_run_maxCSAM2_maxCSAM2",
+  "max_csam_facilities": 2,
+  "seed": 456,
+  "objective": 63906.28572600002,
+  "deployed_count": 0,
+  "deployed_facilities": [],
+  "iterations": 10,
+  "runtime_seconds": 3.6760692596435547
+}

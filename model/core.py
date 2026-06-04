@@ -28,18 +28,18 @@ class Tee:
             f.flush()
 
 
-def solve_benders(params, output_dir="output"):
-# ====================== Unpack Parameters ======================
+def solve_benders(params, net=None, output_dir="experiments"):
+    # ====================== Unpack Parameters ======================
     M = params['M']
     traditional_m_dict = params['traditional_m_dict']
     L = params['L']
     K = params['K']
     T = params['T']
-    F = params['F']                    # Fixed cost of opening CSAM
-    C_in_q = params['C_in_q']          # Queue entry cost
-    C_q_q = params['C_q_q']            # Queue carry-over cost
-    C_service = params.get('C_service', 10.0)   # Repair/service cost
-    C_dummy = params['C_dummy']        # High penalty for unmet
+    F = params['F']
+    C_in_q = params['C_in_q']
+    C_q_q = params['C_q_q']
+    C_service = params.get('C_service', 10.0)
+    C_dummy = params['C_dummy']
     U_l1 = params['U_l1']
     U_l2 = params['U_l2']
     MAX_CSAM_FACILITIES = params['MAX_CSAM_FACILITIES']
@@ -56,9 +56,6 @@ def solve_benders(params, output_dir="output"):
     exp_dir = repo_root / "experiments" / run_id
     exp_dir.mkdir(parents=True, exist_ok=True)
 
-    output_dir = repo_root / output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
-
     # Logging
     log_file = open(exp_dir / "full_log.txt", 'w', encoding='utf-8')
     original_stdout = sys.stdout
@@ -69,10 +66,11 @@ def solve_benders(params, output_dir="output"):
     print(f"Random seed: {SEED}\n")
 
     np.random.seed(SEED)
-    start_time = timer.time()   # ← This was missing
-    
-    # Build network
-    net = build_network(M, traditional_m_dict, L, K, T, SEED)
+    start_time = timer.time()
+
+    # Build network (use passed net or build new)
+    if net is None:
+        net = build_network(M, traditional_m_dict, L, K, T, seed=SEED)
     nodes = net['nodes']
     regular_arcs = net['regular_arcs']
     qq_arcs = net['qq_arcs']
@@ -84,7 +82,6 @@ def solve_benders(params, output_dir="output"):
     iter_count = 0
     best_y = None
     best_sub_cost = np.inf
-    best_sub_vars = None
 
     master = LpProblem("CSAM_Master", LpMinimize)
     y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
@@ -101,25 +98,23 @@ def solve_benders(params, output_dir="output"):
         print(f"Master LB: {lb:.2f}")
 
         fixed_y = {m: value(y[(m, 'l1')]) for m in M}
-        print("Fixed y:", {m: int(v) for m, v in fixed_y.items() if v > 0.5})
+        print("  Fixed y:", {m: int(v) for m, v in fixed_y.items() if v > 0.5})
 
         # ====================== Subproblem ======================
         sub = LpProblem("Subproblem_Flow", LpMinimize)
         x_regular = LpVariable.dicts("flow_regular", regular_arcs, lowBound=0, cat='Continuous')
         x_qq = LpVariable.dicts("flow_qq", qq_arcs, lowBound=0, cat='Continuous')
 
-        print(f"  [DEBUG] Fixed y: {fixed_y}")
         print(f"  [DEBUG] Number of regular arcs: {len(regular_arcs)}")
         print(f"  [DEBUG] Number of qq arcs: {len(qq_arcs)}")
-        print(f"  [DEBUG] Number of dummy arcs: {len([a for a in regular_arcs if 'dummy' in str(a)])}")
 
         # ====================== Objective ======================
         sub += (
-            lpSum(C_in_q * x_regular[a] for a in regular_arcs if a[0].endswith('_in') and a[1].endswith('_q')) +   # in -> q
-            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +                                                          # queue carry-over
-            lpSum(C_service * x_regular[a] for a in regular_arcs if a[1] == 'ss' and a[0].endswith('_q')) +     # service q -> ss
-            lpSum(C_dummy * x_regular[a] for a in regular_arcs if a[1] == 'ss' and a[0] == 'dummy') +           # dummy penalty
-            0  # future travel costs if added
+            lpSum(C_in_q * x_regular[a] for a in regular_arcs if a[0].endswith('_in') and a[1].endswith('_q')) +
+            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +
+            lpSum(C_service * x_regular[a] for a in regular_arcs if a[1] == 'ss' and ('_q_l1' in a[0] or '_q_l2' in a[0])) +
+            lpSum(C_dummy * x_regular[a] for a in regular_arcs if a[0] == 'dummy' and a[1] == 'ss') +
+            0
         ), "SubObjective"
 
         # Demand injection
@@ -130,17 +125,16 @@ def solve_benders(params, output_dir="output"):
                     a = ('source', f'{m}_in', t, c)
                     if a in x_regular:
                         demand = D.get((m, t, c), 0)
-                        sub += x_regular[a] == demand
+                        sub += x_regular[a] == demand, f"demand_{m}_{t}_{c}"
                         total_demand += demand
         print(f"  [DEBUG] Total demand injected: {total_demand:.1f}")
 
-        # Flow conservation with detailed debug
+        # Flow conservation (updated for new nodes)
         print("  [DEBUG] Starting flow conservation setup...")
-        constraint_counter = 0
         unbalanced_nodes = []
+        constraint_counter = 0
 
-        unique_nodes = set(nodes)
-        for n, t_node, comm in unique_nodes:
+        for n, t_node, comm in set(nodes):
             incoming = [a for a in regular_arcs if a[1] == n and a[2] == t_node and a[3] == comm]
             outgoing = [a for a in regular_arcs if a[0] == n and a[2] == t_node and a[3] == comm]
             incoming_qq = [a for a in qq_arcs if a[1] == n and a[4] == t_node and a[3] == comm]
@@ -149,70 +143,47 @@ def solve_benders(params, output_dir="output"):
             in_count = len(incoming) + len(incoming_qq)
             out_count = len(outgoing) + len(outgoing_qq)
 
-            # Only flag real conservation violations (ignore sources, sinks, ss, dummy)
-            if in_count != out_count and not (
-                n.startswith('source') or 
-                n in ['sink', 'ss', 'dummy'] or 
-                '_out_' in n
-            ):
+            if in_count != out_count and not (n.startswith('source') or n in ['ss', 'dummy']):
                 unbalanced_nodes.append((n, t_node, comm, in_count, out_count))
 
             if not (incoming or outgoing or incoming_qq or outgoing_qq):
                 continue
 
             constraint_counter += 1
-            constraint_name = f"flow_con_{constraint_counter}"
-
             if n.startswith('source'):
                 continue
-            elif n == 'sink' and t_node is not None:
-                # Per-time sink just forwards to ss
-                constraint = (
-                    lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) ==
-                    lpSum(x_regular[a] for a in outgoing)
-                )
             elif n == 'ss' and t_node is None:
-                # Global super-sink collects EVERYTHING
                 total_d = sum(D.get((m, ti, comm), 0) for m in M for ti in T)
-                constraint = (
-                    lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) == total_d
-                )
+                sub += (lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) == total_d), f"ss_{comm}"
             else:
-                constraint = (
+                sub += (
                     lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) ==
                     lpSum(x_regular[a] for a in outgoing) + lpSum(x_qq[a] for a in outgoing_qq)
-                )
-            sub += constraint, constraint_name
+                ), f"flow_{constraint_counter}"
 
         print(f"  [DEBUG] Flow conservation constraints added: {constraint_counter}")
         print(f"  [DEBUG] Unbalanced nodes found: {len(unbalanced_nodes)}")
-        if unbalanced_nodes:
-            print(f"  [DEBUG] First 5 unbalanced nodes: {unbalanced_nodes[:5]}")
 
         # ====================== Capacity Constraints ======================
         print("  [DEBUG] Adding capacity constraints...")
 
-        # l1 capacity: any service flow from q nodes when y_m = 1
+        # l1 capacity
         for m in M:
             for t in T:
-                # Sum all service flows from this m's queue for l1 demands
-                l1_service_flow = lpSum(
-                    x_regular.get((f'{m}_q', 'ss', t, c), 0) 
-                    for c in C if c[0] == 'l1'
+                l1_flow = lpSum(x_regular.get((f'{m}_q_l1', 'ss', t, c), 0) for c in C if c[0] == 'l1')
+                sub += l1_flow <= U_l1 * fixed_y.get(m, 0), f"cap_l1_{m}_{t}"
+
+        # l2 capacity
+        for k, tm in traditional_m_dict.items():
+            for t in T:
+                l2_flow = lpSum(
+                    x_regular.get((f'{tm}_q_l2', 'ss', t, c), 0)
+                    for c in C 
+                    if (c[0] == 'l2' and c[1] == k) or (c[0] == 'l1' and c[1] == k)
                 )
-                sub += l1_service_flow <= U_l1 * fixed_y.get(m, 0), f"cap_l1_{m}_{t}"
+                sub += l2_flow <= U_l2.get(k, 100), f"cap_l2_{tm}_{t}"
 
-        # l2 capacity: only at traditional locations, native + l1 crossover
-        for k in K:
-            if k in traditional_m_dict:
-                tm = traditional_m_dict[k]
-                for t in T:
-                    l2_service_flow = lpSum(
-                        x_regular.get((f'{tm}_q', 'ss', t, c), 0) 
-                        for c in C if (c[0] == 'l2' and c[1] == k) or (c[0] == 'l1' and c[1] == k)
-                    )
-                    sub += l2_service_flow <= U_l2.get(k, 100), f"cap_l2_{tm}_{t}"
-
+        # Solve subproblem
         print("  [DEBUG] Solving subproblem...")
         status = sub.solve(PULP_CBC_CMD(msg=0))
         print("Sub Status:", LpStatus[status])
@@ -226,46 +197,31 @@ def solve_benders(params, output_dir="output"):
             if total_cost < best_sub_cost:
                 best_y = fixed_y.copy()
                 best_sub_cost = sub_cost
-                best_sub_vars = {
-                    'x_regular': {a: value(x_regular[a]) for a in regular_arcs},
-                    'x_qq': {a: value(x_qq[a]) for a in qq_arcs}
-                }
-                print(f"New best UB: {ub:.2f} with {sum(best_y.values()):.0f} CSAM facilities")
+                print(f"New best UB: {ub:.2f} with {sum(1 for v in best_y.values() if v > 0.5):.0f} CSAM facilities")
 
-            # Optimality cut
-            pi = {(m, t): sub.constraints[l1_capacity_cons[(m, t)]].pi for m in M for t in T if (m, t) in l1_capacity_cons}
-            cut = theta >= sub_cost + lpSum(pi.get((m, t), 0) * U_l1 * (y[(m, 'l1')] - fixed_y.get(m, 0)) for m in M for t in T)
-            master += cut, f"opt_cut_{iter_count}"
-
+            # TODO: Add proper optimality cut later (dual-based)
         else:
             print("Subproblem infeasible! Adding strong feasibility cut.")
-            min_facilities = min(iter_count, MAX_CSAM_FACILITIES)
-            master += lpSum(y[(m, 'l1')] for m in M) >= min_facilities, f"feas_cut_{iter_count}"
-            print(f"Added feasibility cut: at least {min_facilities} facilities")
-            
-    # ====================== Output & Save ======================
+            master += lpSum(y[(m, 'l1')] for m in M) >= min(iter_count, MAX_CSAM_FACILITIES), f"feas_cut_{iter_count}"
+
+    # ====================== Output ======================
     print("\n=== Benders converged ===")
     print(f"Final Objective (UB): {ub:.2f}")
     runtime = timer.time() - start_time
     print(f"Runtime: {runtime:.2f} seconds")
 
-    if best_y is None:
-        best_y = {m: 0 for m in M}
-
-    # CSAM Deployments
     print("\nCSAM Deployments:")
-    for m in M:
-        if best_y.get(m, 0) > 0.5:
-            print(f"y[{m}, 'l1'] = 1")
+    deployed = [m for m in M if best_y and best_y.get(m, 0) > 0.5]
+    for m in deployed:
+        print(f"y[{m}, 'l1'] = 1")
 
-    # Save summary
     summary = {
         "run_id": run_id,
         "max_csam_facilities": MAX_CSAM_FACILITIES,
         "seed": SEED,
         "objective": float(ub),
-        "deployed_count": int(sum(best_y.values())),
-        "deployed_facilities": [m for m in M if best_y.get(m, 0) > 0.5],
+        "deployed_count": len(deployed),
+        "deployed_facilities": deployed,
         "iterations": iter_count,
         "runtime_seconds": float(runtime)
     }
@@ -275,8 +231,7 @@ def solve_benders(params, output_dir="output"):
 
     print(f"\nExperiment completed → {exp_dir}")
 
-    # Restore stdout
     sys.stdout = original_stdout
     log_file.close()
 
-    return {"objective": ub, "best_y": best_y, "runtime": runtime, "exp_dir": str(exp_dir)}
+    return summary

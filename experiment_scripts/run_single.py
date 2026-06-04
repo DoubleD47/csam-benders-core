@@ -38,7 +38,7 @@ def run_single_experiment(params=None):
     )
     
     # Solve with Benders
-    summary = solve_benders(params, net, output_dir=output_dir)
+    summary = solve_benders(params, net)
     
     return summary
 
