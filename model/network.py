@@ -1,5 +1,4 @@
 import numpy as np
-from collections import defaultdict
 
 def build_network(M, traditional_m_dict, L, K, T, seed=456):
     np.random.seed(seed)
@@ -12,90 +11,74 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
     max_t = max(T)
     l2_locations = set(traditional_m_dict.values())
 
-    # === Node Creation ===
+    # Node creation
     for t in T:
         for c in C:
             l, k = c
             nodes.append(('source', t, c))
-            nodes.append(('sink', t, c))
+            nodes.append(('ss', None, c))   # single global super-sink per c
+            
             if t == max_t:
                 nodes.append(('dummy', t, c))
-            nodes.append(('ss', None, c))  # global super sink per c
 
             for m in M:
                 nodes.append((f'{m}_in', t, c))
-                
-                # l1 always available
-                nodes.extend([(f'{m}_q_l1', t, c), (f'{m}_r_l1', t, c), (f'{m}_out_l1', t, c)])
-                
-                # l2 only at traditional locations + only for allowed c
-                if m in l2_locations:
-                    if l == 'l2' or (l == 'l1' and m == traditional_m_dict.get(k)):
-                        nodes.extend([(f'{m}_q_l2', t, c), (f'{m}_r_l2', t, c), (f'{m}_out_l2', t, c)])
+                nodes.append((f'{m}_q', t, c))   # Simplified single queue per m,c
 
-    # === Arcs ===
+    # Arcs
     for t in T:
         for c in C:
             l, k = c
             matching_m = traditional_m_dict.get(k)
-            
+
             for m in M:
-                # 1. Source injection to any _in
+                # Source injection
                 regular_arcs.append(('source', f'{m}_in', t, c))
 
-                # 2. Travel between _in nodes (all c allowed)
+                # Travel between entry points (all c)
                 for m2 in M:
                     if m != m2:
                         regular_arcs.append((f'{m}_in', f'{m2}_in', t, c))
 
-                # 3. Enter l1 queue (anywhere)
-                regular_arcs.append((f'{m}_in', f'{m}_q_l1', t, c))
+                # Enter queue (pay queue cost here)
+                regular_arcs.append((f'{m}_in', f'{m}_q', t, c))
 
-                # 4. Enter l2 queue (very restricted)
-                if m == matching_m and f'{m}_q_l2' in {n[0] for n in nodes if n[1] == t and n[2] == c}:
-                    regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
+                # === Service arcs (to super-sink) ===
+                # l1 service - enabled by y_m (any l1 demand at any m)
+                if l == 'l1':
+                    regular_arcs.append((f'{m}_q', 'ss', t, c))
 
-                # 5. l1 processing chain
-                regular_arcs.append((f'{m}_q_l1', f'{m}_r_l1', t, c))
-                regular_arcs.append((f'{m}_r_l1', f'{m}_out_l1', t, c))
-                regular_arcs.append((f'{m}_out_l1', 'sink', t, c))
+                # l2 native service
+                if l == 'l2' and m == matching_m:
+                    regular_arcs.append((f'{m}_q', 'ss', t, c))
 
-                # 6. l2 processing chain
-                if m == matching_m and f'{m}_q_l2' in {n[0] for n in nodes if n[1] == t and n[2] == c}:
-                    regular_arcs.append((f'{m}_q_l2', f'{m}_r_l2', t, c))
-                    regular_arcs.append((f'{m}_r_l2', f'{m}_out_l2', t, c))
-                    regular_arcs.append((f'{m}_out_l2', 'sink', t, c))
+                # l1 crossover to matching l2 facility
+                if l == 'l1' and m == matching_m:
+                    regular_arcs.append((f'{m}_q', 'ss', t, c))
 
-                # 7. l1 → l2 crossover at matching location
-                if l == 'l1' and m == matching_m and f'{m}_q_l2' in {n[0] for n in nodes if n[1] == t and n[2] == c}:
-                    regular_arcs.append((f'{m}_q_l1', f'{m}_q_l2', t, c))
-
-                # 8. Dummy exits (LAST period ONLY)
+                # Dummy in last period
                 if t == max_t:
+                    regular_arcs.append((f'{m}_q', 'dummy', t, c))
                     regular_arcs.append((f'{m}_in', 'dummy', t, c))
-                    regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
-                    if m == matching_m and f'{m}_q_l2' in {n[0] for n in nodes if n[1] == t and n[2] == c}:
-                        regular_arcs.append((f'{m}_q_l2', 'dummy', t, c))
 
-                # 9. Sink → super-sink (every period)
-                regular_arcs.append(('sink', 'ss', t, c))
-                if t == max_t:
-                    regular_arcs.append(('dummy', 'ss', t, c))
-
-    # === Queue carry-over arcs ===
+    # Queue carry-over
     for i in range(len(T)-1):
         t_curr = T[i]
         t_next = T[i+1]
         for c in C:
             for m in M:
-                qq_arcs.append((f'{m}_q_l1', f'{m}_q_l1', t_curr, c, t_next))
-                if m == traditional_m_dict.get(c[1]):
-                    qq_arcs.append((f'{m}_q_l2', f'{m}_q_l2', t_curr, c, t_next))
+                qq_arcs.append((f'{m}_q', f'{m}_q', t_curr, c, t_next))
+
+    # Add dummy to ss
+    for t in T:
+        for c in C:
+            if t == max_t:
+                regular_arcs.append(('dummy', 'ss', t, c))
 
     D = {(m, t, c): np.random.uniform(5, 15) for m in M for t in T for c in C}
     
-    print(f"  [DEBUG] Built network with {len(set(nodes))} unique nodes, "
-    f"{len(regular_arcs)} regular arcs, {len(qq_arcs)} qq arcs")
+    print(f"[DEBUG] Built simplified network: {len(set(nodes))} nodes, "
+        f"{len(regular_arcs)} regular arcs, {len(qq_arcs)} qq arcs")
     
     return {
         'nodes': list(set(nodes)),
@@ -104,4 +87,3 @@ def build_network(M, traditional_m_dict, L, K, T, seed=456):
         'D': D,
         'C': C
     }
-    
