@@ -143,7 +143,12 @@ def solve_benders(params, net=None, output_dir="experiments"):
             in_count = len(incoming) + len(incoming_qq)
             out_count = len(outgoing) + len(outgoing_qq)
 
-            if in_count != out_count and not (n.startswith('source') or n in ['ss', 'dummy']):
+            # Unbalanced nodes filtering (allow source, ss, dummy, and _in nodes with dummy in last period)
+            if in_count != out_count and not (
+                n.startswith('source') or 
+                n in ['ss', 'dummy'] or 
+                n.endswith('_in')   # allow _in nodes if they have dummy in last period
+            ):
                 unbalanced_nodes.append((n, t_node, comm, in_count, out_count))
 
             if not (incoming or outgoing or incoming_qq or outgoing_qq):
