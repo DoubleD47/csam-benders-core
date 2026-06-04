@@ -1,3 +1,5 @@
+import numpy as np
+
 def get_default_params():
     return {
         'M': ['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10'],
@@ -16,9 +18,26 @@ def get_default_params():
         'U_l1': 80,
         'U_l2': {'k1':100, 'k2':100, 'k3':100, 'k4':100, 'k5':100},
         
+        # Demand control parameters
+        'demand_mean': 10.0,
+        'demand_scale': 1.0,      
         'MAX_CSAM_FACILITIES': 3,
         'SEED': 456,
         'EPS': 1e-4,
         'MAX_ITER': 10,
         'EXPERIMENT_NAME': "default_run"
+    }
+
+
+def generate_demand(M, T, C, mean=10.0, scale=1.0, seed=456):
+    """
+    Generate demand dictionary. 
+    Easy to scale for experiments (low/med/high demand).
+    """
+    np.random.seed(seed)
+    return {
+        (m, t, c): np.random.uniform(5 * scale, 15 * scale) 
+        for m in M 
+        for t in T 
+        for c in C
     }

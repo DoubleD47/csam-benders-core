@@ -35,13 +35,11 @@ def solve_benders(params, output_dir="output"):
     L = params['L']
     K = params['K']
     T = params['T']
-    F = params['F']
-    C_in_in = params['C_in_in']
-    C_in_q = params['C_in_q']
-    C_q_r_l1 = params['C_q_r_l1']
-    C_q_r_l2 = params['C_q_r_l2']
-    C_q_q = params['C_q_q']
-    C_dummy = params['C_dummy']
+    F = params['F']                    # Fixed cost of opening CSAM
+    C_in_q = params['C_in_q']          # Queue entry cost
+    C_q_q = params['C_q_q']            # Queue carry-over cost
+    C_service = params.get('C_service', 10.0)   # Repair/service cost
+    C_dummy = params['C_dummy']        # High penalty for unmet
     U_l1 = params['U_l1']
     U_l2 = params['U_l2']
     MAX_CSAM_FACILITIES = params['MAX_CSAM_FACILITIES']
@@ -115,19 +113,14 @@ def solve_benders(params, output_dir="output"):
         print(f"  [DEBUG] Number of qq arcs: {len(qq_arcs)}")
         print(f"  [DEBUG] Number of dummy arcs: {len([a for a in regular_arcs if 'dummy' in str(a)])}")
 
-        # Objective
+        # ====================== Objective ======================
         sub += (
-            lpSum(C_in_in * x_regular[a] for a in regular_arcs if '_in' in str(a[0]) and '_in' in str(a[1])) +
-            lpSum(C_in_q * x_regular[a] for a in regular_arcs if '_in' in str(a[0]) and '_q_' in str(a[1])) +
-            lpSum(C_q_r_l1 * x_regular[a] for a in regular_arcs if '_q_l1' in str(a[0]) and '_r_l1' in str(a[1])) +
-            lpSum(C_q_r_l2 * x_regular[a] for a in regular_arcs if '_q_l2' in str(a[0]) and '_r_l2' in str(a[1])) +
-            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +
-            lpSum(0.1 * x_regular[a] for a in regular_arcs if '_r_' in str(a[0]) and '_out_' in str(a[1])) +
-            lpSum(0.1 * x_regular[a] for a in regular_arcs if '_out_' in str(a[0]) and 'sink' in str(a[1])) +
-            lpSum(0.1 * x_regular[a] for a in regular_arcs if 'sink' in str(a[0]) and 'ss' in str(a[1])) +
-            lpSum(C_dummy * x_regular[a] for a in regular_arcs if 'dummy' in str(a[1])) +
-            lpSum(0.1 * x_regular[a] for a in regular_arcs if 'dummy' in str(a[0]) and 'ss' in str(a[1]))
-        )
+            lpSum(C_in_q * x_regular[a] for a in regular_arcs if a[0].endswith('_in') and a[1].endswith('_q')) +   # in -> q
+            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +                                                          # queue carry-over
+            lpSum(C_service * x_regular[a] for a in regular_arcs if a[1] == 'ss' and a[0].endswith('_q')) +     # service q -> ss
+            lpSum(C_dummy * x_regular[a] for a in regular_arcs if a[1] == 'ss' and a[0] == 'dummy') +           # dummy penalty
+            0  # future travel costs if added
+        ), "SubObjective"
 
         # Demand injection
         total_demand = 0
@@ -196,22 +189,29 @@ def solve_benders(params, output_dir="output"):
         if unbalanced_nodes:
             print(f"  [DEBUG] First 5 unbalanced nodes: {unbalanced_nodes[:5]}")
 
-        # Capacity constraints
-        l1_capacity_cons = {}
+        # ====================== Capacity Constraints ======================
+        print("  [DEBUG] Adding capacity constraints...")
+
+        # l1 capacity: any service flow from q nodes when y_m = 1
         for m in M:
             for t in T:
-                cons_name = f"capacity_l1_{m}_{t}_{iter_count}"
-                cons = lpSum(x_regular.get((f'{m}_q_l1', f'{m}_r_l1', t, c), 0) for c in C) <= U_l1 * fixed_y.get(m, 0)
-                sub += cons, cons_name
-                l1_capacity_cons[(m, t)] = cons_name
+                # Sum all service flows from this m's queue for l1 demands
+                l1_service_flow = lpSum(
+                    x_regular.get((f'{m}_q', 'ss', t, c), 0) 
+                    for c in C if c[0] == 'l1'
+                )
+                sub += l1_service_flow <= U_l1 * fixed_y.get(m, 0), f"cap_l1_{m}_{t}"
 
+        # l2 capacity: only at traditional locations, native + l1 crossover
         for k in K:
             if k in traditional_m_dict:
                 tm = traditional_m_dict[k]
                 for t in T:
-                    cons_name = f"capacity_l2_{tm}_{t}_{iter_count}"
-                    cons = lpSum(x_regular.get((f'{tm}_q_l2', f'{tm}_r_l2', t, c), 0) for c in C if c[1] == k) <= U_l2.get(k, 100)
-                    sub += cons, cons_name
+                    l2_service_flow = lpSum(
+                        x_regular.get((f'{tm}_q', 'ss', t, c), 0) 
+                        for c in C if (c[0] == 'l2' and c[1] == k) or (c[0] == 'l1' and c[1] == k)
+                    )
+                    sub += l2_service_flow <= U_l2.get(k, 100), f"cap_l2_{tm}_{t}"
 
         print("  [DEBUG] Solving subproblem...")
         status = sub.solve(PULP_CBC_CMD(msg=0))
