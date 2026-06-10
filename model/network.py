@@ -11,6 +11,7 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
     max_t = max(T)
     l2_locations = set(traditional_m_dict.values())
 
+    # Nodes
     for t in T:
         for c in C:
             nodes.add(('source', t, c))
@@ -26,12 +27,14 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
 
     nodes = list(nodes)
 
+    # Arcs
     for t in T:
         for c in C:
             l, k = c
             matching_m = traditional_m_dict.get(k)
 
             for m in M:
+                # Source -> in
                 regular_arcs.append(('source', f'{m}_in', t, c))
 
                 # Inter-node travel
@@ -41,19 +44,19 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
 
                 # Enter queues
                 regular_arcs.append((f'{m}_in', f'{m}_q_l1', t, c))
-                if m == matching_m and any(n[0] == f'{m}_q_l2' for n in nodes if n[1] == t and n[2] == c):
+                if m == matching_m and any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                     regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
 
-                # Service arcs
+                # Service arcs (only when facility is "active" - but capacity will control)
                 regular_arcs.append((f'{m}_q_l1', 'ss', t, c))
-                if any(n[0] == f'{m}_q_l2' for n in nodes if n[1] == t and n[2] == c):
+                if any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                     regular_arcs.append((f'{m}_q_l2', 'ss', t, c))
 
-                # Dummy only in last period
+                # Dummy (last period only)
                 if t == max_t:
                     regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
                     regular_arcs.append((f'{m}_in', 'dummy', t, c))
-                    if any(n[0] == f'{m}_q_l2' for n in nodes if n[1] == t and n[2] == c):
+                    if any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                         regular_arcs.append((f'{m}_q_l2', 'dummy', t, c))
 
     # Carry-over
@@ -66,7 +69,7 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
                 if m in l2_locations and (c[0] == 'l2' or (c[0] == 'l1' and m == traditional_m_dict.get(c[1]))):
                     qq_arcs.append((f'{m}_q_l2', f'{m}_q_l2', tc, c, tn))
 
-    # Dummy to ss
+    # Dummy -> ss
     for c in C:
         regular_arcs.append(('dummy', 'ss', max_t, c))
 

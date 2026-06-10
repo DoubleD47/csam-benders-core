@@ -1,0 +1,143 @@
+Experiment: 2026-06-10_170647_run_maxCSAM5_maxCSAM5
+MAX_CSAM_FACILITIES = 5 | U_l1 = 80 | C_dummy = 20000.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+New best UB: 17443341.73 with 0 CSAM facilities
+
+--- Iteration 2 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 3 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 4 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 5 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 6 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 7 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 8 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 9 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+--- Iteration 10 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 2720
+  [DEBUG] Number of qq arcs: 130
+  [DEBUG] Total demand injected: 3910.7
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 490
+  [DEBUG] Unbalanced nodes found: 150
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+
+=== Benders converged ===
+Final Objective (UB): 17443341.73
+Runtime: 3.05 seconds
+
+CSAM Deployments:
+
+Experiment completed → C:\git\csam-benders-core\experiments\2026-06-10_170647_run_maxCSAM5_maxCSAM5
