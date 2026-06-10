@@ -8,7 +8,7 @@ def get_default_params():
         'K': ['k1','k2','k3','k4','k5'],
         'T': [1, 2],
         
-        'F': {m: 500 for m in ['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10']},   # Lower fixed costs to encourage more facilities
+        'F': {m: 200 for m in ['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10']},  # Lower fixed cost for testing
         'C_in_in': 3,
         'C_in_q': 10,
         'C_q_r_l1': 25,

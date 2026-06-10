@@ -34,10 +34,10 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
             matching_m = traditional_m_dict.get(k)
 
             for m in M:
-                # Source -> in
+                # Source injection
                 regular_arcs.append(('source', f'{m}_in', t, c))
 
-                # Inter-node travel
+                # Travel between _in nodes
                 for m2 in M:
                     if m != m2:
                         regular_arcs.append((f'{m}_in', f'{m2}_in', t, c))
@@ -47,19 +47,19 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
                 if m == matching_m and any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                     regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
 
-                # Service arcs (only when facility is "active" - but capacity will control)
+                # Service from queues to super-sink
                 regular_arcs.append((f'{m}_q_l1', 'ss', t, c))
                 if any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                     regular_arcs.append((f'{m}_q_l2', 'ss', t, c))
 
-                # Dummy (last period only)
+                # Last period: direct write-off from _in to dummy (your new requirement)
                 if t == max_t:
-                    regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
                     regular_arcs.append((f'{m}_in', 'dummy', t, c))
+                    regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
                     if any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                         regular_arcs.append((f'{m}_q_l2', 'dummy', t, c))
 
-    # Carry-over
+    # Queue carry-over
     for i in range(len(T)-1):
         tc = T[i]
         tn = T[i+1]
@@ -69,7 +69,7 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
                 if m in l2_locations and (c[0] == 'l2' or (c[0] == 'l1' and m == traditional_m_dict.get(c[1]))):
                     qq_arcs.append((f'{m}_q_l2', f'{m}_q_l2', tc, c, tn))
 
-    # Dummy -> ss
+    # Dummy -> super-sink
     for c in C:
         regular_arcs.append(('dummy', 'ss', max_t, c))
 
