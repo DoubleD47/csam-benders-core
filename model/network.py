@@ -34,7 +34,7 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
             matching_m = traditional_m_dict.get(k)
 
             for m in M:
-                # Source -> in
+                # Source injection
                 regular_arcs.append(('source', f'{m}_in', t, c))
 
                 # Travel between _in nodes
@@ -42,7 +42,7 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
                     if m != m2:
                         regular_arcs.append((f'{m}_in', f'{m2}_in', t, c))
 
-                # Enter queues (this is the critical path)
+                # Enter queues - always for l1, restricted for l2
                 regular_arcs.append((f'{m}_in', f'{m}_q_l1', t, c))
                 if m == matching_m and any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                     regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
