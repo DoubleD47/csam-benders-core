@@ -110,19 +110,13 @@ def solve_benders(params, net=None, output_dir="experiments"):
         print(f"  [DEBUG] Number of qq arcs: {len(qq_arcs)}")
 
         # ====================== Objective ======================
-        max_t = max(T)  # Make sure max_t is defined in this scope
+        max_t = max(T)
 
         sub += (
-            # Queue entry cost
-            lpSum(C_in_q * x_regular[a] for a in regular_arcs if a[0].endswith('_in') and a[1].endswith('_q')) +
-            # Queue carry-over cost
-            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +
-            # Normal service cost (from queues to ss)
-            lpSum(C_service * x_regular[a] for a in regular_arcs if a[1] == 'ss' and ('_q_l1' in a[0] or '_q_l2' in a[0])) +
-            # High dummy/write-off cost (last period only, direct to ss)
-            lpSum(C_dummy * x_regular[a] for a in regular_arcs 
-                  if a[1] == 'ss' and a[2] == max_t and 
-                  (a[0].endswith('_in') or a[0].endswith('_q_l1') or a[0].endswith('_q_l2'))) +
+            lpSum(C_in_q * x_regular[a] for a in regular_arcs if a[0].endswith('_in') and a[1].endswith('_q')) +   # in -> q
+            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +                                                          # carry-over
+            lpSum(C_service * x_regular[a] for a in regular_arcs if a[1] == 'ss' and ('_q_l1' in a[0] or '_q_l2' in a[0]) and a[2] != max_t) + # normal service
+            lpSum(C_dummy * x_regular[a] for a in regular_arcs if a[1] == 'ss' and a[2] == max_t) +             # dummy/write-off in last period
             0
         ), "SubObjective"
 
