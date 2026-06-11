@@ -37,12 +37,12 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
                 # Source -> in
                 regular_arcs.append(('source', f'{m}_in', t, c))
 
-                # Travel between _in (all c)
+                # Travel between _in nodes
                 for m2 in M:
                     if m != m2:
                         regular_arcs.append((f'{m}_in', f'{m2}_in', t, c))
 
-                # Enter queues
+                # Enter queues (this is the critical path)
                 regular_arcs.append((f'{m}_in', f'{m}_q_l1', t, c))
                 if m == matching_m and any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                     regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
@@ -52,14 +52,14 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
                 if any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                     regular_arcs.append((f'{m}_q_l2', 'ss', t, c))
 
-                # Last period write-off options
+                # Last period write-off
                 if t == max_t:
                     regular_arcs.append((f'{m}_in', 'dummy', t, c))
                     regular_arcs.append((f'{m}_q_l1', 'dummy', t, c))
                     if any(n[0] == f'{m}_q_l2' and n[1] == t and n[2] == c for n in nodes):
                         regular_arcs.append((f'{m}_q_l2', 'dummy', t, c))
 
-    # Queue carry-over
+    # Carry-over
     for i in range(len(T)-1):
         tc = T[i]
         tn = T[i+1]
