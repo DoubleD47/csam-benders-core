@@ -192,6 +192,25 @@ def solve_benders(params, net=None, output_dir="experiments"):
         print("  [DEBUG] Solving subproblem...")
         status = sub.solve(PULP_CBC_CMD(msg=0))
         print("Sub Status:", LpStatus[status])
+        # Debugging outputs
+        if LpStatus[status] == 'Optimal':
+            print("  [DEBUG] Subproblem solved optimally. Recording key flows for diagnosis...")
+            
+            # Record some sample flows from _in nodes
+            sample_in_flows = {}
+            for m in M[:3]:  # first 3 nodes
+                for t in T:
+                    for c in list(C)[:2]:  # first 2 commodities
+                        a = (f'{m}_in', f'{m}_q_l1', t, c)
+                        if a in x_regular:
+                            flow = value(x_regular[a])
+                            if flow > 0.01:
+                                sample_in_flows[a] = flow
+            print(f"  [DEBUG] Sample in -> q_l1 flows: {len(sample_in_flows)} positive flows")
+            
+            # Total dummy usage
+            dummy_flow = sum(value(x_regular[a]) for a in regular_arcs if a[0] == 'dummy' and a[1] == 'ss')
+            print(f"  [DEBUG] Total dummy usage: {dummy_flow:.1f} out of {total_demand:.1f} demand")
 
         if LpStatus[status] == 'Optimal':
             sub_cost = value(sub.objective)
