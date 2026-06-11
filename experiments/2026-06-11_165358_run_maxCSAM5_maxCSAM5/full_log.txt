@@ -1,0 +1,10 @@
+Experiment: 2026-06-11_165358_run_maxCSAM5_maxCSAM5
+MAX_CSAM_FACILITIES = 5 | U_l1 = 80 | C_dummy = 20000.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3100
+  [DEBUG] Number of qq arcs: 200
