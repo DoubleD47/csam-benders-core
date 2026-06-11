@@ -110,14 +110,19 @@ def solve_benders(params, net=None, output_dir="experiments"):
         print(f"  [DEBUG] Number of qq arcs: {len(qq_arcs)}")
 
         # ====================== Objective ======================
-        max_t = max(T)   # Add this line for scope
+        max_t = max(T)  # Make sure max_t is defined in this scope
 
         sub += (
-            lpSum(C_in_q * x_regular[a] for a in regular_arcs if a[0].endswith('_in') and a[1].endswith('_q')) +   # in -> q cost
-            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +                                                          # queue carry-over cost
-            lpSum(C_service * x_regular[a] for a in regular_arcs if a[1] == 'ss' and ('_q_l1' in a[0] or '_q_l2' in a[0])) + # normal service from queues
-            lpSum(C_dummy * x_regular[a] for a in regular_arcs if a[1] == 'ss' and a[0].endswith('_in') and a[2] == max_t) + # dummy/write-off from _in (last t)
-            lpSum(C_dummy * x_regular[a] for a in regular_arcs if a[1] == 'ss' and ('_q_l1' in a[0] or '_q_l2' in a[0]) and a[2] == max_t) + # dummy from queues (last t)
+            # Queue entry cost
+            lpSum(C_in_q * x_regular[a] for a in regular_arcs if a[0].endswith('_in') and a[1].endswith('_q')) +
+            # Queue carry-over cost
+            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +
+            # Normal service cost (from queues to ss)
+            lpSum(C_service * x_regular[a] for a in regular_arcs if a[1] == 'ss' and ('_q_l1' in a[0] or '_q_l2' in a[0])) +
+            # High dummy/write-off cost (last period only, direct to ss)
+            lpSum(C_dummy * x_regular[a] for a in regular_arcs 
+                  if a[1] == 'ss' and a[2] == max_t and 
+                  (a[0].endswith('_in') or a[0].endswith('_q_l1') or a[0].endswith('_q_l2'))) +
             0
         ), "SubObjective"
 
@@ -173,16 +178,16 @@ def solve_benders(params, net=None, output_dir="experiments"):
         print(f"  [DEBUG] Flow conservation constraints added: {constraint_counter}")
         print(f"  [DEBUG] Unbalanced nodes found: {len(unbalanced_nodes)}")
 
-        # ====================== Capacity Constraints ======================
+# ====================== Capacity Constraints ======================
         print("  [DEBUG] Adding capacity constraints...")
 
-        # l1 capacity: any flow leaving q_l1 to ss
+        # l1 capacity: flows leaving any q_l1 to ss
         for m in M:
             for t in T:
                 l1_flow = lpSum(x_regular.get((f'{m}_q_l1', 'ss', t, c), 0) for c in C if c[0] == 'l1')
                 sub += l1_flow <= U_l1 * fixed_y.get(m, 0), f"cap_l1_{m}_{t}"
 
-        # l2 capacity: only at traditional locations for the matching k (including l1 crossover)
+        # l2 capacity: only meaningful at traditional locations (including l1 crossover)
         for k, tm in traditional_m_dict.items():
             for t in T:
                 l2_flow = lpSum(x_regular.get((f'{tm}_q_l2', 'ss', t, c), 0) for c in C if c[1] == k)
