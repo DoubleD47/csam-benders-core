@@ -9,12 +9,15 @@ def get_default_params():
         'T': [1, 2],
         
         'F': {m: 200 for m in ['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10']},  # Much lower to encourage deployments
-        'C_in_in': 3,
-        'C_in_q': 10,
-        'C_q_r_l1': 25,
-        'C_q_r_l2': 20,
-        'C_q_q': 50,
-        'C_dummy': 5000,
+        'C_in_q': 1.0,      # cost to enter queue from _in
+        'C_q_q': 0.5,       # queue carry-over cost
+        'C_service': 10.0,  # normal repair/service cost (queue -> ss)
+
+        # Differentiated dummy / write-off costs
+        'C_dummy_in': 1000.0,    # High penalty: demand that never leaves _in (pure abandonment)
+        'C_dummy_queue': 500.0,  # Medium penalty: reached a queue but couldn't be serviced by end of horizon
+
+        'C_dummy': 100.0,   # legacy / fallback (can be deprecated later)
         'U_l1': 80,
         'U_l2': {'k1':100, 'k2':100, 'k3':100, 'k4':100, 'k5':100},
         

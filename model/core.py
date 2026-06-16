@@ -40,7 +40,13 @@ def solve_benders(params, net=None, output_dir="experiments"):
     C_in_q = params['C_in_q']
     C_q_q = params['C_q_q']
     C_service = params.get('C_service', 10.0)
-    C_dummy = params['C_dummy']
+
+    # Differentiated dummy costs
+    C_dummy_in = params.get('C_dummy_in', 1000.0)
+    C_dummy_queue = params.get('C_dummy_queue', 500.0)
+
+    # Legacy fallback
+    C_dummy = params.get('C_dummy', 100.0)
     U_l1 = params['U_l1']
     U_l2 = params['U_l2']
     MAX_CSAM_FACILITIES = params['MAX_CSAM_FACILITIES']
@@ -63,7 +69,7 @@ def solve_benders(params, net=None, output_dir="experiments"):
     sys.stdout = Tee(sys.stdout, log_file)
 
     print(f"Experiment: {run_id}")
-    print(f"MAX_CSAM_FACILITIES = {MAX_CSAM_FACILITIES} | U_l1 = {U_l1} | C_dummy = {C_dummy}")
+    print(f"MAX_CSAM_FACILITIES = {MAX_CSAM_FACILITIES} | U_l1 = {U_l1} | C_dummy_in = {C_dummy_in} | C_dummy_queue = {C_dummy_queue}")
     print(f"Random seed: {SEED}\n")
 
     np.random.seed(SEED)
@@ -113,10 +119,23 @@ def solve_benders(params, net=None, output_dir="experiments"):
         max_t = max(T)
 
         sub += (
-            lpSum(C_in_q * x_regular[a] for a in regular_arcs if a[0].endswith('_in') and a[1].endswith('_q')) +   # in -> q
-            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +                                                          # carry-over
-            lpSum(C_service * x_regular[a] for a in regular_arcs if a[1] == 'ss' and ('_q_l1' in a[0] or '_q_l2' in a[0]) and a[2] != max_t) + # normal service
-            lpSum(C_dummy * x_regular[a] for a in regular_arcs if a[1] == 'ss' and a[2] == max_t) +             # dummy/write-off in last period
+            lpSum(C_in_q * x_regular[a] for a in regular_arcs
+                  if a[0].endswith('_in') and a[1].endswith('_q')) +   # in -> q
+            lpSum(C_q_q * x_qq[a] for a in qq_arcs) +                  # carry-over
+
+            # Normal service (repair) from queues
+            lpSum(C_service * x_regular[a] for a in regular_arcs
+                  if a[1] == 'ss' and ('_q_l1' in a[0] or '_q_l2' in a[0]) and a[2] != max_t) +
+
+            # Write-off costs - DIFFERENTIATED
+            # High cost: demand that sits at _in and is never moved/queued
+            lpSum(C_dummy_in * x_regular[a] for a in regular_arcs
+                  if a[0].endswith('_in') and a[1] == 'ss' and a[2] == max_t) +
+
+            # Medium cost: demand that reached a queue but couldn't be serviced
+            lpSum(C_dummy_queue * x_regular[a] for a in regular_arcs
+                  if ('_q_l1' in a[0] or '_q_l2' in a[0]) and a[1] == 'ss' and a[2] == max_t) +
+
             0
         ), "SubObjective"
 
@@ -207,9 +226,12 @@ def solve_benders(params, net=None, output_dir="experiments"):
                                 sample_in_flows += 1
             print(f"  [DEBUG] Positive in -> q_l1 flows (sample): {sample_in_flows}")
 
-            # Total dummy usage
-            dummy_flow = sum(value(x_regular.get(a, 0)) for a in regular_arcs if a[0] == 'dummy')
-            print(f"  [DEBUG] Total dummy usage: {dummy_flow:.1f} / {total_demand:.1f} demand")
+            # Write-off usage (differentiated)
+            dummy_in_flow = sum(value(x_regular.get(a, 0)) for a in regular_arcs
+                                if a[0].endswith('_in') and a[1] == 'ss' and a[2] == max_t)
+            dummy_queue_flow = sum(value(x_regular.get(a, 0)) for a in regular_arcs
+                                   if ('_q_l1' in a[0] or '_q_l2' in a[0]) and a[1] == 'ss' and a[2] == max_t)
+            print(f"  [DEBUG] Write-off flows - _in: {dummy_in_flow:.1f}, queue: {dummy_queue_flow:.1f} / {total_demand:.1f} demand")
 
         if LpStatus[status] == 'Optimal':
             sub_cost = value(sub.objective)
