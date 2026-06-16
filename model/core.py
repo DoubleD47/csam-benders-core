@@ -44,9 +44,6 @@ def solve_benders(params, net=None, output_dir="experiments"):
     # Differentiated dummy costs
     C_dummy_in = params.get('C_dummy_in', 1000.0)
     C_dummy_queue = params.get('C_dummy_queue', 500.0)
-
-    # Legacy fallback
-    C_dummy = params.get('C_dummy', 100.0)
     U_l1 = params['U_l1']
     U_l2 = params['U_l2']
     MAX_CSAM_FACILITIES = params['MAX_CSAM_FACILITIES']
@@ -77,7 +74,11 @@ def solve_benders(params, net=None, output_dir="experiments"):
 
     # Build network (use passed net or build new)
     if net is None:
-        net = build_network(M, traditional_m_dict, L, K, T, seed=SEED)
+        net = build_network(
+            M, traditional_m_dict, L, K, T, seed=SEED,
+            demand_mean=params.get('demand_mean', 10.0),
+            demand_scale=params.get('demand_scale', 1.0),
+        )
     nodes = net['nodes']
     regular_arcs = net['regular_arcs']
     qq_arcs = net['qq_arcs']
@@ -165,24 +166,27 @@ def solve_benders(params, net=None, output_dir="experiments"):
             in_count = len(incoming) + len(incoming_qq)
             out_count = len(outgoing) + len(outgoing_qq)
 
-            # Unbalanced nodes filtering (allow source, ss, dummy, and _in nodes with dummy in last period)
+            # Unbalanced nodes filtering (allow source, ss, dummy, and last-period _in nodes with write-off)
             if in_count != out_count and not (
-                n.startswith('source') or 
-                n in ['ss', 'dummy'] or 
-                n.endswith('_in')   # allow _in nodes if they have dummy in last period
+                n.startswith('source') or
+                n in ['ss', 'dummy'] or
+                (n.endswith('_in') and t_node == max_t)
             ):
                 unbalanced_nodes.append((n, t_node, comm, in_count, out_count))
 
             if not (incoming or outgoing or incoming_qq or outgoing_qq):
                 continue
 
-            constraint_counter += 1
             if n.startswith('source'):
                 continue
+            elif n.endswith('_in') and t_node == max_t:
+                continue  # can dump remaining flow to ss via write-off arcs
             elif n == 'ss' and t_node is None:
+                constraint_counter += 1
                 total_d = sum(D.get((m, ti, comm), 0) for m in M for ti in T)
                 sub += (lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) == total_d), f"ss_{comm}"
             else:
+                constraint_counter += 1
                 sub += (
                     lpSum(x_regular[a] for a in incoming) + lpSum(x_qq[a] for a in incoming_qq) ==
                     lpSum(x_regular[a] for a in outgoing) + lpSum(x_qq[a] for a in outgoing_qq)

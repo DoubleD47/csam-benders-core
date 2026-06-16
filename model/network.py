@@ -1,7 +1,7 @@
 import numpy as np
 
 # This function builds the network structure for the CSAM deployment problem. It creates nodes and arcs based on the specified logic, including source injection, demand movement between entry points, queueing for service, and direct write-off options in the last period. The function also allows for custom demand input and includes debug print statements to verify the network construction.
-def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
+def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456, demand_mean=10.0, demand_scale=1.0):
     """
     Build the time-expanded network for CSAM deployment optimization.
     - All demands can travel between _in nodes.
@@ -50,7 +50,7 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
                 regular_arcs.append((f'{m}_in', f'{m}_q_l1', t, c))
 
                 # Restricted l2 queue access
-                if l == 2 or matching_m == m:
+                if l == 'l2' or matching_m == m:
                     regular_arcs.append((f'{m}_in', f'{m}_q_l2', t, c))
 
                 # Service arcs
@@ -72,10 +72,10 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456):
                 qq_arcs.append((f'{m}_q_l1', f'{m}_q_l1', tc, c, tn))
                 qq_arcs.append((f'{m}_q_l2', f'{m}_q_l2', tc, c, tn))
     
-    # Default demand with clear message
     if D is None:
-        print("[DEBUG] No demand was specified. Using default random values (5-15 per (m,t,c)).")
-        D = {(m, t, c): np.random.uniform(5, 15) for m in M for t in T for c in C}
+        from .parameters import generate_demand
+        print(f"[DEBUG] No demand specified. Using generate_demand (scale={demand_scale}, seed={seed}).")
+        D = generate_demand(M, T, C, mean=demand_mean, scale=demand_scale, seed=seed)
 
     print(f"[DEBUG] Built network: {len(nodes)} nodes, {len(regular_arcs)} regular arcs, {len(qq_arcs)} qq arcs")
     return {

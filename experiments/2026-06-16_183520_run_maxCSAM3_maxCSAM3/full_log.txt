@@ -1,0 +1,173 @@
+Experiment: 2026-06-16_183520_run_maxCSAM3_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy_in = 1000.0 | C_dummy_queue = 500.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+New best UB: 11393.64 with 0 CSAM facilities
+
+--- Iteration 2 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+
+--- Iteration 3 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+
+--- Iteration 4 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+
+--- Iteration 5 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+
+--- Iteration 6 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+
+--- Iteration 7 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+
+--- Iteration 8 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+
+--- Iteration 9 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+
+--- Iteration 10 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
+
+=== Benders converged ===
+Final Objective (UB): 11393.64
+Runtime: 4.46 seconds
+
+CSAM Deployments:
+
+Experiment completed → C:\git\csam-benders-core\experiments\2026-06-16_183520_run_maxCSAM3_maxCSAM3
