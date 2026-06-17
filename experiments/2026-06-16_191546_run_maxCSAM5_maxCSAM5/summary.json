@@ -1,0 +1,18 @@
+{
+  "run_id": "2026-06-16_191546_run_maxCSAM5_maxCSAM5",
+  "max_csam_facilities": 5,
+  "seed": 456,
+  "demand_scale": 1.0,
+  "objective": 9912.219832000004,
+  "subproblem_cost": 9712.219832000004,
+  "deployed_count": 1,
+  "deployed_facilities": [
+    "m9"
+  ],
+  "iterations": 3,
+  "runtime_seconds": 1.391291856765747,
+  "flow_files": {
+    "regular": "experiments\\2026-06-16_191546_run_maxCSAM5_maxCSAM5\\visualizations\\flows_regular.csv",
+    "qq": "experiments\\2026-06-16_191546_run_maxCSAM5_maxCSAM5\\visualizations\\flows_qq.csv"
+  }
+}

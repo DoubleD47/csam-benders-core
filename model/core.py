@@ -90,6 +90,8 @@ def solve_benders(params, net=None, output_dir="experiments"):
     iter_count = 0
     best_y = None
     best_sub_cost = np.inf
+    best_regular_flows = None
+    best_qq_flows = None
 
     master = LpProblem("CSAM_Master", LpMinimize)
     y = LpVariable.dicts("y", [(m, 'l1') for m in M], cat='Binary')
@@ -198,11 +200,14 @@ def solve_benders(params, net=None, output_dir="experiments"):
 # ====================== Capacity Constraints ======================
         print("  [DEBUG] Adding capacity constraints...")
 
-        # l1 capacity: flows leaving any q_l1 to ss
+        # l1 capacity constraints (named for dual access)
+        cap_constraints = {}
         for m in M:
             for t in T:
                 l1_flow = lpSum(x_regular.get((f'{m}_q_l1', 'ss', t, c), 0) for c in C if c[0] == 'l1')
-                sub += l1_flow <= U_l1 * fixed_y.get(m, 0), f"cap_l1_{m}_{t}"
+                cap_name = f"cap_l1_{m}_{t}"
+                sub += l1_flow <= U_l1 * fixed_y.get(m, 0), cap_name
+                cap_constraints[(m, t)] = sub.constraints[cap_name]
 
         # l2 capacity: only meaningful at traditional locations (including l1 crossover)
         for k, tm in traditional_m_dict.items():
@@ -246,9 +251,47 @@ def solve_benders(params, net=None, output_dir="experiments"):
             if total_cost < best_sub_cost:
                 best_y = fixed_y.copy()
                 best_sub_cost = sub_cost
+                best_regular_flows = {}
+                for a in regular_arcs:
+                    flow = value(x_regular[a])
+                    if flow is not None and flow > 1e-6:
+                        best_regular_flows[a] = flow
+                best_qq_flows = {}
+                for a in qq_arcs:
+                    flow = value(x_qq[a])
+                    if flow is not None and flow > 1e-6:
+                        best_qq_flows[a] = flow
                 print(f"New best UB: {ub:.2f} with {sum(1 for v in best_y.values() if v > 0.5):.0f} CSAM facilities")
 
-            # TODO: Add proper optimality cut later (dual-based)
+            # Optimality cut: theta >= Q(y*) + sum pi * U * (y - y*)
+            cap_duals = {}
+            for m in M:
+                for t in T:
+                    pi = cap_constraints[(m, t)].pi
+                    cap_duals[(m, t)] = pi if pi is not None else 0.0
+
+            active_duals = sum(1 for pi in cap_duals.values() if abs(pi) > 1e-6)
+            bottlenecks = []
+            for m in M:
+                period_duals = {t: cap_duals[(m, t)] for t in T if abs(cap_duals[(m, t)]) > 1e-6}
+                if period_duals:
+                    max_abs_pi = max(abs(pi) for pi in period_duals.values())
+                    bottlenecks.append((m, max_abs_pi, period_duals))
+            if bottlenecks:
+                bottlenecks.sort(key=lambda x: x[1], reverse=True)
+                print("  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):")
+                for m, max_abs_pi, period_duals in bottlenecks:
+                    period_str = ", ".join(f"t{t}={pi:.4f}" for t, pi in sorted(period_duals.items()))
+                    print(f"    {m}: max|pi|={max_abs_pi:.4f} ({period_str})")
+            cut_constant = sub_cost - sum(
+                cap_duals[(m, t)] * U_l1 * fixed_y.get(m, 0)
+                for m in M for t in T
+            )
+            master += theta >= cut_constant + lpSum(
+                cap_duals[(m, t)] * U_l1 * y[(m, 'l1')]
+                for m in M for t in T
+            ), f"opt_cut_{iter_count}"
+            print(f"  [DEBUG] Optimality cut added (active duals: {active_duals}, sub_cost: {sub_cost:.2f})")
         else:
             print("Subproblem infeasible! Adding strong feasibility cut.")
             master += lpSum(y[(m, 'l1')] for m in M) >= min(iter_count, MAX_CSAM_FACILITIES), f"feas_cut_{iter_count}"
@@ -264,15 +307,42 @@ def solve_benders(params, net=None, output_dir="experiments"):
     for m in deployed:
         print(f"y[{m}, 'l1'] = 1")
 
+    viz_dir = exp_dir / "visualizations"
+    viz_dir.mkdir(exist_ok=True)
+    flow_files = {}
+    if best_regular_flows is not None:
+        regular_path = viz_dir / "flows_regular.csv"
+        with open(regular_path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["from", "to", "t", "l", "k", "flow"])
+            for (u, v, t, (l, k)), flow in sorted(best_regular_flows.items(), key=lambda x: -x[1]):
+                writer.writerow([u, v, t, l, k, flow])
+        flow_files["regular"] = str(regular_path.relative_to(repo_root))
+
+    if best_qq_flows is not None:
+        qq_path = viz_dir / "flows_qq.csv"
+        with open(qq_path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["from", "to", "t_from", "t_to", "l", "k", "flow"])
+            for (u, v, t_from, (l, k), t_to), flow in sorted(best_qq_flows.items(), key=lambda x: -x[1]):
+                writer.writerow([u, v, t_from, t_to, l, k, flow])
+        flow_files["qq"] = str(qq_path.relative_to(repo_root))
+
+    if flow_files:
+        print(f"\nSaved {len(best_regular_flows or {})} regular + {len(best_qq_flows or {})} qq flows → {viz_dir}")
+
     summary = {
         "run_id": run_id,
         "max_csam_facilities": MAX_CSAM_FACILITIES,
         "seed": SEED,
+        "demand_scale": params.get("demand_scale", 1.0),
         "objective": float(ub),
+        "subproblem_cost": float(best_sub_cost) if best_sub_cost < np.inf else None,
         "deployed_count": len(deployed),
         "deployed_facilities": deployed,
         "iterations": iter_count,
-        "runtime_seconds": float(runtime)
+        "runtime_seconds": float(runtime),
+        "flow_files": flow_files,
     }
 
     with open(exp_dir / "summary.json", "w") as f:

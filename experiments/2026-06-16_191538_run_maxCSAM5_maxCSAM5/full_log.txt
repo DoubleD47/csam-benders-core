@@ -1,0 +1,20 @@
+Experiment: 2026-06-16_191538_run_maxCSAM5_maxCSAM5
+MAX_CSAM_FACILITIES = 5 | U_l1 = 80 | C_dummy_in = 1000.0 | C_dummy_queue = 500.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 3010
+  [DEBUG] Number of qq arcs: 200
+  [DEBUG] Total demand injected: 1955.3
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 500
+  [DEBUG] Unbalanced nodes found: 300
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 3.4 / 1955.3 demand
