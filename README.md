@@ -1,94 +1,65 @@
 # CSAM Deployment Optimization via Benders Decomposition
 
-This project solves a multi-period facility deployment problem for **Cold-Spray Additive Manufacturing (CSAM)** mobile repair units that supplement existing traditional repair infrastructure. The model uses **Benders decomposition** to handle the large-scale mixed-integer linear program (MILP) arising from the time-expanded network flow formulation.
+This project solves a multi-period facility deployment problem for **Cold-Spray Additive Manufacturing (CSAM)** mobile repair units that supplement existing traditional repair infrastructure. The model uses **Benders decomposition** with dual-based optimality cuts on a time-expanded network flow formulation.
 
 ---
 
 ## Model Overview
 
-The problem involves routing repair demand of type **(l, k)** across a network of main nodes (traditional repair sites). 
+The problem routes repair demand of type **(l, k)** across a network of main nodes (traditional repair sites).
 
-- **l ∈ {l1, l2}**: Repair type  
-  - `l1`: Flexible — can be processed at any open CSAM facility or at the matching traditional l2 site.  
-  - `l2`: Restricted — must be processed at its specific traditional facility (e.g., (l2, k1) only at m1).
+| Symbol | Meaning |
+|--------|---------|
+| `l1` | Flexible repair — CSAM or matching traditional site |
+| `l2` | Restricted repair — must use the designated traditional facility |
+| `k` | Repair class (k1–k5) |
+| `y_m` | Binary: deploy mobile CSAM at main node `m` |
 
-- **k**: Specific repair class (k1, k2, ..., determined by parameters).
+Demand enters at main nodes, can move between locations, queues for service, carries over across periods, and can be written off at differentiated penalties in the final period.
 
-- **Mobile CSAM facilities** (`y_m`): Binary decisions indicating whether a mobile l1-capable unit is deployed at main node `m`.
+**Repair costs** (configurable in `model/parameters.py`):
 
-Demand arrives at main nodes, can travel between nodes, enters repair queues, incurs queue carry-over costs between periods, and can be satisfied via traditional or CSAM repair. Unmet demand in the final period exits via dummy arcs at high penalty.
-
----
-
-## Mathematical Formulation (Simplified)
-
-### Sets
-- $M$: Main nodes (traditional repair sites)
-- $T$: Time periods
-- $C = l \times k$: Commodities (repair types)
-- $A$: Arcs
-  - $A_r$: Regular arcs, for travel in between main nodes
-  - $A_q$: Queuing arcs, entering the queue at a main node
-  - $A_{qq}$: Queue carry-over arcs between time periods
-  - $A_d$: Dummy arcs, carry unment demand from queue to super sink in the final time period
-  - $A_{l1}, A_{l2}$: Repair arcs for cold spray and traditional repair to the super sink, respectively
-
-### Variables
-- $x_a^{t,c}$: Flow of commodity $c$ on regular arc $a$ in period $t$
-- $x_{qq}^{t,t+1,c}_m$: Flow carried over in queue $m$ from $t$ to $t+1$
-- $y_m \in \{0,1\}$: Deploy CSAM l1 facility at node $m$
-
-### Objective
-$$
-\min \quad \sum_{t,c} \Big( \text{travel cost} + \text{queue cost} \Big) + C_{\text{dummy}} \cdot \text{unmet demand} + \text{fixed CSAM cost} \cdot \sum_m y_m
-$$
-
-### Flow Conservation (for most nodes)
-For each node $n$, time $t$, commodity $c$:
-$$
-\sum_{a \in \delta^-(n)} x_a^{t,c} + \sum_{qq \in \delta^-_{qq}(n)} x_{qq} = \sum_{a \in \delta^+(n)} x_a^{t,c} + \sum_{qq \in \delta^+_{qq}(n)} x_{qq}
-$$
-
-Special nodes:
-- **Source** injects demand $D_{m,t,c}$
-- **Sink** (per period) → **Super-Sink** (global)
-- **Dummy** (last period only) absorbs unmet demand
-
-### Capacity Constraints (Subproblem)
-$$
-\sum_{c} x_{\text{repair}, m, c}^{t} \leq U_{l1} \cdot y_m \quad \forall m, t \quad \text{(l1 capacity)}
-$$
-$$
-\sum_{\text{allowed } c} x_{\text{l2 repair}, m, c}^{t} \leq U_{l2,m} \quad \forall m, t
-$$
-
-### Benders Decomposition
-- **Master Problem**: Optimizes facility locations $y_m$ (with feasibility and optimality cuts).
-- **Subproblem**: Network flow LP for fixed $y$ (checks feasibility and provides dual-based cuts).
+- `C_service_l1` — cold spray / CSAM repair (`q_l1 → ss`)
+- `C_service_l2` — traditional repair (`q_l2 → ss`)
 
 ---
 
 ## Project Structure
 
+```
 csam-benders-core/
-├── model/                          # Network builder + core Benders logic
-├── experiment_scripts/             # Run single & sweep experiments
-├── visualization_scripts/          # Network diagrams + result plots
-├── config/                         # Default parameters
+├── model/
+│   ├── parameters.py      # Default parameters & demand generation
+│   ├── network.py         # Time-expanded network builder
+│   └── core.py            # Benders master/subproblem solver
+├── experiment_scripts/
+│   ├── run_single.py      # Single experiment
+│   ├── run_sweep.py       # Factorial parameter sweep
+│   ├── analyze_sweep.py   # Aggregate analysis + figures
+│   ├── sweep_report.py    # Standalone sweep report generator
+│   ├── report_utils.py    # Markdown/PDF report helpers
+│   ├── sweep_utils.py     # Factor grids & scenario naming
+│   ├── analyze_network.py # Network structure inspection
+│   └── iterations_study.py
+├── visualization_scripts/
+│   ├── network_viz.py     # Static network diagram
+│   └── sweep_plots.py     # Sweep figures (called by analyze_sweep)
 ├── experiments/
-│   └── sweeps/                     # Organized multi-scenario results
-│       └── YYYY-MM-DD_sweep_vX/
+│   ├── <run_id>/          # Per-run outputs (single or sweep scenario)
+│   └── sweeps/
+│       └── YYYY-MM-DD_<name>/
 │           ├── configs/
 │           ├── results/
 │           ├── logs/
-│           └── visualizations/
-├── README.md
-└── requirements.txt
-
+│           ├── visualizations/
+│           └── reports/
+├── requirements.txt
+└── README.md
+```
 
 ---
 
-## Setup & Running
+## Setup
 
 ```bash
 git clone https://github.com/DoubleD47/csam-benders-core.git
@@ -99,26 +70,146 @@ venv\Scripts\activate          # Windows
 # source venv/bin/activate     # Linux/Mac
 
 pip install -r requirements.txt
-'''
+```
 
-## Single Run
+Set `PYTHONPATH` to the repo root if imports fail:
 
-'''bash
-python -m experiment_scripts.run_single --max_csam 5 --u_l1 100 --c_dummy 5000 --seed 456
-'''
+```bash
+# Windows PowerShell
+$env:PYTHONPATH="C:\path\to\csam-benders-core"
 
-## Parameter Sweep
+# Linux/Mac
+export PYTHONPATH=/path/to/csam-benders-core
+```
 
-'''bash
-python -m experiment_scripts.run_sweep
+---
+
+## Single Experiment
+
+```bash
+python -m experiment_scripts.run_single \
+  --max_csam 3 \
+  --seed 456 \
+  --demand_scale 1.0 \
+  --demand_mean 10.0 \
+  --F_cost 100
+```
+
+**Outputs** in `experiments/<timestamp>_run_maxCSAM<N>/`:
+
+| File | Description |
+|------|-------------|
+| `summary.json` | Objective, deployments, unmet demand %, flow paths |
+| `full_log.txt` | Complete solver log |
+| `visualizations/flows_regular.csv` | Non-zero arc flows |
+| `visualizations/flows_qq.csv` | Queue carry-over flows |
+| `reports/run_report.md` | Human-readable run summary |
+| `reports/run_report.pdf` | PDF version (requires `fpdf2`) |
+
+Edit default parameters in `model/parameters.py` (`T`, `MAX_ITER`, costs, capacities).
+
+---
+
+## Factorial Parameter Sweep
+
+Sweeps vary these factors (defined in `experiment_scripts/sweep_utils.py`):
+
+- `MAX_CSAM_FACILITIES` — deployment budget (1–10 in full grid)
+- `demand_mean` — center of demand draw
+- `demand_scale` — demand multiplier
+- `F_cost` — uniform CSAM opening cost
+- `SEED` — RNG seed
+
+```bash
+# Pilot sweep (4 scenarios) — recommended first
+python -m experiment_scripts.run_sweep --quick --sweep-name quick
+
+# Truncated factorial
+python -m experiment_scripts.run_sweep --max-scenarios 20 --sweep-name pilot_study
+
+# Full factorial (1,350 scenarios with default grid — long run!)
+python -m experiment_scripts.run_sweep --sweep-name full_factorial
+```
+
+By default, `run_sweep` automatically runs `analyze_sweep` (figures + sweep report) when scenarios complete. Use `--no-analyze` to skip.
+
+**Sweep outputs** in `experiments/sweeps/<timestamp>_<name>/`:
+
+| Path | Description |
+|------|-------------|
+| `configs/<scenario>.json` | Input parameters per scenario |
+| `results/<scenario>_summary.json` | Merged config + solver summary |
+| `sweep_manifest.json` | Factor grid, scenario list, pass/fail |
+| `visualizations/*.png` | Bar charts, heatmaps, factor plots |
+| `visualizations/sweep_results_table.csv` | Master results table |
+| `reports/sweep_report.md` | Aggregate sweep report |
+| `reports/sweep_report.pdf` | PDF with embedded figures |
+
+Each scenario also creates its own folder under `experiments/<run_id>/` with per-run reports.
+
+---
+
+## Analysis & Reports
+
+```bash
+# Analyze latest sweep (figures + Markdown/PDF report)
 python -m experiment_scripts.analyze_sweep
-'''
+
+# Analyze a specific sweep folder
+python -m experiment_scripts.analyze_sweep \
+  --sweep-dir experiments/sweeps/2026-06-18_quick
+
+# Regenerate sweep report only
+python -m experiment_scripts.sweep_report --analyze-first
+
+# Inspect network structure
+python -m experiment_scripts.analyze_network
+```
+
+**Figures produced by `analyze_sweep`:**
+
+- Deployment frequency across scenarios
+- Objective by factor level (MAX_CSAM, demand_scale, F_cost, seed)
+- Unmet demand % by scenario
+- Repair heatmap (location × commodity)
+- Inter-location movement heatmap + Sankey diagram (HTML)
+- Demand vs. repair side-by-side heatmap (representative scenario)
+
+---
+
+## Other Scripts
+
+```bash
+# Benders iteration sensitivity (now meaningful with optimality cuts)
+python -m experiment_scripts.iterations_study
+
+# Deprecated wrapper — redirects to run_sweep --quick
+python -m experiment_scripts.run_complex_sweep
+
+# Static network diagram (one period)
+python -m visualization_scripts.network_viz
+```
+
+---
 
 ## Key Features
 
-#Time-expanded multi-commodity network flow
-#Flexible l1 vs restricted l2 repair logic
-#Queue carry-over penalties
-#Dummy arcs for unmet demand in final period
-#Benders decomposition with strong feasibility/optimality cuts
-#Organized experiment tracking
+- Time-expanded multi-commodity network flow
+- Flexible l1 vs. restricted l2 repair routing
+- Differentiated write-off costs (`C_dummy_in`, `C_dummy_queue`)
+- Differentiated repair costs (`C_service_l1`, `C_service_l2`)
+- Queue carry-over penalties
+- Benders decomposition with dual-based optimality cuts on l1 capacity
+- Factorial sweeps with publication-style figures and Markdown/PDF reports
+
+---
+
+## Tuning the Factor Grid
+
+Edit `QUICK_FACTOR_GRID` and `DEFAULT_FACTOR_GRID` in `experiment_scripts/sweep_utils.py` before large runs. The default full factorial is **1,350 scenarios** — always pilot with `--quick` first.
+
+---
+
+## License & Citation
+
+See repository for license details. If you use this code in academic work, please cite the associated research project.

@@ -1,22 +1,23 @@
 import argparse
-import os
-from datetime import datetime
+import copy
+
 from model.parameters import get_default_params, generate_demand
 from model.network import build_network
 from model.core import solve_benders
 
-# Once parameters.py is set, run with: python -m experiment_scripts.run_single --max_csam 3 --seed 456 --demand_scale 1.0
+# Single run:
+#   python -m experiment_scripts.run_single --max_csam 3 --seed 456 --demand_scale 1.0 --F_cost 100
 
 def run_single_experiment(params=None):
     if params is None:
         params = get_default_params()
-    
-    # Apply command-line style overrides if passed as dict
-    experiment_name = params.get('EXPERIMENT_NAME', "default_run")
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
-    output_dir = f"experiments/{timestamp}_{experiment_name}"
-    os.makedirs(output_dir, exist_ok=True)
-    
+    else:
+        params = copy.deepcopy(params)
+
+    # Uniform opening cost override (sweep sets F_cost + F dict together)
+    if "F_cost" in params and "F" not in params:
+        params["F"] = {m: params["F_cost"] for m in params["M"]}
+
     # Generate demand
     C = [(l, k) for l in params['L'] for k in params['K']]
     D = generate_demand(
@@ -52,6 +53,8 @@ if __name__ == "__main__":
     parser.add_argument("--c_dummy", type=float, default=5000)
     parser.add_argument("--seed", type=int, default=456)
     parser.add_argument("--demand_scale", type=float, default=1.0)
+    parser.add_argument("--demand_mean", type=float, default=10.0)
+    parser.add_argument("--F_cost", type=float, default=100.0, help="Uniform CSAM opening cost")
     
     args = parser.parse_args()
     
@@ -61,6 +64,9 @@ if __name__ == "__main__":
     params['C_dummy'] = args.c_dummy
     params['SEED'] = args.seed
     params['demand_scale'] = args.demand_scale
+    params['demand_mean'] = args.demand_mean
+    params['F_cost'] = args.F_cost
+    params['F'] = {m: args.F_cost for m in params['M']}
     params['EXPERIMENT_NAME'] = f"run_maxCSAM{args.max_csam}"
     
     summary = run_single_experiment(params)

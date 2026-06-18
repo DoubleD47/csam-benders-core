@@ -1,0 +1,7 @@
+numpy
+pulp
+pandas
+matplotlib
+seaborn
+plotly
+fpdf2

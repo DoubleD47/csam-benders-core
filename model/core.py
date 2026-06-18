@@ -39,7 +39,13 @@ def solve_benders(params, net=None, output_dir="experiments"):
     F = params['F']
     C_in_q = params['C_in_q']
     C_q_q = params['C_q_q']
-    C_service = params.get('C_service', 10.0)
+    # Differentiated repair costs (legacy C_service applies to both if set alone)
+    if 'C_service' in params and 'C_service_l1' not in params and 'C_service_l2' not in params:
+        C_service_l1 = params['C_service']
+        C_service_l2 = params['C_service']
+    else:
+        C_service_l1 = params.get('C_service_l1', 20.0)
+        C_service_l2 = params.get('C_service_l2', 5.0)
 
     # Differentiated dummy costs
     C_dummy_in = params.get('C_dummy_in', 1000.0)
@@ -54,7 +60,7 @@ def solve_benders(params, net=None, output_dir="experiments"):
 
     # ====================== Experiment Setup ======================
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H%M%S")
-    run_id = f"{timestamp}_{EXPERIMENT_NAME}_maxCSAM{MAX_CSAM_FACILITIES}"
+    run_id = f"{timestamp}_{EXPERIMENT_NAME}"
     
     repo_root = Path(__file__).parent.parent
     exp_dir = repo_root / "experiments" / run_id
@@ -66,7 +72,8 @@ def solve_benders(params, net=None, output_dir="experiments"):
     sys.stdout = Tee(sys.stdout, log_file)
 
     print(f"Experiment: {run_id}")
-    print(f"MAX_CSAM_FACILITIES = {MAX_CSAM_FACILITIES} | U_l1 = {U_l1} | C_dummy_in = {C_dummy_in} | C_dummy_queue = {C_dummy_queue}")
+    print(f"MAX_CSAM_FACILITIES = {MAX_CSAM_FACILITIES} | U_l1 = {U_l1} | C_service_l1 = {C_service_l1} | C_service_l2 = {C_service_l2}")
+    print(f"C_dummy_in = {C_dummy_in} | C_dummy_queue = {C_dummy_queue}")
     print(f"Random seed: {SEED}\n")
 
     np.random.seed(SEED)
@@ -126,9 +133,11 @@ def solve_benders(params, net=None, output_dir="experiments"):
                   if a[0].endswith('_in') and a[1].endswith('_q')) +   # in -> q
             lpSum(C_q_q * x_qq[a] for a in qq_arcs) +                  # carry-over
 
-            # Normal service (repair) from queues
-            lpSum(C_service * x_regular[a] for a in regular_arcs
-                  if a[1] == 'ss' and ('_q_l1' in a[0] or '_q_l2' in a[0]) and a[2] != max_t) +
+            # Normal service (repair) from queues — differentiated by repair type
+            lpSum(C_service_l1 * x_regular[a] for a in regular_arcs
+                  if a[1] == 'ss' and '_q_l1' in a[0] and a[2] != max_t) +
+            lpSum(C_service_l2 * x_regular[a] for a in regular_arcs
+                  if a[1] == 'ss' and '_q_l2' in a[0] and a[2] != max_t) +
 
             # Write-off costs - DIFFERENTIATED
             # High cost: demand that sits at _in and is never moved/queued
@@ -168,7 +177,7 @@ def solve_benders(params, net=None, output_dir="experiments"):
             in_count = len(incoming) + len(incoming_qq)
             out_count = len(outgoing) + len(outgoing_qq)
 
-            # Unbalanced nodes filtering (allow source, ss, dummy, and last-period _in nodes with write-off)
+            # in_count != out_count may be expected (special handling) or worth flagging
             if in_count != out_count and not (
                 n.startswith('source') or
                 n in ['ss', 'dummy'] or
@@ -195,7 +204,7 @@ def solve_benders(params, net=None, output_dir="experiments"):
                 ), f"flow_{constraint_counter}"
 
         print(f"  [DEBUG] Flow conservation constraints added: {constraint_counter}")
-        print(f"  [DEBUG] Unbalanced nodes found: {len(unbalanced_nodes)}")
+        print(f"  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): {len(unbalanced_nodes)} flagged")
 
 # ====================== Capacity Constraints ======================
         print("  [DEBUG] Adding capacity constraints...")
@@ -307,6 +316,17 @@ def solve_benders(params, net=None, output_dir="experiments"):
     for m in deployed:
         print(f"y[{m}, 'l1'] = 1")
 
+    max_t_out = max(T)
+    total_demand_out = sum(D.values())
+    flows_out = best_regular_flows or {}
+    unmet_out = sum(
+        f for a, f in flows_out.items()
+        if a[1] == 'ss' and a[2] == max_t_out
+        and (a[0].endswith('_in') or '_q_l1' in a[0] or '_q_l2' in a[0])
+    )
+    if total_demand_out > 0:
+        print(f"Unmet demand: {unmet_out:.1f} / {total_demand_out:.1f} ({100*unmet_out/total_demand_out:.1f}%)")
+
     viz_dir = exp_dir / "visualizations"
     viz_dir.mkdir(exist_ok=True)
     flow_files = {}
@@ -331,13 +351,39 @@ def solve_benders(params, net=None, output_dir="experiments"):
     if flow_files:
         print(f"\nSaved {len(best_regular_flows or {})} regular + {len(best_qq_flows or {})} qq flows → {viz_dir}")
 
+    max_t = max(T)
+    total_demand = sum(D.values())
+    flows = best_regular_flows or {}
+    unmet_in = sum(
+        f for a, f in flows.items()
+        if a[0].endswith('_in') and a[1] == 'ss' and a[2] == max_t
+    )
+    unmet_queue = sum(
+        f for a, f in flows.items()
+        if ('_q_l1' in a[0] or '_q_l2' in a[0]) and a[1] == 'ss' and a[2] == max_t
+    )
+    unmet_total = unmet_in + unmet_queue
+    unmet_pct = 100.0 * unmet_total / total_demand if total_demand > 0 else 0.0
+    deployment_cost = sum(F[m] * (best_y or {}).get(m, 0) for m in M)
+    f_cost = params.get('F_cost', F[M[0]] if M else None)
+
     summary = {
         "run_id": run_id,
+        "experiment_dir": str(exp_dir.relative_to(repo_root)),
+        "scenario_name": params.get("scenario_name"),
         "max_csam_facilities": MAX_CSAM_FACILITIES,
         "seed": SEED,
+        "demand_mean": params.get("demand_mean", 10.0),
         "demand_scale": params.get("demand_scale", 1.0),
+        "F_cost": f_cost,
         "objective": float(ub),
         "subproblem_cost": float(best_sub_cost) if best_sub_cost < np.inf else None,
+        "deployment_cost": float(deployment_cost),
+        "total_demand": float(total_demand),
+        "unmet_demand": float(unmet_total),
+        "unmet_demand_pct": float(unmet_pct),
+        "unmet_in": float(unmet_in),
+        "unmet_queue": float(unmet_queue),
         "deployed_count": len(deployed),
         "deployed_facilities": deployed,
         "iterations": iter_count,
@@ -347,6 +393,16 @@ def solve_benders(params, net=None, output_dir="experiments"):
 
     with open(exp_dir / "summary.json", "w") as f:
         json.dump(summary, f, indent=2)
+
+    try:
+        from experiment_scripts.report_utils import generate_run_report
+        report_files = generate_run_report(exp_dir, summary, params)
+        summary["report_files"] = report_files
+        with open(exp_dir / "summary.json", "w") as f:
+            json.dump(summary, f, indent=2)
+        print(f"Run report → {exp_dir / 'reports'}")
+    except Exception as exc:
+        print(f"Run report skipped: {exc}")
 
     print(f"\nExperiment completed → {exp_dir}")
 
