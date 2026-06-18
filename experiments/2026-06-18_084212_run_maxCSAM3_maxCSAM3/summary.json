@@ -1,0 +1,18 @@
+{
+  "run_id": "2026-06-18_084212_run_maxCSAM3_maxCSAM3",
+  "max_csam_facilities": 3,
+  "seed": 456,
+  "demand_scale": 1.0,
+  "objective": 30331.35929200001,
+  "subproblem_cost": 30131.35930700001,
+  "deployed_count": 1,
+  "deployed_facilities": [
+    "m9"
+  ],
+  "iterations": 10,
+  "runtime_seconds": 10.480966567993164,
+  "flow_files": {
+    "regular": "experiments\\2026-06-18_084212_run_maxCSAM3_maxCSAM3\\visualizations\\flows_regular.csv",
+    "qq": "experiments\\2026-06-18_084212_run_maxCSAM3_maxCSAM3\\visualizations\\flows_qq.csv"
+  }
+}

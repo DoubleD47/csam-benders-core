@@ -1,0 +1,288 @@
+Experiment: 2026-06-18_084212_run_maxCSAM3_maxCSAM3
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_dummy_in = 1000.0 | C_dummy_queue = 500.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 16.3 / 4008.9 demand
+New best UB: 38153.45 with 0 CSAM facilities
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m1: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+    m2: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+    m3: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+    m4: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+    m5: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+    m6: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+    m7: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+    m8: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+    m9: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+    m10: max|pi|=491.0000 (t1=-1.0000, t2=-491.0000, t3=-490.5000)
+  [DEBUG] Optimality cut added (active duals: 30, sub_cost: 38153.45)
+
+--- Iteration 2 ---
+Master LB: 200.00
+  Fixed y: {'m9': 1}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 4008.9 demand
+New best UB: 30331.36 with 1 CSAM facilities
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m1: max|pi|=0.5000 (t2=-0.5000)
+    m2: max|pi|=0.5000 (t2=-0.5000)
+    m3: max|pi|=0.5000 (t2=-0.5000)
+    m4: max|pi|=0.5000 (t2=-0.5000)
+    m5: max|pi|=0.5000 (t2=-0.5000)
+    m6: max|pi|=0.5000 (t2=-0.5000)
+    m7: max|pi|=0.5000 (t2=-0.5000)
+    m8: max|pi|=0.5000 (t2=-0.5000)
+    m10: max|pi|=0.5000 (t2=-0.5000)
+  [DEBUG] Optimality cut added (active duals: 9, sub_cost: 30131.36)
+
+--- Iteration 3 ---
+Master LB: 30291.36
+  Fixed y: {'m8': 1}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 4008.9 demand
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m1: max|pi|=0.5000 (t2=-0.5000)
+    m2: max|pi|=0.5000 (t2=-0.5000)
+    m3: max|pi|=0.5000 (t2=-0.5000)
+    m4: max|pi|=0.5000 (t2=-0.5000)
+    m5: max|pi|=0.5000 (t2=-0.5000)
+    m6: max|pi|=0.5000 (t2=-0.5000)
+    m7: max|pi|=0.5000 (t2=-0.5000)
+    m9: max|pi|=0.5000 (t2=-0.5000)
+    m10: max|pi|=0.5000 (t2=-0.5000)
+  [DEBUG] Optimality cut added (active duals: 9, sub_cost: 30131.36)
+
+--- Iteration 4 ---
+Master LB: 30291.36
+  Fixed y: {'m7': 1}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 4008.9 demand
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m1: max|pi|=0.5000 (t2=-0.5000)
+    m2: max|pi|=0.5000 (t2=-0.5000)
+    m3: max|pi|=0.5000 (t2=-0.5000)
+    m4: max|pi|=0.5000 (t2=-0.5000)
+    m5: max|pi|=0.5000 (t2=-0.5000)
+    m6: max|pi|=0.5000 (t2=-0.5000)
+    m8: max|pi|=0.5000 (t2=-0.5000)
+    m9: max|pi|=0.5000 (t2=-0.5000)
+    m10: max|pi|=0.5000 (t2=-0.5000)
+  [DEBUG] Optimality cut added (active duals: 9, sub_cost: 30131.36)
+
+--- Iteration 5 ---
+Master LB: 30291.36
+  Fixed y: {'m6': 1}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 4008.9 demand
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m1: max|pi|=0.5000 (t2=-0.5000)
+    m2: max|pi|=0.5000 (t2=-0.5000)
+    m3: max|pi|=0.5000 (t2=-0.5000)
+    m4: max|pi|=0.5000 (t2=-0.5000)
+    m5: max|pi|=0.5000 (t2=-0.5000)
+    m7: max|pi|=0.5000 (t2=-0.5000)
+    m8: max|pi|=0.5000 (t2=-0.5000)
+    m9: max|pi|=0.5000 (t2=-0.5000)
+    m10: max|pi|=0.5000 (t2=-0.5000)
+  [DEBUG] Optimality cut added (active duals: 9, sub_cost: 30131.36)
+
+--- Iteration 6 ---
+Master LB: 30291.36
+  Fixed y: {'m5': 1}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 4008.9 demand
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m1: max|pi|=0.5000 (t2=-0.5000)
+    m2: max|pi|=0.5000 (t2=-0.5000)
+    m3: max|pi|=0.5000 (t2=-0.5000)
+    m4: max|pi|=0.5000 (t2=-0.5000)
+    m6: max|pi|=0.5000 (t2=-0.5000)
+    m7: max|pi|=0.5000 (t2=-0.5000)
+    m8: max|pi|=0.5000 (t2=-0.5000)
+    m9: max|pi|=0.5000 (t2=-0.5000)
+    m10: max|pi|=0.5000 (t2=-0.5000)
+  [DEBUG] Optimality cut added (active duals: 9, sub_cost: 30131.36)
+
+--- Iteration 7 ---
+Master LB: 30291.36
+  Fixed y: {'m4': 1}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 4008.9 demand
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m1: max|pi|=0.5000 (t2=-0.5000)
+    m2: max|pi|=0.5000 (t2=-0.5000)
+    m3: max|pi|=0.5000 (t2=-0.5000)
+    m5: max|pi|=0.5000 (t2=-0.5000)
+    m6: max|pi|=0.5000 (t2=-0.5000)
+    m7: max|pi|=0.5000 (t2=-0.5000)
+    m8: max|pi|=0.5000 (t2=-0.5000)
+    m9: max|pi|=0.5000 (t2=-0.5000)
+    m10: max|pi|=0.5000 (t2=-0.5000)
+  [DEBUG] Optimality cut added (active duals: 9, sub_cost: 30131.36)
+
+--- Iteration 8 ---
+Master LB: 30291.36
+  Fixed y: {'m3': 1}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 8
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 4008.9 demand
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m1: max|pi|=0.5000 (t2=-0.5000)
+    m2: max|pi|=0.5000 (t2=-0.5000)
+    m4: max|pi|=0.5000 (t2=-0.5000)
+    m5: max|pi|=0.5000 (t2=-0.5000)
+    m6: max|pi|=0.5000 (t2=-0.5000)
+    m7: max|pi|=0.5000 (t2=-0.5000)
+    m8: max|pi|=0.5000 (t2=-0.5000)
+    m9: max|pi|=0.5000 (t2=-0.5000)
+    m10: max|pi|=0.5000 (t2=-0.5000)
+  [DEBUG] Optimality cut added (active duals: 9, sub_cost: 30131.36)
+
+--- Iteration 9 ---
+Master LB: 30291.36
+  Fixed y: {'m2': 1}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 6
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 4008.9 demand
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m1: max|pi|=0.5000 (t2=-0.5000)
+    m3: max|pi|=0.5000 (t2=-0.5000)
+    m4: max|pi|=0.5000 (t2=-0.5000)
+    m5: max|pi|=0.5000 (t2=-0.5000)
+    m6: max|pi|=0.5000 (t2=-0.5000)
+    m7: max|pi|=0.5000 (t2=-0.5000)
+    m8: max|pi|=0.5000 (t2=-0.5000)
+    m9: max|pi|=0.5000 (t2=-0.5000)
+    m10: max|pi|=0.5000 (t2=-0.5000)
+  [DEBUG] Optimality cut added (active duals: 9, sub_cost: 30131.36)
+
+--- Iteration 10 ---
+Master LB: 30291.36
+  Fixed y: {'m1': 1}
+  [DEBUG] Number of regular arcs: 5720
+  [DEBUG] Number of qq arcs: 600
+  [DEBUG] Total demand injected: 4008.9
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 1100
+  [DEBUG] Unbalanced nodes found: 500
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 7
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 4008.9 demand
+  [DEBUG] l1 CSAM capacity bottlenecks (binding at current y; duals on <= constraints are typically negative in min problems):
+    m2: max|pi|=0.5000 (t2=-0.5000)
+    m3: max|pi|=0.5000 (t2=-0.5000)
+    m4: max|pi|=0.5000 (t2=-0.5000)
+    m5: max|pi|=0.5000 (t2=-0.5000)
+    m6: max|pi|=0.5000 (t2=-0.5000)
+    m7: max|pi|=0.5000 (t2=-0.5000)
+    m8: max|pi|=0.5000 (t2=-0.5000)
+    m9: max|pi|=0.5000 (t2=-0.5000)
+    m10: max|pi|=0.5000 (t2=-0.5000)
+  [DEBUG] Optimality cut added (active duals: 9, sub_cost: 30131.36)
+
+=== Benders converged ===
+Final Objective (UB): 30331.36
+Runtime: 10.48 seconds
+
+CSAM Deployments:
+y[m9, 'l1'] = 1
+
+Saved 883 regular + 0 qq flows → C:\git\csam-benders-core\experiments\2026-06-18_084212_run_maxCSAM3_maxCSAM3\visualizations
+
+Experiment completed → C:\git\csam-benders-core\experiments\2026-06-18_084212_run_maxCSAM3_maxCSAM3

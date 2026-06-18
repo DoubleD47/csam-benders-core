@@ -5,6 +5,8 @@ from model.parameters import get_default_params, generate_demand
 from model.network import build_network
 from model.core import solve_benders
 
+# Once parameters.py is set, run with: python -m experiment_scripts.run_single --max_csam 3 --seed 456 --demand_scale 1.0
+
 def run_single_experiment(params=None):
     if params is None:
         params = get_default_params()

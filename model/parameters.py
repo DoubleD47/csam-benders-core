@@ -6,7 +6,7 @@ def get_default_params():
         'traditional_m_dict': {'k1':'m1','k2':'m2','k3':'m3','k4':'m4','k5':'m5'},
         'L': ['l1', 'l2'],
         'K': ['k1','k2','k3','k4','k5'],
-        'T': [1, 2],
+        'T': [1, 2, 3, 4],
         
         'F': {m: 200 for m in ['m1','m2','m3','m4','m5','m6','m7','m8','m9','m10']},  # Much lower to encourage deployments
         'C_in_q': 1.0,      # cost to enter queue from _in
