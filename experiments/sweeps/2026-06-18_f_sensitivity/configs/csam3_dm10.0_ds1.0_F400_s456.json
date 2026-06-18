@@ -1,0 +1,8 @@
+{
+  "MAX_CSAM_FACILITIES": 3,
+  "demand_mean": 10.0,
+  "demand_scale": 1.0,
+  "F_cost": 400,
+  "SEED": 456,
+  "name": "csam3_dm10.0_ds1.0_F400_s456"
+}

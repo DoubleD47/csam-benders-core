@@ -19,13 +19,13 @@ from pathlib import Path
 from typing import Any
 
 
-# Pilot grid — fast smoke test (4 scenarios)
+# Pilot grid — F_cost sensitivity (5 scenarios) for tuning opening-cost range before full factorial
 QUICK_FACTOR_GRID: dict[str, list[Any]] = {
-    "MAX_CSAM_FACILITIES": [1, 3],
+    "MAX_CSAM_FACILITIES": [3],
     "demand_mean": [10.0],
     "demand_scale": [1.0],
-    "F_cost": [100],
-    "SEED": [456, 123],
+    "F_cost": [25, 50, 100, 200, 400],
+    "SEED": [456],
 }
 
 # Publication-style grid — adjust before long runs; full product can be large
@@ -33,7 +33,7 @@ DEFAULT_FACTOR_GRID: dict[str, list[Any]] = {
     "MAX_CSAM_FACILITIES": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     "demand_mean": [8.0, 10.0, 12.0],
     "demand_scale": [0.8, 1.0, 1.2],
-    "F_cost": [50, 100, 200],
+    "F_cost": [25, 50, 100, 200, 400],  # tuned from quick F sensitivity runs
     "SEED": [42, 123, 456, 789, 1011],
 }
 

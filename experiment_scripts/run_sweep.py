@@ -122,7 +122,7 @@ def main() -> None:
     parser.add_argument(
         "--quick",
         action="store_true",
-        help="Use a small pilot factor grid (4 scenarios)",
+        help="Use pilot factor grid (5-scenario F_cost sensitivity by default)",
     )
     parser.add_argument(
         "--max-scenarios",

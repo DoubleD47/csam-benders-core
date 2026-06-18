@@ -108,6 +108,8 @@ python -m experiment_scripts.run_single \
 
 Edit default parameters in `model/parameters.py` (`T`, `MAX_ITER`, costs, capacities).
 
+**Time periods (`T`):** `T = [1, 2, …, 12]` models **12 weekly periods** (one quarter). Demand is injected each week; service can occur each week. Queue carry-over arcs link consecutive weeks only (`t → t+1`), so 12 periods imply **11 carry-over intervals** — that is expected and does not mean you are missing a week. You do **not** need `T=0` unless you want a separate “week zero” pre-positioning period. For an 11-week horizon, use `T = list(range(1, 12))`.
+
 ---
 
 ## Factorial Parameter Sweep
