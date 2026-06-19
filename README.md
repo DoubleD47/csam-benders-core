@@ -133,7 +133,10 @@ python -m experiment_scripts.run_sweep --quick --sweep-name quick
 # Truncated factorial
 python -m experiment_scripts.run_sweep --max-scenarios 20 --sweep-name pilot_study
 
-# Full factorial (270 scenarios with default grid — long run!)
+# Full factorial (270 scenarios — expect ~9–14 hours; run in VS Code terminal, not a short-lived session)
+# PowerShell (from repo root):
+#   $env:PYTHONPATH = (Get-Location).Path
+#   python -m experiment_scripts.run_sweep --sweep-name full_factorial 2>&1 | Tee-Object experiments/sweeps/full_factorial_console.log
 python -m experiment_scripts.run_sweep --sweep-name full_factorial
 ```
 

@@ -29,9 +29,10 @@ QUICK_FACTOR_GRID: dict[str, list[Any]] = {
 }
 
 # Full factorial — 10 × 3 × 3 × 3 × 1 = 270 scenarios (F fixed at tuned value)
+# demand_mean tuned from pilots: 12/15/18 stresses toward full CSAM utilization
 DEFAULT_FACTOR_GRID: dict[str, list[Any]] = {
     "MAX_CSAM_FACILITIES": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    "demand_mean": [8.0, 10.0, 12.0],
+    "demand_mean": [12.0, 15.0, 18.0],
     "demand_variance": [4.0, 9.0, 16.0],   # std 2, 3, 4 — low/med/high spread
     "F_cost": [100],
     "SEED": [42, 456, 123],
