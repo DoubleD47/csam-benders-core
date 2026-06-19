@@ -3,10 +3,10 @@ Shared helpers for factorial parameter sweeps.
 
 Factor grid keys:
   - MAX_CSAM_FACILITIES: deployment budget (master problem)
-  - demand_mean: center of uniform demand draw (see generate_demand)
-  - demand_scale: multiplier on demand range
+  - demand_mean: mean of Normal demand per (m, t, c)
+  - demand_variance: variance of Normal demand (stress / spread)
   - F_cost: uniform CSAM opening cost applied to every main node
-  - SEED: RNG seed for demand generation
+  - SEED: RNG seed — independent demand realizations per scenario
 """
 
 from __future__ import annotations
@@ -19,22 +19,22 @@ from pathlib import Path
 from typing import Any
 
 
-# Pilot grid — F_cost sensitivity (5 scenarios) for tuning opening-cost range before full factorial
+# Pilot grid — high-demand stress test (3 means, elevated variance)
 QUICK_FACTOR_GRID: dict[str, list[Any]] = {
-    "MAX_CSAM_FACILITIES": [3],
-    "demand_mean": [10.0],
-    "demand_scale": [1.0],
-    "F_cost": [25, 50, 100, 200, 400],
+    "MAX_CSAM_FACILITIES": [5],
+    "demand_mean": [14.0, 16.0, 18.0],
+    "demand_variance": [16.0],
+    "F_cost": [100],
     "SEED": [456],
 }
 
-# Publication-style grid — adjust before long runs; full product can be large
+# Full factorial — 10 × 3 × 3 × 3 × 1 = 270 scenarios (F fixed at tuned value)
 DEFAULT_FACTOR_GRID: dict[str, list[Any]] = {
     "MAX_CSAM_FACILITIES": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     "demand_mean": [8.0, 10.0, 12.0],
-    "demand_scale": [0.8, 1.0, 1.2],
-    "F_cost": [25, 50, 100, 200, 400],  # tuned from quick F sensitivity runs
-    "SEED": [42, 123, 456, 789, 1011],
+    "demand_variance": [4.0, 9.0, 16.0],   # std 2, 3, 4 — low/med/high spread
+    "F_cost": [100],
+    "SEED": [42, 456, 123],
 }
 
 
@@ -54,7 +54,7 @@ def scenario_name(factors: dict[str, Any]) -> str:
     return (
         f"csam{factors['MAX_CSAM_FACILITIES']}"
         f"_dm{factors['demand_mean']}"
-        f"_ds{factors['demand_scale']}"
+        f"_dv{factors['demand_variance']}"
         f"_F{factors['F_cost']}"
         f"_s{factors['SEED']}"
     )
@@ -81,7 +81,7 @@ def apply_factors(base_params: dict[str, Any], factors: dict[str, Any]) -> dict[
     params = copy.deepcopy(base_params)
     params["MAX_CSAM_FACILITIES"] = factors["MAX_CSAM_FACILITIES"]
     params["demand_mean"] = factors["demand_mean"]
-    params["demand_scale"] = factors["demand_scale"]
+    params["demand_variance"] = factors["demand_variance"]
     params["SEED"] = factors["SEED"]
     params["F_cost"] = factors["F_cost"]
     params["F"] = {m: factors["F_cost"] for m in params["M"]}
@@ -110,7 +110,7 @@ def merge_result(config: dict[str, Any], summary: dict[str, Any]) -> dict[str, A
         "scenario": config.get("name"),
         "MAX_CSAM_FACILITIES": config.get("MAX_CSAM_FACILITIES"),
         "demand_mean": config.get("demand_mean"),
-        "demand_scale": config.get("demand_scale"),
+        "demand_variance": config.get("demand_variance"),
         "F_cost": config.get("F_cost"),
         "SEED": config.get("SEED"),
         **summary,

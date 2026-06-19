@@ -146,7 +146,7 @@ def generate_run_report(
         f"- **Scenario:** {summary.get('scenario_name', 'N/A')}",
         f"- **MAX_CSAM_FACILITIES:** {summary.get('max_csam_facilities')}",
         f"- **Seed:** {summary.get('seed')}",
-        f"- **Demand mean / scale:** {summary.get('demand_mean')} / {summary.get('demand_scale')}",
+        f"- **Demand mean / variance:** {summary.get('demand_mean')} / {summary.get('demand_variance')}",
         f"- **CSAM opening cost (F):** {summary.get('F_cost')}",
         "",
         "## Results",
@@ -253,7 +253,7 @@ def generate_sweep_report(sweep_dir: Path | str) -> dict[str, str]:
         lines.extend(["", "## Scenario Results", ""])
         table_cols = [
             c for c in [
-                "scenario", "MAX_CSAM_FACILITIES", "demand_scale", "F_cost", "SEED",
+                "scenario", "MAX_CSAM_FACILITIES", "demand_mean", "demand_variance", "F_cost", "SEED",
                 "objective", "deployed_count", "deployed_facilities", "unmet_demand_pct",
             ]
             if c in df.columns

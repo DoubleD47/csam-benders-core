@@ -1,7 +1,8 @@
 import numpy as np
 
 # This function builds the network structure for the CSAM deployment problem. It creates nodes and arcs based on the specified logic, including source injection, demand movement between entry points, queueing for service, and direct write-off options in the last period. The function also allows for custom demand input and includes debug print statements to verify the network construction.
-def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456, demand_mean=10.0, demand_scale=1.0):
+def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456, demand_mean=10.0,
+                  demand_variance=9.0, demand_scale=1.0):
     """
     Build the time-expanded network for CSAM deployment optimization.
     - All demands can travel between _in nodes.
@@ -74,8 +75,10 @@ def build_network(M, traditional_m_dict, L, K, T, D=None, seed=456, demand_mean=
     
     if D is None:
         from .parameters import generate_demand
-        print(f"[DEBUG] No demand specified. Using generate_demand (scale={demand_scale}, seed={seed}).")
-        D = generate_demand(M, T, C, mean=demand_mean, scale=demand_scale, seed=seed)
+        print(f"[DEBUG] No demand specified. Using generate_demand "
+              f"(mean={demand_mean}, var={demand_variance}, seed={seed}).")
+        D = generate_demand(M, T, C, mean=demand_mean, variance=demand_variance,
+                            scale=demand_scale, seed=seed)
 
     print(f"[DEBUG] Built network: {len(nodes)} nodes, {len(regular_arcs)} regular arcs, {len(qq_arcs)} qq arcs")
     return {

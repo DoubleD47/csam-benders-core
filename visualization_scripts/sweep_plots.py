@@ -278,7 +278,7 @@ def build_summary_table(df: pd.DataFrame, out_dir: Path) -> Path:
             "scenario",
             "MAX_CSAM_FACILITIES",
             "demand_mean",
-            "demand_scale",
+            "demand_variance",
             "F_cost",
             "SEED",
             "objective",

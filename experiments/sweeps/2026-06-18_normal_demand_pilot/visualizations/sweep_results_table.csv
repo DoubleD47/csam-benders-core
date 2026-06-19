@@ -1,0 +1,4 @@
+scenario,MAX_CSAM_FACILITIES,demand_mean,demand_variance,F_cost,SEED,objective,deployed_count,deployed_facilities,unmet_demand_pct,total_demand,iterations,runtime_seconds,experiment_dir
+csam3_dm10.0_dv9.0_F100_s456,3,10.0,9.0,100,456,56213.79249283504,1,['m9'],0.0,12004.394264851688,20,155.4663074016571,experiments\2026-06-18_213643_sweep_csam3_dm10.0_dv9.0_F100_s456
+csam3_dm12.0_dv9.0_F100_s456,3,12.0,9.0,100,456,81096.13054525,2,"['m1', 'm10']",0.0,14404.394264851688,20,159.71258163452148,experiments\2026-06-18_213919_sweep_csam3_dm12.0_dv9.0_F100_s456
+csam3_dm8.0_dv9.0_F100_s456,3,8.0,9.0,100,456,43809.12200604999,0,[],0.0,9605.550311208997,2,16.699817180633545,experiments\2026-06-18_213625_sweep_csam3_dm8.0_dv9.0_F100_s456

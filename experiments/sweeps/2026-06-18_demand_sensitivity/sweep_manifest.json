@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-06-18T14:45:38.689188",
+  "factor_grid": {
+    "MAX_CSAM_FACILITIES": [
+      3
+    ],
+    "demand_mean": [
+      10.0
+    ],
+    "demand_scale": [
+      0.8,
+      1.0,
+      1.2
+    ],
+    "F_cost": [
+      100
+    ],
+    "SEED": [
+      456
+    ]
+  },
+  "scenario_count": 3,
+  "full_factorial_size": 3,
+  "truncated": false,
+  "scenarios": [
+    "csam3_dm10.0_ds0.8_F100_s456",
+    "csam3_dm10.0_ds1.0_F100_s456",
+    "csam3_dm10.0_ds1.2_F100_s456"
+  ],
+  "status": "completed",
+  "completed": [
+    "csam3_dm10.0_ds0.8_F100_s456",
+    "csam3_dm10.0_ds1.0_F100_s456",
+    "csam3_dm10.0_ds1.2_F100_s456"
+  ],
+  "failed": []
+}

@@ -92,7 +92,7 @@ def analyze_sweep(sweep_dir: Path | None = None) -> Path:
     print(df[["scenario", "objective", "deployed_count", "unmet_demand_pct"]].head(10).to_string(index=False))
 
     # --- Factor-level objective plots ---
-    for factor in ("MAX_CSAM_FACILITIES", "demand_scale", "F_cost", "SEED"):
+    for factor in ("MAX_CSAM_FACILITIES", "demand_mean", "demand_variance", "F_cost", "SEED"):
         p = plot_objective_by_factor(df, factor, viz_dir)
         if p:
             print(f"Saved {p.name}")

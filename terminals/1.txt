@@ -3,7 +3,7 @@ pid: 30364
 cwd: "C:\git\csam-benders-core"
 command: "$env:PYTHONPATH=\"C:\\git\\csam-benders-core\"; python experiment_scripts/run_single.py --max_csam 3 --seed 456"
 started_at: 2026-06-18T13:21:10.606Z
-running_for_ms: 6520006  
+running_for_ms: 46955007 
 ---
 [DEBUG] Built network: 3730 nodes, 16560 regular arcs, 2200 qq arcs
 Experiment: 2026-06-18_092111_run_maxCSAM3

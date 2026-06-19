@@ -6,7 +6,7 @@ from model.network import build_network
 from model.core import solve_benders
 
 # Single run:
-#   python -m experiment_scripts.run_single --max_csam 3 --seed 456 --demand_scale 1.0 --F_cost 100
+#   python -m experiment_scripts.run_single --max_csam 3 --seed 456 --demand_mean 10 --demand_variance 9 --F_cost 100
 
 def run_single_experiment(params=None):
     if params is None:
@@ -21,12 +21,13 @@ def run_single_experiment(params=None):
     # Generate demand
     C = [(l, k) for l in params['L'] for k in params['K']]
     D = generate_demand(
-        params['M'], 
-        params['T'], 
+        params['M'],
+        params['T'],
         C,
         mean=params.get('demand_mean', 10.0),
+        variance=params.get('demand_variance', 9.0),
         scale=params.get('demand_scale', 1.0),
-        seed=params['SEED']
+        seed=params['SEED'],
     )
     
     # Build network
@@ -52,8 +53,10 @@ if __name__ == "__main__":
     parser.add_argument("--u_l1", type=int, default=80)
     parser.add_argument("--c_dummy", type=float, default=5000)
     parser.add_argument("--seed", type=int, default=456)
-    parser.add_argument("--demand_scale", type=float, default=1.0)
     parser.add_argument("--demand_mean", type=float, default=10.0)
+    parser.add_argument("--demand_variance", type=float, default=9.0)
+    parser.add_argument("--demand_scale", type=float, default=1.0,
+                        help="Legacy multiplier on mean (optional)")
     parser.add_argument("--F_cost", type=float, default=100.0, help="Uniform CSAM opening cost")
     
     args = parser.parse_args()
@@ -63,8 +66,9 @@ if __name__ == "__main__":
     params['U_l1'] = args.u_l1
     params['C_dummy'] = args.c_dummy
     params['SEED'] = args.seed
-    params['demand_scale'] = args.demand_scale
     params['demand_mean'] = args.demand_mean
+    params['demand_variance'] = args.demand_variance
+    params['demand_scale'] = args.demand_scale
     params['F_cost'] = args.F_cost
     params['F'] = {m: args.F_cost for m in params['M']}
     params['EXPERIMENT_NAME'] = f"run_maxCSAM{args.max_csam}"

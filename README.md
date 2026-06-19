@@ -117,10 +117,14 @@ Edit default parameters in `model/parameters.py` (`T`, `MAX_ITER`, costs, capaci
 Sweeps vary these factors (defined in `experiment_scripts/sweep_utils.py`):
 
 - `MAX_CSAM_FACILITIES` — deployment budget (1–10 in full grid)
-- `demand_mean` — center of demand draw
-- `demand_scale` — demand multiplier
-- `F_cost` — uniform CSAM opening cost
-- `SEED` — RNG seed
+- `demand_mean` — mean of Normal demand per `(node, week, commodity)` tuple
+- `demand_variance` — variance of the same Normal distribution (spread / stress)
+- `F_cost` — uniform CSAM opening cost (fixed at 100 in full grid)
+- `SEED` — RNG seed (3 seeds → independent demand realizations)
+
+**Demand model:** Each `(m, t, c)` draws independently from  
+`N(demand_mean, demand_variance)` with negative values clipped at zero.  
+Every node/commodity/week gets its own sample from the same distribution.
 
 ```bash
 # Pilot sweep (4 scenarios) — recommended first
@@ -129,7 +133,7 @@ python -m experiment_scripts.run_sweep --quick --sweep-name quick
 # Truncated factorial
 python -m experiment_scripts.run_sweep --max-scenarios 20 --sweep-name pilot_study
 
-# Full factorial (1,350 scenarios with default grid — long run!)
+# Full factorial (270 scenarios with default grid — long run!)
 python -m experiment_scripts.run_sweep --sweep-name full_factorial
 ```
 
@@ -171,7 +175,7 @@ python -m experiment_scripts.analyze_network
 **Figures produced by `analyze_sweep`:**
 
 - Deployment frequency across scenarios
-- Objective by factor level (MAX_CSAM, demand_scale, F_cost, seed)
+- Objective by factor level (MAX_CSAM, demand_mean, demand_variance, F_cost, seed)
 - Unmet demand % by scenario
 - Repair heatmap (location × commodity)
 - Inter-location movement heatmap + Sankey diagram (HTML)
@@ -208,7 +212,7 @@ python -m visualization_scripts.network_viz
 
 ## Tuning the Factor Grid
 
-Edit `QUICK_FACTOR_GRID` and `DEFAULT_FACTOR_GRID` in `experiment_scripts/sweep_utils.py` before large runs. The default full factorial is **1,350 scenarios** — always pilot with `--quick` first.
+Edit `QUICK_FACTOR_GRID` and `DEFAULT_FACTOR_GRID` in `experiment_scripts/sweep_utils.py` before large runs. The default full factorial is **270 scenarios** (10 MAX_CSAM × 3 means × 3 variances × 3 seeds) — always pilot with `--quick` first.
 
 ---
 

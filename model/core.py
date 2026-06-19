@@ -84,6 +84,7 @@ def solve_benders(params, net=None, output_dir="experiments"):
         net = build_network(
             M, traditional_m_dict, L, K, T, seed=SEED,
             demand_mean=params.get('demand_mean', 10.0),
+            demand_variance=params.get('demand_variance', 9.0),
             demand_scale=params.get('demand_scale', 1.0),
         )
     nodes = net['nodes']
@@ -374,6 +375,7 @@ def solve_benders(params, net=None, output_dir="experiments"):
         "max_csam_facilities": MAX_CSAM_FACILITIES,
         "seed": SEED,
         "demand_mean": params.get("demand_mean", 10.0),
+        "demand_variance": params.get("demand_variance", 9.0),
         "demand_scale": params.get("demand_scale", 1.0),
         "F_cost": f_cost,
         "objective": float(ub),

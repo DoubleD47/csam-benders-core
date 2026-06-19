@@ -122,7 +122,7 @@ def main() -> None:
     parser.add_argument(
         "--quick",
         action="store_true",
-        help="Use pilot factor grid (5-scenario F_cost sensitivity by default)",
+        help="Use pilot factor grid (see QUICK_FACTOR_GRID in sweep_utils.py)",
     )
     parser.add_argument(
         "--max-scenarios",

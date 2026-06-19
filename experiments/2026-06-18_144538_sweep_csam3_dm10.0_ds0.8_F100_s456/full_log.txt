@@ -1,0 +1,52 @@
+Experiment: 2026-06-18_144538_sweep_csam3_dm10.0_ds0.8_F100_s456
+MAX_CSAM_FACILITIES = 3 | U_l1 = 80 | C_service_l1 = 20.0 | C_service_l2 = 5.0
+C_dummy_in = 1000.0 | C_dummy_queue = 500.0
+Random seed: 456
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 9533.4
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 9533.4 demand
+New best UB: 43636.86 with 0 CSAM facilities
+  [DEBUG] Optimality cut added (active duals: 0, sub_cost: 43636.86)
+
+--- Iteration 2 ---
+Master LB: 43636.86
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 9533.4
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Optimal
+  [DEBUG] Subproblem solved optimally. Recording key flows...
+  [DEBUG] Positive in -> q_l1 flows (sample): 0
+  [DEBUG] Write-off flows - _in: 0.0, queue: 0.0 / 9533.4 demand
+  [DEBUG] Optimality cut added (active duals: 0, sub_cost: 43636.86)
+
+=== Benders converged ===
+Final Objective (UB): 43636.86
+Runtime: 16.86 seconds
+
+CSAM Deployments:
+Unmet demand: 0.0 / 9533.4 (0.0%)
+
+Saved 2852 regular + 0 qq flows → C:\git\csam-benders-core\experiments\2026-06-18_144538_sweep_csam3_dm10.0_ds0.8_F100_s456\visualizations
+Run report → C:\git\csam-benders-core\experiments\2026-06-18_144538_sweep_csam3_dm10.0_ds0.8_F100_s456\reports
+
+Experiment completed → C:\git\csam-benders-core\experiments\2026-06-18_144538_sweep_csam3_dm10.0_ds0.8_F100_s456

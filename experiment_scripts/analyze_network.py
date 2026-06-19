@@ -35,6 +35,7 @@ def analyze_network(output_dir: str | Path, params: dict) -> Path:
         params["T"],
         C,
         mean=params.get("demand_mean", 10.0),
+        variance=params.get("demand_variance", 9.0),
         scale=params.get("demand_scale", 1.0),
         seed=params["SEED"],
     )
@@ -93,7 +94,7 @@ def main() -> None:
             with open(Path(latest) / "summary.json", encoding="utf-8") as f:
                 summary = json.load(f)
             params = base.copy()
-            for key in ("MAX_CSAM_FACILITIES", "demand_mean", "demand_scale", "SEED", "F_cost"):
+            for key in ("MAX_CSAM_FACILITIES", "demand_mean", "demand_variance", "SEED", "F_cost"):
                 if key in summary:
                     params[key] = summary[key]
             if "F_cost" in summary:
