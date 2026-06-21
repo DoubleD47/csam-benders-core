@@ -3,7 +3,7 @@ pid: 32720
 cwd: "C:\git\csam-benders-core"
 command: "$env:PYTHONPATH=\"C:\\git\\csam-benders-core\"; python -m experiment_scripts.run_sweep --quick --sweep-name f_sensitivity"
 started_at: 2026-06-18T15:20:21.464Z
-running_for_ms: 39920010 
+running_for_ms: 40720004 
 ---
 Sweep directory: experiments\sweeps\2026-06-18_f_sensitivity
 Factor grid (5 full factorial combinations):

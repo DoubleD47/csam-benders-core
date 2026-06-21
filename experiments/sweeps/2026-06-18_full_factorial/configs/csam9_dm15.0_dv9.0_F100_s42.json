@@ -1,0 +1,8 @@
+{
+  "MAX_CSAM_FACILITIES": 9,
+  "demand_mean": 15.0,
+  "demand_variance": 9.0,
+  "F_cost": 100,
+  "SEED": 42,
+  "name": "csam9_dm15.0_dv9.0_F100_s42"
+}

@@ -1,0 +1,295 @@
+Experiment: 2026-06-19_004722_sweep_csam2_dm18.0_dv16.0_F100_s42
+MAX_CSAM_FACILITIES = 2 | U_l1 = 80 | C_service_l1 = 20.0 | C_service_l2 = 5.0
+C_dummy_in = 1000.0 | C_dummy_queue = 500.0
+Random seed: 42
+
+
+--- Iteration 1 ---
+Master LB: 0.00
+  Fixed y: {}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 2 ---
+Master LB: 100.00
+  Fixed y: {'m9': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 3 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 4 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 5 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 6 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 7 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 8 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 9 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 10 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 11 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 12 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 13 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 14 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 15 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 16 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 17 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 18 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 19 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+--- Iteration 20 ---
+Master LB: 200.00
+  Fixed y: {'m1': 1, 'm10': 1}
+  [DEBUG] Number of regular arcs: 16560
+  [DEBUG] Number of qq arcs: 2200
+  [DEBUG] Total demand injected: 21784.2
+  [DEBUG] Starting flow conservation setup...
+  [DEBUG] Flow conservation constraints added: 3500
+  [DEBUG] Nodes with in_count != out_count (unbalanced or special handling): 1300 flagged
+  [DEBUG] Adding capacity constraints...
+  [DEBUG] Solving subproblem...
+Sub Status: Infeasible
+Subproblem infeasible! Adding strong feasibility cut.
+
+=== Benders converged ===
+Final Objective (UB): inf
+Runtime: 157.64 seconds
+
+CSAM Deployments:
+Unmet demand: 0.0 / 21784.2 (0.0%)
+Run report skipped: unsupported format string passed to NoneType.__format__
+
+Experiment completed → C:\git\csam-benders-core\experiments\2026-06-19_004722_sweep_csam2_dm18.0_dv16.0_F100_s42

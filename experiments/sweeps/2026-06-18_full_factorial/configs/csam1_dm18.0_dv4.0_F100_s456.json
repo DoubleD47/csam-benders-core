@@ -1,0 +1,8 @@
+{
+  "MAX_CSAM_FACILITIES": 1,
+  "demand_mean": 18.0,
+  "demand_variance": 4.0,
+  "F_cost": 100,
+  "SEED": 456,
+  "name": "csam1_dm18.0_dv4.0_F100_s456"
+}

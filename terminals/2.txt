@@ -3,7 +3,7 @@ pid: 14348
 cwd: "C:\git\csam-benders-core"
 command: "$env:PYTHONPATH=\"C:\\git\\csam-benders-core\"; python -m experiment_scripts.run_sweep --quick --sweep-name quick"
 started_at: 2026-06-18T15:06:33.165Z
-running_for_ms: 40750005 
+running_for_ms: 41549998 
 ---
 Sweep directory: experiments\sweeps\2026-06-18_quick
 Factor grid (4 full factorial combinations):

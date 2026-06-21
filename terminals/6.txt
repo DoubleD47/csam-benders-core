@@ -3,7 +3,7 @@ pid: 24624
 cwd: "C:\git\csam-benders-core"
 command: "$env:PYTHONPATH=\"C:\\git\\csam-benders-core\"; python -m experiment_scripts.run_sweep --quick --sweep-name high_demand_stress"
 started_at: 2026-06-19T01:52:16.806Z
-running_for_ms: 2010010  
+running_for_ms: 2805003  
 ---
 Sweep directory: experiments\sweeps\2026-06-18_high_demand_stress
 Factor grid (3 full factorial combinations):

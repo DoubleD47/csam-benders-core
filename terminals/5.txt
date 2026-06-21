@@ -3,7 +3,7 @@ pid: 28292
 cwd: "C:\git\csam-benders-core"
 command: "$env:PYTHONPATH=\"C:\\git\\csam-benders-core\"; python -m experiment_scripts.run_sweep --quick --sweep-name normal_demand_pilot"
 started_at: 2026-06-19T01:36:24.748Z
-running_for_ms: 2960006  
+running_for_ms: 3760002  
 ---
 Sweep directory: experiments\sweeps\2026-06-18_normal_demand_pilot
 Factor grid (3 full factorial combinations):

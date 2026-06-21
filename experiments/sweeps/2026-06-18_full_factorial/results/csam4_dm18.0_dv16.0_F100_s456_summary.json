@@ -1,0 +1,39 @@
+{
+  "scenario": "csam4_dm18.0_dv16.0_F100_s456",
+  "MAX_CSAM_FACILITIES": 4,
+  "demand_mean": 18.0,
+  "demand_variance": 16.0,
+  "F_cost": 100,
+  "SEED": 456,
+  "run_id": "2026-06-19_030405_sweep_csam4_dm18.0_dv16.0_F100_s456",
+  "experiment_dir": "experiments\\2026-06-19_030405_sweep_csam4_dm18.0_dv16.0_F100_s456",
+  "scenario_name": "csam4_dm18.0_dv16.0_F100_s456",
+  "max_csam_facilities": 4,
+  "seed": 456,
+  "demand_scale": 1.0,
+  "objective": 527510.2009098607,
+  "subproblem_cost": 527110.2009098607,
+  "deployment_cost": 400.0,
+  "total_demand": 21605.85901980225,
+  "unmet_demand": 377.21812917,
+  "unmet_demand_pct": 1.7459066488597894,
+  "unmet_in": 0.0,
+  "unmet_queue": 377.21812917,
+  "deployed_count": 4,
+  "deployed_facilities": [
+    "m1",
+    "m2",
+    "m3",
+    "m10"
+  ],
+  "iterations": 20,
+  "runtime_seconds": 158.5184772014618,
+  "flow_files": {
+    "regular": "experiments\\2026-06-19_030405_sweep_csam4_dm18.0_dv16.0_F100_s456\\visualizations\\flows_regular.csv",
+    "qq": "experiments\\2026-06-19_030405_sweep_csam4_dm18.0_dv16.0_F100_s456\\visualizations\\flows_qq.csv"
+  },
+  "report_files": {
+    "markdown": "experiments\\2026-06-19_030405_sweep_csam4_dm18.0_dv16.0_F100_s456\\reports\\run_report.md",
+    "pdf": "experiments\\2026-06-19_030405_sweep_csam4_dm18.0_dv16.0_F100_s456\\reports\\run_report.pdf"
+  }
+}
