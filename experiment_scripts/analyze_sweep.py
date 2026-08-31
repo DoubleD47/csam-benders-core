@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -40,8 +41,42 @@ def find_latest_sweep() -> Path | None:
     sweep_root = REPO_ROOT / "experiments" / "sweeps"
     if not sweep_root.exists():
         return None
-    folders = sorted(sweep_root.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True)
+    folders = [
+        p for p in sweep_root.iterdir()
+        if p.is_dir() and (p / "results").exists()
+    ]
+    folders = sorted(folders, key=lambda p: p.stat().st_mtime, reverse=True)
     return folders[0] if folders else None
+
+
+def _is_finite_number(value) -> bool:
+    try:
+        return math.isfinite(float(value))
+    except (TypeError, ValueError):
+        return False
+
+
+def prepare_results_frame(df: pd.DataFrame) -> pd.DataFrame:
+    """Flag infeasible cells and keep raw objective separate from plottable cost.
+
+    Benders writes objective=inf when no feasible subproblem (incumbent) was
+    found. Those rows are not "zero unmet" and must not enter cost averages.
+    """
+    out = df.copy()
+    raw = pd.to_numeric(out.get("objective"), errors="coerce")
+    out["objective_raw"] = out.get("objective")
+    finite_mask = raw.apply(_is_finite_number)
+    out["feasible"] = finite_mask & (out.get("subproblem_cost").notna() if "subproblem_cost" in out.columns else True)
+    out["status"] = out["feasible"].map({True: "feasible", False: "infeasible_no_incumbent"})
+    out["objective"] = raw.where(out["feasible"])
+    if "unmet_demand_pct" in out.columns:
+        out.loc[~out["feasible"], "unmet_demand_pct"] = pd.NA
+    if "deployed_count" in out.columns:
+        out.loc[~out["feasible"], "deployed_count"] = pd.NA
+        out.loc[~out["feasible"], "deployed_facilities"] = out.loc[~out["feasible"], "deployed_facilities"].apply(
+            lambda _: []
+        )
+    return out
 
 
 def load_sweep_results(sweep_dir: Path) -> pd.DataFrame:
@@ -52,7 +87,7 @@ def load_sweep_results(sweep_dir: Path) -> pd.DataFrame:
             records.append(json.load(f))
     if not records:
         raise FileNotFoundError(f"No result files in {results_dir}")
-    return pd.DataFrame(records)
+    return prepare_results_frame(pd.DataFrame(records))
 
 
 def load_flows(repo_root: Path, record: dict) -> pd.DataFrame:
@@ -68,7 +103,8 @@ def load_flows(repo_root: Path, record: dict) -> pd.DataFrame:
 
 def aggregate_flows(df: pd.DataFrame, repo_root: Path) -> pd.DataFrame:
     frames = []
-    for _, row in df.iterrows():
+    feasible = df[df["feasible"]] if "feasible" in df.columns else df
+    for _, row in feasible.iterrows():
         flows = load_flows(repo_root, row.to_dict())
         if not flows.empty:
             flows["scenario"] = row.get("scenario")
@@ -83,24 +119,30 @@ def analyze_sweep(sweep_dir: Path | None = None) -> Path:
 
     print(f"Analyzing sweep: {sweep_dir}\n")
     df = load_sweep_results(sweep_dir)
+    n_feas = int(df["feasible"].sum()) if "feasible" in df.columns else len(df)
+    n_inf = len(df) - n_feas
+    print(f"Scenarios: {len(df)} | feasible: {n_feas} | infeasible (no incumbent): {n_inf}")
+
     viz_dir = sweep_dir / "visualizations"
     viz_dir.mkdir(exist_ok=True)
+    finite_df = df[df["feasible"]].copy() if "feasible" in df.columns else df
 
     # --- Summary tables ---
     table_path = build_summary_table(df, viz_dir)
     print(f"Results table → {table_path}")
-    print(df[["scenario", "objective", "deployed_count", "unmet_demand_pct"]].head(10).to_string(index=False))
+    preview_cols = [c for c in ["scenario", "status", "objective", "deployed_count", "unmet_demand_pct"] if c in df.columns]
+    print(df[preview_cols].head(10).to_string(index=False))
 
-    # --- Factor-level objective plots ---
+    # --- Factor-level objective plots (feasible cells only) ---
     for factor in ("MAX_CSAM_FACILITIES", "demand_mean", "demand_variance", "F_cost", "SEED"):
-        p = plot_objective_by_factor(df, factor, viz_dir)
+        p = plot_objective_by_factor(finite_df, factor, viz_dir)
         if p:
             print(f"Saved {p.name}")
 
     # --- Deployment & unmet demand bars ---
-    plot_deployment_frequency(df, viz_dir)
-    plot_deployment_count_bars(df, viz_dir)
-    plot_unmet_demand_bars(df, viz_dir)
+    plot_deployment_frequency(finite_df, viz_dir)
+    plot_deployment_count_bars(finite_df, viz_dir)
+    plot_unmet_demand_bars(finite_df, viz_dir)
     print("Saved deployment_frequency.png, deployment_count_by_scenario.png, unmet_demand_by_scenario.png")
 
     # --- Flow-based figures (aggregate + representative scenario) ---
@@ -112,10 +154,10 @@ def analyze_sweep(sweep_dir: Path | None = None) -> Path:
         if sankey:
             print(f"Saved movement visualizations → {sankey}")
 
-    # Representative: scenario with median objective
-    if "objective" in df.columns and len(df) > 0:
-        med_idx = (df["objective"] - df["objective"].median()).abs().idxmin()
-        rep = df.loc[med_idx]
+    # Representative: scenario with median finite objective
+    if "objective" in finite_df.columns and len(finite_df) > 0:
+        med_idx = (finite_df["objective"] - finite_df["objective"].median()).abs().idxmin()
+        rep = finite_df.loc[med_idx]
         rep_flows = load_flows(REPO_ROOT, rep.to_dict())
         if not rep_flows.empty:
             plot_repair_heatmap(rep_flows, viz_dir, title_suffix=f" ({rep['scenario']})")

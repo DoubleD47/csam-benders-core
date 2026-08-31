@@ -1,7 +1,7 @@
 """
 Publication-style figures for factorial sweep analysis.
 
-Called by experiment_scripts/analyze_sweep.py. Outputs PNG + CSV tables
+Called by experiment_scripts.analyze_sweep.py. Outputs PNG + CSV tables
 into the sweep's visualizations/ folder.
 """
 
@@ -44,7 +44,7 @@ def plot_deployment_frequency(df: pd.DataFrame, out_dir: Path) -> Path:
     ax.set_title("CSAM Deployment Frequency Across Sweep Scenarios")
     ax.set_xlabel("Main Node")
     ax.set_ylabel("Scenarios Deployed")
-    ax.set_ylim(0, len(df))
+    ax.set_ylim(0, max(len(df), 1))
     fig.tight_layout()
     path = out_dir / "deployment_frequency.png"
     fig.savefig(path, dpi=200)
@@ -57,10 +57,16 @@ def plot_objective_by_factor(df: pd.DataFrame, factor: str, out_dir: Path) -> Pa
     if factor not in df.columns or "objective" not in df.columns:
         return None
 
+    plot_df = df[[factor, "objective"]].copy()
+    plot_df["objective"] = pd.to_numeric(plot_df["objective"], errors="coerce")
+    plot_df = plot_df.replace([np.inf, -np.inf], np.nan).dropna(subset=["objective"])
+    if plot_df.empty:
+        return None
+
     fig, ax = plt.subplots(figsize=(8, 5))
-    sns.boxplot(data=df, x=factor, y="objective", ax=ax, color="lightgray")
-    sns.stripplot(data=df, x=factor, y="objective", ax=ax, color="navy", alpha=0.5, size=4)
-    ax.set_title(f"Objective by {factor}")
+    sns.boxplot(data=plot_df, x=factor, y="objective", ax=ax, color="lightgray")
+    sns.stripplot(data=plot_df, x=factor, y="objective", ax=ax, color="navy", alpha=0.5, size=4)
+    ax.set_title(f"Objective by {factor} (feasible scenarios)")
     ax.tick_params(axis="x", rotation=30)
     fig.tight_layout()
     path = out_dir / f"objective_by_{factor}.png"
@@ -71,13 +77,15 @@ def plot_objective_by_factor(df: pd.DataFrame, factor: str, out_dir: Path) -> Pa
 
 def plot_deployment_count_bars(df: pd.DataFrame, out_dir: Path) -> Path:
     """Bar chart of deployed_count by scenario (sorted)."""
-    plot_df = df.sort_values("deployed_count", ascending=False).head(30)
+    plot_df = df.dropna(subset=["deployed_count"]).sort_values("deployed_count", ascending=False).head(30)
+    if plot_df.empty:
+        return out_dir / "deployment_count_by_scenario.png"
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.bar(range(len(plot_df)), plot_df["deployed_count"], color="teal", edgecolor="black")
     ax.set_xticks(range(len(plot_df)))
     ax.set_xticklabels(plot_df["scenario"], rotation=60, ha="right", fontsize=7)
     ax.set_ylabel("CSAM Facilities Deployed")
-    ax.set_title("Deployments per Scenario (top 30)")
+    ax.set_title("Deployments per Scenario (top 30 feasible)")
     fig.tight_layout()
     path = out_dir / "deployment_count_by_scenario.png"
     fig.savefig(path, dpi=200)
@@ -87,13 +95,15 @@ def plot_deployment_count_bars(df: pd.DataFrame, out_dir: Path) -> Path:
 
 def plot_unmet_demand_bars(df: pd.DataFrame, out_dir: Path) -> Path:
     """Unmet demand % by scenario."""
-    plot_df = df.sort_values("unmet_demand_pct", ascending=False).head(30)
+    plot_df = df.dropna(subset=["unmet_demand_pct"]).sort_values("unmet_demand_pct", ascending=False).head(30)
+    if plot_df.empty:
+        return out_dir / "unmet_demand_by_scenario.png"
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.bar(range(len(plot_df)), plot_df["unmet_demand_pct"], color="indianred", edgecolor="black")
     ax.set_xticks(range(len(plot_df)))
     ax.set_xticklabels(plot_df["scenario"], rotation=60, ha="right", fontsize=7)
     ax.set_ylabel("Unmet Demand (%)")
-    ax.set_title("Unmet Demand by Scenario (top 30)")
+    ax.set_title("Unmet Demand by Scenario (top 30 feasible)")
     fig.tight_layout()
     path = out_dir / "unmet_demand_by_scenario.png"
     fig.savefig(path, dpi=200)
@@ -243,23 +253,32 @@ def build_summary_table(df: pd.DataFrame, out_dir: Path) -> Path:
         "runtime_seconds",
         "iterations",
     ]
+    stats_df = df.replace([np.inf, -np.inf], np.nan)
     rows = []
     for col in numeric_cols:
-        if col not in df.columns:
+        if col not in stats_df.columns:
             continue
+        series = pd.to_numeric(stats_df[col], errors="coerce")
         rows.append(
             {
                 "metric": col,
-                "mean": df[col].mean(),
-                "std": df[col].std(),
-                "min": df[col].min(),
-                "max": df[col].max(),
+                "n_finite": int(series.notna().sum()),
+                "mean": series.mean(),
+                "std": series.std(),
+                "min": series.min(),
+                "max": series.max(),
             }
         )
 
-    # Deployment frequency per node
+    if "status" in df.columns:
+        status_counts = df["status"].value_counts()
+        for label, n in status_counts.items():
+            rows.append({"metric": f"count_{label}", "n_finite": int(n), "mean": n, "std": np.nan, "min": n, "max": n})
+
+    # Deployment frequency per node (feasible rows only)
     all_deployments = []
-    for deployed in df.get("deployed_facilities", pd.Series(dtype=object)):
+    source = df[df["feasible"]] if "feasible" in df.columns else df
+    for deployed in source.get("deployed_facilities", pd.Series(dtype=object)):
         if isinstance(deployed, list):
             all_deployments.extend(deployed)
     if all_deployments:
@@ -276,6 +295,8 @@ def build_summary_table(df: pd.DataFrame, out_dir: Path) -> Path:
         c
         for c in [
             "scenario",
+            "status",
+            "feasible",
             "MAX_CSAM_FACILITIES",
             "demand_mean",
             "demand_variance",
@@ -292,5 +313,10 @@ def build_summary_table(df: pd.DataFrame, out_dir: Path) -> Path:
         ]
         if c in df.columns
     ]
-    df[keep].to_csv(out_dir / "sweep_results_table.csv", index=False)
+    export = df[keep].copy()
+    if "deployed_facilities" in export.columns:
+        export["deployed_facilities"] = export["deployed_facilities"].apply(
+            lambda xs: ",".join(xs) if isinstance(xs, list) else ""
+        )
+    export.to_csv(out_dir / "sweep_results_table.csv", index=False)
     return out_dir / "sweep_results_table.csv"
